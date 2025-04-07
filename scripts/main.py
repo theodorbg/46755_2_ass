@@ -35,7 +35,8 @@ OFFER_PRICE_WIND_FARM = 0
 # Initialize scenario counter
 scenario_counter = 1
 
-in_sample_scenarios = 
+in_sample_scenarios = []
+out_of_sample_scenarios = []
 
 # Loop through each condition (column) in df_conditions
 for condition in range(df_conditions.shape[1]):
@@ -43,11 +44,36 @@ for condition in range(df_conditions.shape[1]):
     for wind_day in range(df_wind.shape[1]):
         # Loop through each day (column) in day-ahead prices
         for price_day in range(df_price.shape[1]):
+
             # Print scenario details
             print(f"Scenario {scenario_counter}")
             print(f"Condition {condition}")
             print(f"Wind day {wind_day}")
             print(f"Day-ahead price day {price_day}")
             
+            if scenario_counter <= 200:
+                    
+                in_sample_scenarios.append({
+                    "Scenario": scenario_counter,
+                    "Condition": condition,
+                    "Wind Day": wind_day,
+                    "Price Day": price_day
+                })
+            else:
+                out_of_sample_scenarios.append({
+                    "Scenario": scenario_counter,
+                    "Condition": condition,
+                    "Wind Day": wind_day,
+                    "Price Day": price_day
+                })
+
             # Increment scenario counter
             scenario_counter += 1
+
+#Convert the lists of Scenarios to DataFrames
+df_in_sample_scenarios = pd.DataFrame(in_sample_scenarios)
+df_out_of_sample_scenarios = pd.DataFrame(out_of_sample_scenarios)
+
+#Save the DataFrames to CSV files
+df_in_sample_scenarios.to_csv('in_sample_scenarios.csv', index=False)
+df_out_of_sample_scenarios.to_csv('out_of_sample_scenarios.csv', index=False)
