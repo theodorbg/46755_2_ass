@@ -10,7 +10,7 @@ import pandas as pd
 
 # Local imports
 from import_data import df_wind, df_price, df_conditions
-
+from scenario_generator_loop import df_balancing_prices, df_in_sample_scenarios df_out_of_sample_scenarios
 
 CAPACITY_WIND_FARM = 500 #MW
 OFFER_PRICE_WIND_FARM = 0
@@ -27,53 +27,11 @@ OFFER_PRICE_WIND_FARM = 0
 
 # uncertainties assumed uncorrelated
 
-# # Assuming the following DataFrames:
-# conditions_0_df, conditions_1_df, conditions_2_df, conditions_3_df
-# df_wind_actual_gen (wind power production)
-# df_price_day_ahead (day-ahead prices)
+# DATAFRAMES:
+# df_wind: wind power production forecast (MW)
+# df_price: day-ahead market price forecast (EUR/MWh)
+# df_conditions: system conditions (binary, 1 = deficit, 0 = excess)
+# df_balancing_prices: balancing market prices (EUR/MWh)
 
-# Initialize scenario counter
-scenario_counter = 1
-
-in_sample_scenarios = []
-out_of_sample_scenarios = []
-
-# Loop through each condition (column) in df_conditions
-for condition in range(df_conditions.shape[1]):
-    # Loop through each day (column) in wind power production
-    for wind_day in range(df_wind.shape[1]):
-        # Loop through each day (column) in day-ahead prices
-        for price_day in range(df_price.shape[1]):
-
-            # Print scenario details
-            print(f"Scenario {scenario_counter}")
-            print(f"Condition {condition}")
-            print(f"Wind day {wind_day}")
-            print(f"Day-ahead price day {price_day}")
-            
-            if scenario_counter <= 200:
-                    
-                in_sample_scenarios.append({
-                    "Scenario": scenario_counter,
-                    "Condition": condition,
-                    "Wind Day": wind_day,
-                    "Price Day": price_day
-                })
-            else:
-                out_of_sample_scenarios.append({
-                    "Scenario": scenario_counter,
-                    "Condition": condition,
-                    "Wind Day": wind_day,
-                    "Price Day": price_day
-                })
-
-            # Increment scenario counter
-            scenario_counter += 1
-
-#Convert the lists of Scenarios to DataFrames
-df_in_sample_scenarios = pd.DataFrame(in_sample_scenarios)
-df_out_of_sample_scenarios = pd.DataFrame(out_of_sample_scenarios)
-
-#Save the DataFrames to CSV files
-df_in_sample_scenarios.to_csv('in_sample_scenarios.csv', index=False)
-df_out_of_sample_scenarios.to_csv('out_of_sample_scenarios.csv', index=False)
+#df_in_sample_scenarios: in-sample scenarios (200 scenarios)
+# df_out_of_sample_scenarios: out-of-sample scenarios (1400 scenarios)
