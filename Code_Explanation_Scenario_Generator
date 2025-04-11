@@ -1,0 +1,115 @@
+# Code Explanation: Scenario Generator Step-by-Step
+
+## Step 1: Import and Setup
+The code starts by importing necessary libraries (OS operations, JSON handling, plotting, NumPy, pandas) and custom data sources (`df_wind`, `df_price`, `df_conditions`).
+
+## Step 2: Create Balancing Prices
+```python
+for condition in range(num_conditions):  # Loop through 4 conditions
+    df_balancing_price = df_price.copy() 
+    
+    for hour in range(df_conditions.shape[0]):  # 24 hours
+        condition_value = df_conditions.iloc[hour, condition]  # 0 or 1
+        for day in range(df_price.shape[1]):  # 20 days
+            # Apply price adjustments based on condition
+            if condition_value == 0:  # Excess: +25%
+                df_balancing_price.iloc[hour, day] = df_price.iloc[hour, day] * 1.25
+            else:  # Deficit: -15%
+                df_balancing_price.iloc[hour, day] = df_price.iloc[hour, day] * 0.85
+    
+    balancing_prices_list.append(df_balancing_price)
+```
+This creates 4 separate balancing price DataFrames (one per condition), each with 24 hours × 20 days.
+
+## Step 3: Generate Scenarios
+```python
+for condition in range(df_conditions.shape[1]):
+    for wind_day in range(df_wind.shape[1]):
+        for price_day in range(df_price.shape[1]):
+```
+This triple loop creates scenarios for every combination of:
+- 4 conditions
+- All 20 wind days
+- All 20 price days
+
+For each combination, it creates a DataFrame with:
+- Index: 24 hours (named 'hour')
+- Columns: 'condition', 'price', 'balancing_price', 'wind'
+- Additional metadata stored in `.attrs` dictionary (which wind and price day, as well as the condition)
+
+## Step 4: Saving the Data
+The scenarios are saved using pickle format, which preserves the DataFrame structures including attributes.
+
+## Step 5: Visualization
+The `plot_scenario()` function creates detailed visualizations with 4 panels showing:
+1. System condition (0=Excess or 1=Deficit)
+2. Prices (regular and balancing)
+3. Wind production
+4. Imbalance costs
+
+## How the Data is Stored
+
+### Dictionary Structure
+```
+in_sample_scenarios = {
+    1: DataFrame(24 hours × 4 columns),
+    2: DataFrame(24 hours × 4 columns),
+    ...
+}
+```
+
+### DataFrame Structure for Each Scenario
+```
+       condition  price  balancing_price  wind
+hour                                          
+0             0   45.2           56.50   120.5
+1             1   42.1           35.79   125.3
+...          ...    ...             ...    ...
+23            0   40.5           50.63   115.2
+```
+
+### Metadata (Attributes)
+```python
+scenario_data.attrs = {
+    'condition_id': condition,  # Which condition pattern
+    'wind_day': wind_day,      # Source wind day
+    'price_day': price_day     # Source price day
+}
+```
+
+## How to Access the Data
+
+### Direct Access to Scenarios
+```python
+# Get a specific scenario
+scenario5 = in_sample_scenarios[5]
+
+# Access a specific hour's data
+hour_10_data = in_sample_scenarios[5].loc[10]
+# or
+price_at_hour_15 = in_sample_scenarios[5].loc[15, 'price']
+```
+
+### Accessing Metadata
+```python
+# Get source data for scenario 5
+condition_id = in_sample_scenarios[5].attrs['condition_id']
+wind_day = in_sample_scenarios[5].attrs['wind_day']
+price_day = in_sample_scenarios[5].attrs['price_day']
+```
+
+### Loading Saved Scenarios
+```python
+import pickle
+with open('results/scenarios/in_sample_scenarios.pkl', 'rb') as f:
+    scenarios = pickle.load(f)
+```
+
+### Finding Specific Scenarios
+```python
+# Get all scenarios with condition_id = 2
+condition_2_scenarios = {id: df for id, df in in_sample_scenarios.items() 
+                        if df.attrs['condition_id'] == 2}
+```
+
+This structure is both flexible and organized, making it easy to analyze scenarios individually or in groups.

@@ -1,79 +1,45 @@
 import os
-
 import pandas as pd
-import numpy as np
+from generate_conditions import generate_conditions
 
-from scenario_generation import df_conditions
-
-
-# Read files from \data
-DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
-files = {
-    'price_day_ahead': os.path.join(DATA_DIR, 'price_dayahead.xlsx'),
-    'wind_actual_gen': os.path.join(DATA_DIR, 'wind_actual_gen.csv'), 
-    'wind_forecast': os.path.join(DATA_DIR, 'wind_forecast.csv')
-}
-
-# Check if files exist
-for key, filepath in files.items():
-    if not os.path.exists(filepath):
-        raise FileNotFoundError(f"File {filepath} does not exist.")
+def load_data():
+    """Load and process price and wind data, generate conditions"""
+    # Set data directory and paths
+    DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+    price_path = os.path.join(DATA_DIR, 'price_dayahead.xlsx')
+    wind_path = os.path.join(DATA_DIR, 'wind_actual_gen.csv')
     
+    # Load price data and reshape
+    df_price = pd.read_excel(price_path)
+    df_price.index.name = 'Hour'
+    df_price = df_price.drop(columns=['time']).iloc[:, ::-1]  # Drop time, reverse columns
+    df_price.columns = [f'Day {i+1}' for i in range(len(df_price.columns))]
+    
+    # Load wind data and reshape
+    df_wind_raw = pd.read_csv(wind_path, sep=";", parse_dates=['startTime'])
+    df_wind_raw.set_index('startTime', inplace=True)
+    
+    # Resample wind data to hourly and reshape to days
+    hourly_wind = df_wind_raw['Wind power generation - 15 min data'].resample('1h').sum()
+    reshaped_wind = hourly_wind.values.reshape(-1, 24).T  # Transpose to have hours as rows
+    df_wind = pd.DataFrame(
+        reshaped_wind, 
+        columns=[f'Day {i+1}' for i in range(reshaped_wind.shape[1])]
+    )
+    
+    # Generate conditions dataframe
+    df_conditions = generate_conditions()
+    
+    return df_wind, df_price, df_conditions
 
-# Read dataframes with appropriate method based on file extension
-dfs = {}
-for key, path in files.items():
-    if path.endswith('.xlsx'):
-        dfs[key] = pd.read_excel(path)
-    else:
-        dfs[key] = pd.read_csv(path, sep = ";",
-                               parse_dates=['startTime', 'endTime'])
+# Generate the three required dataframes
+df_wind, df_price, df_conditions = load_data()
 
-# defining the dataframes
-df_wind_actual_gen = dfs['wind_actual_gen']
-df_wind_forecast = dfs['wind_forecast']
-df_price_day_ahead = dfs['price_day_ahead']
-
-#create index for hour 0 to 24 in df_price_day_ahead
-df_price_day_ahead['Hour'] = df_price_day_ahead.index
-df_price_day_ahead = df_price_day_ahead.set_index('Hour')
-
-#delete "time" column in df_price_day_ahead
-df_price_day_ahead = df_price_day_ahead.drop(columns=['time'])
-
-#reverse the column order in df_price_day_ahead
-df_price_day_ahead = df_price_day_ahead.iloc[:, ::-1]
-
-# Name each column Day x, where x is the day number
-for i in range(len(df_price_day_ahead.columns)):
-    df_price_day_ahead.rename(columns={df_price_day_ahead.columns[i]: f'Day {i+1}'}, inplace=True)
-
-df_price = df_price_day_ahead.copy()
-print(df_price  )
-
-
-# resample df_wind_actual_gen to 1 hour frequency
-# Set the 'startTime' column as the index
-df_wind_actual_gen.set_index('startTime', inplace=True)
-
-# Select only numeric columns for resampling
-numeric_columns = df_wind_actual_gen.select_dtypes(include=['number'])
-
-# Resample to 1-hour frequency and sum the values
-df_resampled = numeric_columns.resample('1h').sum()
-
-# Reset the index to work with the data
-df_resampled = df_resampled.reset_index()
-
-# Add an 'Hour' column to represent the hour of the day
-df_resampled['Hour'] = df_resampled['startTime'].dt.hour
-
-# Reshape the DataFrame to have 24 rows per column
-reshaped_data = df_resampled['Wind power generation - 15 min data'].values.reshape(-1, 24).T
-
-# Create a new DataFrame with columns for each 24-hour period
-df_restructured = pd.DataFrame(reshaped_data, columns=[f'Day {i+1}' for i in range(reshaped_data.shape[1])])
-df_wind = df_restructured.copy()
-# Display the restructured DataFrame
-print(df_wind)
-
+# # For debugging only - comment out in production
+# if __name__ == "__main__":
+#     print("Wind data sample:")
+#     print(df_wind.head())
+#     print("\nPrice data sample:")
+#     print(df_price.head())
+#     print("\nConditions data:")
+#     print(df_conditions)

@@ -1,5 +1,6 @@
 # Standard library imports
 import os
+import pickle
 
 # Third-party imports
 import gurobipy as gp
@@ -9,8 +10,18 @@ import numpy as np
 import pandas as pd
 
 # Local imports
-from import_data import df_wind, df_price, df_conditions
-from scenario_generator_loop import df_balancing_prices, df_in_sample_scenarios df_out_of_sample_scenarios
+import functions as fn
+
+# Read in_sample and out of_sample scenarios
+in_sample_scenarios, out_sample_scenarios = fn.load_scenarios()
+
+
+# Example: Access scenario 1
+# print(f"Scenario 1 data:")
+# print(in_sample_scenarios[1])
+# print('amount of in_sample_scenarios:', len(in_sample_scenarios))
+# print('amount of out_of_sample_scenarios:', len(out_sample_scenarios))
+
 
 CAPACITY_WIND_FARM = 500 #MW
 OFFER_PRICE_WIND_FARM = 0
