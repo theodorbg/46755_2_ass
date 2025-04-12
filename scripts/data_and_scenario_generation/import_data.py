@@ -1,13 +1,31 @@
 import os
 import pandas as pd
+import numpy as np
 from generate_conditions import generate_conditions
 
 def load_data():
     """Load and process price and wind data, generate conditions"""
-    # Set data directory and paths
-    DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+    # Fix the path by going up two levels (to project root) then to data folder
+    current_file_dir = os.path.dirname(os.path.abspath(__file__))  # Get current file directory
+    project_root = os.path.dirname(os.path.dirname(current_file_dir))  # Go up two levels
+    DATA_DIR = os.path.join(project_root, 'data')  # Path to data folder
+    
+    # Check if path exists
+    if not os.path.exists(DATA_DIR):
+        raise FileNotFoundError(f"Data directory not found at {DATA_DIR}")
+        
     price_path = os.path.join(DATA_DIR, 'price_dayahead.xlsx')
     wind_path = os.path.join(DATA_DIR, 'wind_actual_gen.csv')
+    
+    # Print path for debugging
+    print(f"Looking for price data at: {price_path}")
+    print(f"Looking for wind data at: {wind_path}")
+    
+    # Check if files exist
+    if not os.path.exists(price_path):
+        raise FileNotFoundError(f"Price data file not found: {price_path}")
+    if not os.path.exists(wind_path):
+        raise FileNotFoundError(f"Wind data file not found: {wind_path}")
     
     # Load price data and reshape
     df_price = pd.read_excel(price_path)
@@ -34,12 +52,3 @@ def load_data():
 
 # Generate the three required dataframes
 df_wind, df_price, df_conditions = load_data()
-
-# # For debugging only - comment out in production
-# if __name__ == "__main__":
-#     print("Wind data sample:")
-#     print(df_wind.head())
-#     print("\nPrice data sample:")
-#     print(df_price.head())
-#     print("\nConditions data:")
-#     print(df_conditions)

@@ -10,7 +10,7 @@ import pickle
 
 # Local imports
 from import_data import df_wind, df_price, df_conditions
-import plot_functions as pf
+import plot_functions_scenario_generation as pf
 
 # Create balancing prices DataFrames to store condition-specific pricing
 num_conditions = df_conditions.shape[1] #4 conditions
@@ -23,9 +23,9 @@ for condition in range(num_conditions):
     for hour in range(df_conditions.shape[0]): #24 hours
         condition_value = df_conditions.iloc[hour, condition] # 0 or 1
         for day in range(df_price.shape[1]): # 20 days
-            if condition_value == 0: # Excess condition
+            if condition_value == 1: # Deficit condition
                 df_balancing_price.iloc[hour, day] = df_price.iloc[hour, day] * 1.25
-            else: # Deficit condition
+            else: # Excess  condition
                 df_balancing_price.iloc[hour, day] = df_price.iloc[hour, day] * 0.85
     
     balancing_prices_list.append(df_balancing_price)
