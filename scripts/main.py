@@ -11,7 +11,8 @@ import pandas as pd
 
 # Local imports
 import data_and_scenario_generation.load_scenarios as load_scenarios
-import steps.step1_solve_one_price_offering_strategy as s1
+import steps.step1_one_price as s1
+import steps.step2_two_price as s2
 import plot_functions as pf
 
 # Read in_sample and out of_sample scenarios
@@ -72,15 +73,15 @@ optimal_offers, expected_profit, scenario_profits = s1.solve_one_price_offering_
 
 # Print results
 print(f"Expected profit: {expected_profit:.2f} EUR")
-print("Optimal day-ahead offers (MW):")
-for h in range(24):
-    print(f"Hour {h}: {optimal_offers[h]:.2f} MW")
+# print("Optimal day-ahead offers (MW):")
+# for h in range(24):
+#     print(f"Hour {h}: {optimal_offers[h]:.2f} MW")
 
 # Plot optimal offers
 pf.plot_optimal_offers(optimal_offers)
 
 # Plot profit distribution
-pf.plot_cumulative_distribution_func(scenario_profits, expected_profit)
+pf.plot_cumulative_distribution_func(scenario_profits, expected_profit, 'One-Price')
 
 # Analyze if we see an all-or-nothing bidding strategy
 threshold = 1e-6  # MW, to account for potential numerical precision
@@ -96,7 +97,106 @@ print(f"All-or-nothing bidding strategy: {'Yes' if all_or_nothing else 'No'}")
 # from slides:
 # yt link: https://www.youtube.com/watch?v=9dEe5JdqPp4&ab_channel=Renewablesinelectricitymarkets
 
+# Solve the two-price model
+tp_optimal_offers, tp_expected_profit, tp_scenario_profits = s2.solve_two_price_offering_strategy(
+    in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS
+)
 
+# Print results
+print("\n=== TWO-PRICE BALANCING SCHEME RESULTS ===")
+print(f"Expected profit: {tp_expected_profit:.2f} EUR")
+print("Optimal day-ahead offers (MW):")
+for h in range(24):
+    print(f"Hour {h}: {tp_optimal_offers[h]:.2f} MW")
+
+# Plot optimal offers
+pf.plot_optimal_offers(tp_optimal_offers, title="Optimal Day-Ahead Offers - Two-Price Scheme", 
+                     filename="two_price_optimal_offers.png")
+
+# Plot profit distribution
+pf.plot_cumulative_distribution_func(tp_scenario_profits, tp_expected_profit, 
+                                   'Two-Price')
+
+# Analyze if we see an all-or-nothing bidding strategy
+tp_all_or_nothing = all(offer <= threshold or abs(offer - CAPACITY_WIND_FARM) <= threshold 
+                      for offer in tp_optimal_offers)
+print(f"All-or-nothing bidding strategy: {'Yes' if tp_all_or_nothing else 'No'}")
+
+# Compare with one-price results
+print("\n=== COMPARISON: ONE-PRICE vs TWO-PRICE ===")
+print(f"One-Price Expected Profit: {expected_profit:.2f} EUR")
+print(f"Two-Price Expected Profit: {tp_expected_profit:.2f} EUR")
+print(f"Difference: {tp_expected_profit - expected_profit:.2f} EUR")
+
+# Plot comparison of offering strategies
+plt.figure(figsize=(12, 6))
+plt.bar(np.arange(24) - 0.2, optimal_offers, width=0.4, label='One-Price', color='blue', alpha=0.7)
+plt.bar(np.arange(24) + 0.2, tp_optimal_offers, width=0.4, label='Two-Price', color='orange', alpha=0.7)
+plt.xlabel('Hour')
+plt.ylabel('Offer Quantity (MW)')
+plt.title('Comparison of Optimal Day-Ahead Offers')
+plt.grid(alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.savefig('results/comparison_optimal_offers.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+
+# %% DEBUGGING 1.2
+# After solving all hours
+price_diff_by_hour = []
+for hour in range(N_HOURS):
+    DA_prices = [in_sample_scenarios[s].loc[hour, 'price'] for s in in_sample_scenarios]
+    BAL_prices_excess = [in_sample_scenarios[s].loc[hour, 'balancing_price'] 
+                         for s in in_sample_scenarios if in_sample_scenarios[s].loc[hour, 'condition'] == 0]
+    BAL_prices_deficit = [in_sample_scenarios[s].loc[hour, 'balancing_price'] 
+                          for s in in_sample_scenarios if in_sample_scenarios[s].loc[hour, 'condition'] == 1]
+    
+    avg_DA = sum(DA_prices) / len(DA_prices)
+    avg_BAL_excess = sum(BAL_prices_excess) / len(BAL_prices_excess) if BAL_prices_excess else 0
+    avg_BAL_deficit = sum(BAL_prices_deficit) / len(BAL_prices_deficit) if BAL_prices_deficit else 0
+    
+    price_diff_by_hour.append({
+        'hour': hour,
+        'avg_DA': avg_DA,
+        'avg_BAL_excess': avg_BAL_excess,
+        'avg_BAL_deficit': avg_BAL_deficit,
+        'surplus_penalty': (avg_DA - avg_BAL_excess) / avg_DA if avg_DA else 0,
+        'deficit_penalty': (avg_BAL_deficit - avg_DA) / avg_DA if avg_DA else 0,
+        'optimal_bid': optimal_offers[hour]
+    })
+
+# Print analysis for hours with 0 or 500 MW bids
+print("\nPrice difference analysis for extreme bidding hours:")
+for data in price_diff_by_hour:
+    if data['optimal_bid'] < 1 or data['optimal_bid'] > 499:
+        print(f"Hour {data['hour']}: Bid = {data['optimal_bid']:.0f} MW, " +
+              f"DA = {data['avg_DA']:.2f}, " +
+              f"BAL(excess) = {data['avg_BAL_excess']:.2f}, " +
+              f"BAL(deficit) = {data['avg_BAL_deficit']:.2f}, " +
+              f"Surplus penalty = {data['surplus_penalty']*100:.0f}%, " +
+              f"Deficit penalty = {data['deficit_penalty']*100:.0f}%")
+        
+
+
+# Add detailed debugging for problematic hours
+if hour in [11, 12, 13]:
+    print(f"\n--- Detailed analysis for Hour {hour} ---")
+    # Check data ranges
+    wind_values = [in_sample_scenarios[s].loc[hour, 'wind'] for s in in_sample_scenarios]
+    price_values = [in_sample_scenarios[s].loc[hour, 'price'] for s in in_sample_scenarios]
+    
+    print(f"Wind min/avg/max: {min(wind_values):.1f}/{sum(wind_values)/len(wind_values):.1f}/{max(wind_values):.1f}")
+    print(f"DA Price min/avg/max: {min(price_values):.2f}/{sum(price_values)/len(price_values):.2f}/{max(price_values):.2f}")
+    
+    # Check for extreme or invalid values
+    extreme_wind = [s for s in in_sample_scenarios if abs(in_sample_scenarios[s].loc[hour, 'wind']) > 1000]
+    negative_wind = [s for s in in_sample_scenarios if in_sample_scenarios[s].loc[hour, 'wind'] < 0]
+    
+    if extreme_wind:
+        print(f"Found {len(extreme_wind)} scenarios with extreme wind values")
+    if negative_wind:
+        print(f"Found {len(negative_wind)} scenarios with negative wind values")
 # %%  Ex-post Analysis
 #  Following Lecture 8, conduct ex-post cross-validation analyses to
 #  evaluate the quality of the offering decisions made in both Steps 1.1 and 1.2. 
