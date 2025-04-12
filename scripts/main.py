@@ -66,7 +66,7 @@ N_HOURS = in_sample_scenarios[1].shape[0]  # 24 hours
 # Each scenario is independent and equally likely (1/200) for in-sample scenarios
 
 # Solve the model
-optimal_offers, expected_profit, scenario_profits = s1.solve_one_price_offering_strategy(out_sample_scenarios,
+optimal_offers, expected_profit, scenario_profits = s1.solve_one_price_offering_strategy(in_sample_scenarios,
                                                                                          CAPACITY_WIND_FARM,
                                                                                          N_HOURS)
 
