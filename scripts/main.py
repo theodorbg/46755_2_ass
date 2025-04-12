@@ -11,7 +11,7 @@ import pandas as pd
 
 # Local imports
 import data_and_scenario_generation.load_scenarios as load_scenarios
-import steps.solve_one_price_offering_strategy_1_1 as s1
+import steps.step1_solve_one_price_offering_strategy as s1
 import plot_functions as pf
 
 # Read in_sample and out of_sample scenarios
@@ -66,7 +66,7 @@ N_HOURS = in_sample_scenarios[1].shape[0]  # 24 hours
 # Each scenario is independent and equally likely (1/200) for in-sample scenarios
 
 # Solve the model
-optimal_offers, expected_profit, scenario_profits = s1.solve_one_price_offering_strategy(in_sample_scenarios,
+optimal_offers, expected_profit, scenario_profits = s1.solve_one_price_offering_strategy(out_sample_scenarios,
                                                                                          CAPACITY_WIND_FARM,
                                                                                          N_HOURS)
 
@@ -86,10 +86,6 @@ pf.plot_cumulative_distribution_func(scenario_profits, expected_profit)
 threshold = 1e-6  # MW, to account for potential numerical precision
 all_or_nothing = all(offer <= threshold or abs(offer - CAPACITY_WIND_FARM) <= threshold for offer in optimal_offers)
 print(f"All-or-nothing bidding strategy: {'Yes' if all_or_nothing else 'No'}")
-
-
-
-
 
 
 # %%  1.2 Offering Strategy Under a Two-Price Balancing Scheme
