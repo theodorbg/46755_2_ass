@@ -39,30 +39,37 @@ def calculate_profits(offers, scenarios, capacity_wind_farm, n_hours, price_sche
     return total_profit / len(scenarios)
 
 def perform_cross_validation(all_scenarios, n_folds=8, in_sample_size=200, capacity_wind_farm=500, n_hours=24):
-    """Perform k-fold cross-validation analysis"""
-    # Convert scenarios dict to list for easier splitting
-    scenario_keys = list(all_scenarios.keys())
-    np.random.shuffle(scenario_keys)
+    """Perform k-fold cross-validation analysis using sequential blocks of scenarios"""
+    # Get original in-sample keys (first 200)
+    original_in_sample_keys = sorted(list(all_scenarios.keys()))[:in_sample_size]
+    # Get remaining keys
+    remaining_keys = sorted([k for k in all_scenarios.keys() if k not in original_in_sample_keys])
     
     results = {
         'one_price': {'in_sample': [], 'out_sample': []},
         'two_price': {'in_sample': [], 'out_sample': []}
     }
     
-    fold_size = len(scenario_keys) // n_folds
-    
+    # Process each fold
     for fold in range(n_folds):
         print(f"Processing fold {fold + 1}/{n_folds}")
         
-        # Select scenarios for this fold
-        test_start = fold * fold_size
-        test_end = test_start + fold_size
-        test_keys = scenario_keys[test_start:test_end]
-        train_keys = [k for k in scenario_keys if k not in test_keys]
+        if fold == 0:
+            # For first fold, use original in-sample scenarios
+            in_sample_keys = original_in_sample_keys
+        else:
+            # For other folds, use sequential blocks from remaining scenarios
+            start_idx = (fold - 1) * in_sample_size
+            end_idx = start_idx + in_sample_size
+            if end_idx <= len(remaining_keys):
+                in_sample_keys = remaining_keys[start_idx:end_idx]
+            else:
+                # Handle case where there aren't enough remaining scenarios
+                print(f"Warning: Not enough scenarios for fold {fold + 1}")
+                break
         
-        # Randomly select in-sample scenarios from training set
-        in_sample_keys = np.random.choice(train_keys, size=in_sample_size, replace=False)
-        out_sample_keys = [k for k in test_keys]
+        # All other scenarios become out-of-sample
+        out_sample_keys = [k for k in all_scenarios.keys() if k not in in_sample_keys]
         
         # Create scenario subsets
         in_sample_scenarios = {k: all_scenarios[k] for k in in_sample_keys}

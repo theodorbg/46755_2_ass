@@ -98,7 +98,8 @@ print(f"All-or-nothing bidding strategy: {'Yes' if all_or_nothing else 'No'}")
 
 # from slides:
 # yt link: https://www.youtube.com/watch?v=9dEe5JdqPp4&ab_channel=Renewablesinelectricitymarkets
-
+# Print results
+print("\n=== TWO-PRICE BALANCING SCHEME RESULTS ===")
 # Solve the two-price model
 tp_optimal_offers, tp_expected_profit, tp_scenario_profits = s2.solve_two_price_offering_strategy(
     in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS
@@ -297,4 +298,3 @@ for strategy in ['one_price', 'two_price']:
     diff_percent = ((in_sample - out_sample) / in_sample) * 100
     print(f"\n{strategy.replace('_', ' ').title()} Strategy Gap Analysis:")
     print(f"In-sample vs Out-sample difference: {diff_percent:.2f}%")
-    
