@@ -255,6 +255,7 @@ results = s3.perform_cross_validation(
     n_hours=N_HOURS
 )
 
+
 # Print results
 print("\nCross-validation Results:")
 print("========================")
@@ -296,3 +297,4 @@ for strategy in ['one_price', 'two_price']:
     diff_percent = ((in_sample - out_sample) / in_sample) * 100
     print(f"\n{strategy.replace('_', ' ').title()} Strategy Gap Analysis:")
     print(f"In-sample vs Out-sample difference: {diff_percent:.2f}%")
+    
