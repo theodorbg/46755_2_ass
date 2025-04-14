@@ -91,6 +91,7 @@ with open('results/scenarios/out_of_sample_scenarios.pkl', 'wb') as f:
 # Plot the first 5 scenarios (wind, price, balancing price)
 for i in range(1, 6):
     pf.plot_scenario(in_sample_scenarios[i], i)
+print('Plotted the first 5 scenarios')
 
 # Generate  balancing price, and day ahead price (20 plots)
 pf.plot_balancing_prices_by_day(balancing_prices_list, df_price)

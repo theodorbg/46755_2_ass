@@ -38,7 +38,7 @@ def load_data():
     df_wind_raw.set_index('startTime', inplace=True)
     
     # Resample wind data to hourly and reshape to days
-    hourly_wind = df_wind_raw['Wind power generation - 15 min data'].resample('1h').sum()
+    hourly_wind = df_wind_raw['Wind power generation - 15 min data'].resample('1h').mean()
     reshaped_wind = hourly_wind.values.reshape(-1, 24).T  # Transpose to have hours as rows
     df_wind = pd.DataFrame(
         reshaped_wind, 
@@ -52,3 +52,14 @@ def load_data():
 
 # Generate the three required dataframes
 df_wind, df_price, df_conditions = load_data()
+
+
+#find max value of wind production of in_sample_scenarios
+CAPACITY_WIND_FARM = 500 # MW
+MAX_CAPACITY_FINGRID = 8411 # MW
+#normalize the wind production based on the max wind production in the in_sample_scenarios and the max capacity (500MW)
+for row in df_wind.columns:
+    df_wind[row] = df_wind[row] / MAX_CAPACITY_FINGRID * CAPACITY_WIND_FARM
+    
+# print(f"Normalized wind production in scenario 1:")
+# print(df_wind.head())

@@ -31,8 +31,6 @@ in_sample_scenarios, out_sample_scenarios = load_scenarios.load_scenarios()
 CAPACITY_WIND_FARM = 500 #MW
 OFFER_PRICE_WIND_FARM = 0
 N_HOURS = in_sample_scenarios[1].shape[0]  # 24 hours
-
-
 # objective: formulate and solve optimization problem to determine its optimal offering strategy in terms of production quantity in the day-ahead market
 # ANALYSIS SPAN: 24 HOURS
 # MARKETS: day-ahead + balancing markets
@@ -99,6 +97,15 @@ print(f"All-or-nothing bidding strategy: {'Yes' if all_or_nothing else 'No'}")
 # from slides:
 # yt link: https://www.youtube.com/watch?v=9dEe5JdqPp4&ab_channel=Renewablesinelectricitymarkets
 # Print results
+
+print('#################################')
+print('debugging')
+
+# print keys of in sample scenarios
+print(f"Keys of in_sample_scenarios: {in_sample_scenarios.keys()}")
+
+print('#################################')
+
 print("\n=== TWO-PRICE BALANCING SCHEME RESULTS ===")
 # Solve the two-price model
 tp_optimal_offers, tp_expected_profit, tp_scenario_profits = s2.solve_two_price_offering_strategy(
@@ -109,7 +116,7 @@ tp_optimal_offers, tp_expected_profit, tp_scenario_profits = s2.solve_two_price_
 print("\n=== TWO-PRICE BALANCING SCHEME RESULTS ===")
 print(f"Expected profit: {tp_expected_profit:.2f} EUR")
 print("Optimal day-ahead offers (MW):")
-for h in range(24):
+for h in range(len(tp_optimal_offers)):
     print(f"Hour {h}: {tp_optimal_offers[h]:.2f} MW")
 
 # Plot optimal offers
@@ -144,7 +151,41 @@ plt.tight_layout()
 plt.savefig('results/comparison_optimal_offers.png', dpi=300, bbox_inches='tight')
 plt.show()
 
+# %%
+print('#################################')
+# Add this section after the two-price results
+print("\n=== FORECAST STRATEGY RESULTS ===")
+ew_optimal_offers, ew_expected_profit, ew_scenario_profits = s2.forecast_strategy(
+    in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS
+)
 
+print(f"Expected profit: {ew_expected_profit:.2f} EUR")
+print("Optimal day-ahead offers (MW):")
+for h in range(24):
+    print(f"Hour {h}: {ew_optimal_offers[h]:.2f} MW")
+
+# Compare with other strategies
+print("\n=== COMPARISON: ALL STRATEGIES ===")
+print(f"One-Price Expected Profit: {expected_profit:.2f} EUR")
+print(f"Two-Price Expected Profit: {tp_expected_profit:.2f} EUR")
+print(f"Expected Wind Profit: {ew_expected_profit:.2f} EUR")
+print(f"Expected Wind vs One-Price: {ew_expected_profit - expected_profit:.2f} EUR")
+print(f"Expected Wind vs Two-Price: {ew_expected_profit - tp_expected_profit:.2f} EUR")
+
+# Plot comparison of all three strategies
+plt.figure(figsize=(14, 7))
+plt.bar(np.arange(24) - 0.3, optimal_offers, width=0.2, label='One-Price', color='blue', alpha=0.7)
+plt.bar(np.arange(24), tp_optimal_offers, width=0.2, label='Two-Price', color='green', alpha=0.7)
+plt.bar(np.arange(24) + 0.3, ew_optimal_offers, width=0.2, label='Expected Wind', color='orange', alpha=0.7)
+plt.xlabel('Hour')
+plt.ylabel('Offer Quantity (MW)')
+plt.title('Comparison of Bidding Strategies')
+plt.grid(alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.savefig('results/comparison_all_strategies.png', dpi=300, bbox_inches='tight')
+
+print('#################################')
 # %% DEBUGGING 1.2
 # After solving all hours
 price_diff_by_hour = []
