@@ -6,6 +6,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+# Function to ensure directories exist before saving files
+def ensure_dir_exists(file_path):
+    directory = os.path.dirname(file_path)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory)
+
 def plot_optimal_offers(offers, title="Optimal Day-Ahead Market Offers", filename=None):
     """Plot the optimal offers with customizable title and filename."""
     plt.figure(figsize=(12, 6))
@@ -15,9 +21,17 @@ def plot_optimal_offers(offers, title="Optimal Day-Ahead Market Offers", filenam
     plt.title(title)
     plt.grid(alpha=0.3)
     plt.tight_layout()
-    plt.savefig('results//figures/solutions/one_price_optimal_offers.png', dpi=300, bbox_inches='tight')
+    
+    # Save the figure
+    save_path = 'results/figures/solutions/one_price_optimal_offers.png'
+    if filename:
+        save_path = f'results/{filename}'
+    
+    # Ensure directory exists before saving
+    ensure_dir_exists(save_path)
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    
     plt.close()
-
 def plot_cumulative_distribution_func(scenario_profits, expected_profit, scheme_type):
     profit_values = list(scenario_profits.values())
     plt.figure(figsize=(12, 6))

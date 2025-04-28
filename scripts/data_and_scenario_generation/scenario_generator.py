@@ -12,6 +12,8 @@ import pickle
 from import_data import df_wind, df_price, df_conditions
 import plot_functions_scenario_generation as pf
 
+IN_SAMPLE_NUMBER = 1
+
 # Create balancing prices DataFrames to store condition-specific pricing
 num_conditions = df_conditions.shape[1] #4 conditions
 balancing_prices_list = [] #list to store each balancing price df
@@ -62,7 +64,7 @@ for condition in range(df_conditions.shape[1]):
             }
             
             # Add to appropriate collection
-            if scenario_counter <= 200:
+            if scenario_counter <= IN_SAMPLE_NUMBER:
                 in_sample_scenarios[scenario_counter] = scenario_data
             else:
                 out_of_sample_scenarios[scenario_counter] = scenario_data
@@ -85,6 +87,8 @@ with open('results/scenarios/out_of_sample_scenarios.pkl', 'wb') as f:
 # print(f"Scenario 1 data:")
 # print(in_sample_scenarios[1])
 # print('amount of in_sample_scenarios:', len(in_sample_scenarios))
+# print(in_sample_scenarios[0]['condition'] )
+# print(in_sample_scenarios[0]['condition']==0)
 # print('amount of out_of_sample_scenarios:', len(out_of_sample_scenarios))
 
 
@@ -95,3 +99,6 @@ print('Plotted the first 5 scenarios')
 
 # Generate  balancing price, and day ahead price (20 plots)
 pf.plot_balancing_prices_by_day(balancing_prices_list, df_price)
+print('Plotted balancing prices by day')
+
+print('Scenario generation completed.')
