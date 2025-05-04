@@ -21,13 +21,13 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
     probability = 1.0 / n_scenarios
 
     # Create price arrays for each scenario and hour
-    surplus_price = np.zeros((24, n_scenarios))
-    deficit_price = np.zeros((24, n_scenarios))
+    surplus_price = np.zeros((n_hours, n_scenarios))
+    deficit_price = np.zeros((n_hours, n_scenarios))
     
     # Set prices based on system conditions
     for s in range(1, n_scenarios + 1):
         condition = in_sample_scenarios[s]['condition']  # one day
-        for t in range(24):
+        for t in range(n_hours):
             # Two-price balancing scheme
             if condition[t] == 0:  # System excess
                 # Surplus at balancing price, deficit at day-ahead
@@ -44,7 +44,7 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
         
     # Decision variable: day-ahead market offers
     p_da = model.addMVar(
-        shape=(24), 
+        shape=(n_hours), 
         lb=0, 
         ub=capacity_wind_farm, 
         name="p_DA"
@@ -52,12 +52,12 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
     
     # Variables for positive and negative imbalances
     pos_imbalance = model.addMVar(
-        shape=(24, n_scenarios), 
+        shape=(n_hours, n_scenarios), 
         lb=0, 
         name="pos_imbalance"
     )
     neg_imbalance = model.addMVar(
-        shape=(24, n_scenarios), 
+        shape=(n_hours, n_scenarios), 
         lb=0, 
         name="neg_imbalance"
     )
@@ -72,12 +72,12 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
             )
             for s in range(1, n_scenarios + 1)
         )
-        for t in range(24)
+        for t in range(n_hours)
     )
     model.setObjective(objective_expr, GRB.MAXIMIZE)
     
     # Imbalance constraints
-    for t in range(24):
+    for t in range(n_hours):
         for s in range(1, n_scenarios + 1):
             wind_actual = in_sample_scenarios[s]['wind'].iloc[t]
             model.addConstr(
@@ -95,7 +95,7 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
     # Check if the model was solved successfully
     if model.status == GRB.OPTIMAL:
         # Extract results
-        optimal_offers = [p_da[t].X for t in range(24)]
+        optimal_offers = [p_da[t].X for t in range(n_hours)]
         total_profit = model.objVal
         return optimal_offers, total_profit
     else:
