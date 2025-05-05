@@ -33,9 +33,8 @@ for condition in range(num_conditions):
     balancing_prices_list.append(df_balancing_price)
 
 # Generate scenarios with hour-by-hour DataFrames
-in_sample_scenarios = {}
-out_of_sample_scenarios = {}
-scenario_counter = 1
+sample_scenarios = {}
+scenario_counter = 0
 
 # Loop through each condition
 for condition in range(df_conditions.shape[1]):
@@ -64,12 +63,45 @@ for condition in range(df_conditions.shape[1]):
             }
             
             # Add to appropriate collection
-            if scenario_counter <= IN_SAMPLE_NUMBER:
-                in_sample_scenarios[scenario_counter] = scenario_data
-            else:
-                out_of_sample_scenarios[scenario_counter] = scenario_data
-                
+            sample_scenarios[scenario_counter] = scenario_data
             scenario_counter += 1
+
+# Define the number of in-sample scenarios
+IN_SAMPLE_NUMBER = 200  # Changed from 1 to 200
+
+# Take random scenarios from sample_scenarios and save them in a dictionary
+# with continuous numbering (0-199 for in-sample, 200+ for out-of-sample)
+in_sample_scenarios = {}
+out_of_sample_scenarios = {}
+
+# First, determine how many scenarios to select in total
+total_scenarios_to_select = 1600  # For example, 200 in-sample + 200 out-of-sample
+
+# Generate a list of random indices without replacement
+# Random seed
+# Create a random number generator with a fixed seed
+rng = np.random.RandomState(42)  # Fixed seed for reproducibility
+
+all_indices = rng.choice(
+    list(sample_scenarios.keys()), 
+    size=total_scenarios_to_select, 
+    replace=False
+)
+# Assign scenarios to in-sample and out-of-sample dictionaries
+for i in range(total_scenarios_to_select):
+    random_index = all_indices[i]
+    
+    if i < IN_SAMPLE_NUMBER:
+        # In-sample scenarios: 0 to 199
+        in_sample_scenarios[i] = sample_scenarios[random_index]
+    else:
+        # Out-of-sample scenarios: 200 onward
+        out_of_sample_scenarios[i] = sample_scenarios[random_index]
+
+# No need to reset keys since they're already numbered correctly
+# Print confirmation of key ranges
+print("In-sample scenarios keys range:", min(in_sample_scenarios.keys()), "to", max(in_sample_scenarios.keys()))
+print("Out-of-sample scenarios keys range:", min(out_of_sample_scenarios.keys()), "to", max(out_of_sample_scenarios.keys()))
 
 # Save scenarios to pickle files (best for preserving DataFrame structure)
 # Create directory if it doesn't exist
@@ -93,9 +125,13 @@ with open('results/scenarios/out_of_sample_scenarios.pkl', 'wb') as f:
 
 
 # Plot the first 5 scenarios (wind, price, balancing price)
-for i in range(1, 6):
-    pf.plot_scenario(in_sample_scenarios[i], i)
-print('Plotted the first 5 scenarios')
+if len(in_sample_scenarios) > 5:
+    for i in range(5):
+        pf.plot_scenario(in_sample_scenarios[i], i)
+    print('Plotted the first 5 scenarios')
+else:
+    pf.plot_scenario(in_sample_scenarios[0], 0)
+    print('Plotted the first scenario')
 
 # Generate  balancing price, and day ahead price (20 plots)
 pf.plot_balancing_prices_by_day(balancing_prices_list, df_price)

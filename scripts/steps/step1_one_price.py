@@ -18,7 +18,7 @@ def solve_one_price_offering_strategy(in_sample_scenarios, CAPACITY_WIND_FARM, N
         in_sample_scenarios: Dictionary of in-sample scenarios
     
     Returns:
-        optimal_offers: Optimal hourly production quantity offers
+        optimal_offers_one_price: Optimal hourly production quantity offers
         expected_profit: Expected profit
         scenario_profits: Profits for each scenario
     """
@@ -71,7 +71,7 @@ def solve_one_price_offering_strategy(in_sample_scenarios, CAPACITY_WIND_FARM, N
     model.optimize()
     
     # Extract results
-    optimal_offers = [p_DA[h].X for h in range(N_HOURS)]
+    optimal_offers_one_price = [p_DA[h].X for h in range(N_HOURS)]
     scenario_profits = {s: profit[s].X for s in in_sample_scenarios}
     
-    return optimal_offers, model.objVal, scenario_profits
+    return optimal_offers_one_price, model.objVal, scenario_profits
