@@ -25,18 +25,18 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
     deficit_price = np.zeros((n_hours, n_scenarios))
     
     # Set prices based on system conditions
-    for s in range(1, n_scenarios + 1):
+    for s in range(1, n_scenarios):
         condition = in_sample_scenarios[s]['condition']  # one day
         for t in range(n_hours):
             # Two-price balancing scheme
             if condition[t] == 0:  # System excess
                 # Surplus at balancing price, deficit at day-ahead
-                surplus_price[t, s-1] = in_sample_scenarios[s]['balancing_price'].iloc[t]
-                deficit_price[t, s-1] = in_sample_scenarios[s]['price'].iloc[t]
+                surplus_price[t, s] = in_sample_scenarios[s]['balancing_price'].iloc[t]
+                deficit_price[t, s] = in_sample_scenarios[s]['price'].iloc[t]
             else:  # System deficit (condition == 1)
                 # Surplus at day-ahead, deficit at balancing price
-                surplus_price[t, s-1] = in_sample_scenarios[s]['price'].iloc[t]
-                deficit_price[t, s-1] = in_sample_scenarios[s]['balancing_price'].iloc[t]
+                surplus_price[t, s] = in_sample_scenarios[s]['price'].iloc[t]
+                deficit_price[t, s] = in_sample_scenarios[s]['balancing_price'].iloc[t]
 
     # Create optimization model
     model = gp.Model("WindFarmTwoPrice_Hour")
@@ -67,10 +67,10 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
         gp.quicksum(
             probability * (
                 in_sample_scenarios[s]['price'].iloc[t] * p_da[t] +
-                surplus_price[t, s-1] * pos_imbalance[t, s-1] -
-                deficit_price[t, s-1] * neg_imbalance[t, s-1]
+                surplus_price[t, s] * pos_imbalance[t, s] -
+                deficit_price[t, s] * neg_imbalance[t, s]
             )
-            for s in range(1, n_scenarios + 1)
+            for s in range(1, n_scenarios)
         )
         for t in range(n_hours)
     )
@@ -78,11 +78,11 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
     
     # Imbalance constraints
     for t in range(n_hours):
-        for s in range(1, n_scenarios + 1):
+        for s in range(1, n_scenarios):
             wind_actual = in_sample_scenarios[s]['wind'].iloc[t]
             model.addConstr(
                 wind_actual - p_da[t] == 
-                pos_imbalance[t, s-1] - neg_imbalance[t, s-1],
+                pos_imbalance[t, s] - neg_imbalance[t, s],
                 f"imbalance_{t}_{s}"
             )
     
