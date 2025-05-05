@@ -86,13 +86,22 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
         name="neg_imbalance"
     )
     
+    EXCESS_FACTOR = 0.85  # imbalance price during surplus (low)
+    DEFICIT_FACTOR = 1.25  # imbalance price during deficit (high)
+
     # Objective function - maximize expected profit
     objective_expr = gp.quicksum(
         gp.quicksum(
             probability * (
-                in_sample_scenarios[s]['price'].iloc[t] * p_da[t] +
-                surplus_price[t, s] * pos_imbalance[t, s] -
-                deficit_price[t, s] * neg_imbalance[t, s]
+                in_sample_scenarios[s]['price'].iloc[t] * p_da[t] 
+                + in_sample_scenarios[s]['condition'].iloc[t] *( #ASSUME DEFICIT=1
+                    pos_imbalance[t, s] * in_sample_scenarios[s]['price'].iloc[t] # we produce more than we bid, so 
+                    - neg_imbalance[t, s] * in_sample_scenarios[s]['price'].iloc[t]*DEFICIT_FACTOR #we produce less than we bid, so we get the price of the day-ahead market
+                )
+                + (1 - in_sample_scenarios[s]['condition'].iloc[t]) * ( #ASSUME EXCESS=0
+                    pos_imbalance[t, s] * in_sample_scenarios[s]['price'].iloc[t]*EXCESS_FACTOR # we produce more than we bid, so we get the price of the day-ahead market
+                    - neg_imbalance[t, s] * in_sample_scenarios[s]['price'].iloc[t]
+                )
             )
             for s in range(1, n_scenarios)
         )
