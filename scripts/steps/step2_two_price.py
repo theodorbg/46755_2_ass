@@ -1,6 +1,7 @@
 import gurobipy as gp
 from gurobipy import GRB
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
@@ -23,42 +24,65 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm,
     # Create price arrays for each scenario and hour
     surplus_price = np.zeros((n_hours, n_scenarios))
     deficit_price = np.zeros((n_hours, n_scenarios))
-    
+
+    EXCESS_FACTOR = 0.85  # imbalance price during surplus (low)
+    DEFICIT_FACTOR = 1.25  # imbalance price during deficit (high)
+
     # Set prices based on system conditions
     for s in range(1, n_scenarios):
-        condition = in_sample_scenarios[s]['condition']  # one day
+        condition = in_sample_scenarios[s]['condition']  # 0 = excess, 1 = deficit
         for t in range(n_hours):
-            # Two-price balancing scheme
-            if condition[t] == 0:  # System excess
-                # Surplus at balancing price, deficit at day-ahead
-                surplus_price[t, s] = in_sample_scenarios[s]['balancing_price'].iloc[t]
-                deficit_price[t, s] = in_sample_scenarios[s]['price'].iloc[t]
-            else:  # System deficit (condition == 1)
-                # Surplus at day-ahead, deficit at balancing price
-                surplus_price[t, s] = in_sample_scenarios[s]['price'].iloc[t]
-                deficit_price[t, s] = in_sample_scenarios[s]['balancing_price'].iloc[t]
+            day_ahead_price = in_sample_scenarios[s]['price'].iloc[t]
+            
+            if condition[t] == 0:  # System EXCESS (too much energy in system)
+                # For your SURPLUS (when you produce more than bid):
+                surplus_price[t, s] = day_ahead_price * EXCESS_FACTOR  # Penalized with lower price (0.85)
+                # For your DEFICIT (when you produce less than bid):
+                deficit_price[t, s] = day_ahead_price  # Regular day-ahead price
+                
+            else:  # System DEFICIT (not enough energy in system)
+                # For your SURPLUS (when you produce more than bid):
+                surplus_price[t, s] = day_ahead_price * DEFICIT_FACTOR  # Rewarded with higher price (1.25)
+                # For your DEFICIT (when you produce less than bid):
+                deficit_price[t, s] = day_ahead_price  # Regular day-ahead price
+    
+    # print surplus and deficit prices for debugging
+    # print("Surplus prices:", surplus_price[:,1])
+    # print("Deficit prices:", deficit_price[:,1])
+        # Plot surplus and deficit prices for visualization and debugging
+    # plt.figure(figsize=(10, 5))
+    # plt.scatter(in_sample_scenarios[1].index, surplus_price[:,1], label='Surplus Price')
+    # plt.scatter(in_sample_scenarios[1].index, deficit_price[:,1], label='Deficit Price')
+    # plt.scatter(in_sample_scenarios[1].index, in_sample_scenarios[1]['price'], label='Day-Ahead Price')
+    # plt.xlabel('Hour')
+    # plt.ylabel('Price (EUR/MWh)')
+    # plt.title('Price Comparison: Surplus vs Deficit vs Day-Ahead')
+    # plt.legend()
+    # plt.grid(alpha=0.3)
+    # plt.show()
 
     # Create optimization model
     model = gp.Model("WindFarmTwoPrice_Hour")
     # model.setParam('OutputFlag', 0)  # Suppress output
+    model.setParam('DualReductions', 0)  # Suppress output
         
     # Decision variable: day-ahead market offers
     p_da = model.addMVar(
         shape=(n_hours), 
         lb=0, 
-        ub=capacity_wind_farm, 
+        ub=capacity_wind_farm,
         name="p_DA"
     )
     
     # Variables for positive and negative imbalances
     pos_imbalance = model.addMVar(
         shape=(n_hours, n_scenarios), 
-        lb=0, 
+        lb=0,
         name="pos_imbalance"
     )
     neg_imbalance = model.addMVar(
         shape=(n_hours, n_scenarios), 
-        lb=0, 
+        lb=0,
         name="neg_imbalance"
     )
     

@@ -114,7 +114,7 @@ def perform_cross_validation(in_sample_scenarios, out_sample_scenarios, n_folds=
         ]:
             # Use hourly solver for two-price to avoid license issues
             if solver.__name__ == 'solve_two_price_offering_strategy':
-                solver = solve_two_price_offering_strategy_hourly
+                solver = solve_two_price_offering_strategy
                 
             # Solve offering strategy
             offers, _, _ = solver(fold_in_sample, capacity_wind_farm, n_hours)
