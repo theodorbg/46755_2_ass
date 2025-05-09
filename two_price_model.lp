@@ -2,57 +2,58 @@
 \ LP format - for model browsing. Use MPS format to capture full model detail.
 \ Signature: 0xdcccfb4ead0ec883
 Maximize
-  88.45125000000004 p_DA[0] + 78.78 p_DA[1] + 76.63965000000002 p_DA[2]
-   + 74.06824999999994 p_DA[3] + 75.6764 p_DA[4]
-   + 82.43544999999999 p_DA[5] + 104.8508999999999 p_DA[6]
-   + 117.0709 p_DA[7] + 102.8592000000001 p_DA[8] + 80.4563 p_DA[9]
-   + 52.56584999999998 p_DA[10] + 36.191 p_DA[11] + 31.931 p_DA[12]
-   + 31.05404999999997 p_DA[13] + 39.85275000000001 p_DA[14]
-   + 60.3754 p_DA[15] + 91.777 p_DA[16] + 127.75655 p_DA[17]
-   + 159.7753999999999 p_DA[18] + 140.85615 p_DA[19] + 114.94945 p_DA[20]
-   + 99.5403 p_DA[21] + 91.3539500000002 p_DA[22] + 83.1348 p_DA[23]
-   + 0 pos_imbalance[0,0] + 0.47668 pos_imbalance[0,1]
-   + 0.4045575 pos_imbalance[0,2] + 0.3823724999999999 pos_imbalance[0,3]
-   + 0.4609 pos_imbalance[0,4] + 0.017 pos_imbalance[0,5]
-   + 0.4640575 pos_imbalance[0,6] + 0.391765 pos_imbalance[0,7]
-   + 0.4566625 pos_imbalance[0,8] + 0.4436575 pos_imbalance[0,9]
-   + 0.47668 pos_imbalance[0,10] + 0.32775 pos_imbalance[0,11]
-   + 0.47595 pos_imbalance[0,12] + 0.40732 pos_imbalance[0,13]
-   + 0.017 pos_imbalance[0,14] + 0.128775 pos_imbalance[0,15]
-   + 0.4436575 pos_imbalance[0,16] + 0.02 pos_imbalance[0,17]
-   + 0.5311224999999999 pos_imbalance[0,18] + 0.5608 pos_imbalance[0,19]
-   + 0.5311224999999999 pos_imbalance[0,20] + 0.128775 pos_imbalance[0,21]
-   + 0.4045575 pos_imbalance[0,22] + 0.47668 pos_imbalance[0,23]
-   + 0.40732 pos_imbalance[0,24] + 0.14155 pos_imbalance[0,25]
-   + 0.53725 pos_imbalance[0,26] + 0.3836475 pos_imbalance[0,27]
-   + 0.4610825 pos_imbalance[0,28] + 0.4610825 pos_imbalance[0,29]
-   + 0.4436575 pos_imbalance[0,30] + 0.40732 pos_imbalance[0,31]
-   + 0.62485 pos_imbalance[0,32] + 0.3836475 pos_imbalance[0,33]
-   + 0.130305 pos_imbalance[0,34] + 0.62485 pos_imbalance[0,35]
-   + 0.017 pos_imbalance[0,36] + 0.391765 pos_imbalance[0,37]
-   + 0.54485 pos_imbalance[0,38] + 0.4640575 pos_imbalance[0,39]
-   + 0.47668 pos_imbalance[0,40] + 0.4360925 pos_imbalance[0,41]
-   + 0.4360925 pos_imbalance[0,42] + 0.2785875 pos_imbalance[0,43]
-   + 0.2785875 pos_imbalance[0,44] + 0.4610825 pos_imbalance[0,45]
-   + 0.3836475 pos_imbalance[0,46] + 0.86751 pos_imbalance[0,47]
-   + 0.4566625 pos_imbalance[0,48] + 0.62485 pos_imbalance[0,49]
-   + 0.4610825 pos_imbalance[0,50] + 0.44985 pos_imbalance[0,51]
-   + 0.62485 pos_imbalance[0,52] + 0.47668 pos_imbalance[0,53]
-   + 0.3823724999999999 pos_imbalance[0,54] + 0.4610825 pos_imbalance[0,55]
-   + 0.4610825 pos_imbalance[0,56] + 0.4436575 pos_imbalance[0,57]
-   + 0.3823724999999999 pos_imbalance[0,58] + 0.432395 pos_imbalance[0,59]
-   + 0.54485 pos_imbalance[0,60] + 0.40732 pos_imbalance[0,61]
-   + 0.4640575 pos_imbalance[0,62] + 0.1533 pos_imbalance[0,63]
-   + 0.1203175 pos_imbalance[0,64] + 0.86751 pos_imbalance[0,65]
-   + 0.130305 pos_imbalance[0,66] + 0.53725 pos_imbalance[0,67]
-   + 0.86751 pos_imbalance[0,68] + 0.391765 pos_imbalance[0,69]
-   + 0.4610825 pos_imbalance[0,70] + 0.5311224999999999 pos_imbalance[0,71]
-   + 0.4640575 pos_imbalance[0,72] + 0.4609 pos_imbalance[0,73]
-   + 0.017 pos_imbalance[0,74] + 0.32775 pos_imbalance[0,75]
-   + 0.4436575 pos_imbalance[0,76] + 0.54595 pos_imbalance[0,77]
-   + 0.1203175 pos_imbalance[0,78] + 0.40732 pos_imbalance[0,79]
-   + 0.128775 pos_imbalance[0,80] + 0.62485 pos_imbalance[0,81]
-   + 0.4566625 pos_imbalance[0,82] + 0.3823724999999999 pos_imbalance[0,83]
+  88.9026 p_DA[0] + 79.23134999999991 p_DA[1] + 77.09655000000002 p_DA[2]
+   + 74.5267 p_DA[3] + 76.16705000000003 p_DA[4]
+   + 83.01124999999996 p_DA[5] + 105.5292499999999 p_DA[6]
+   + 117.8093999999999 p_DA[7] + 103.4703500000001 p_DA[8]
+   + 80.8713 p_DA[9] + 52.89235000000001 p_DA[10] + 36.34855 p_DA[11]
+   + 31.9964 p_DA[12] + 31.09444999999998 p_DA[13] + 40.038 p_DA[14]
+   + 60.82614999999998 p_DA[15] + 92.41195000000005 p_DA[16]
+   + 128.50615 p_DA[17] + 160.85865 p_DA[18] + 141.7495499999999 p_DA[19]
+   + 115.69295 p_DA[20] + 100.2022999999999 p_DA[21] + 91.9495 p_DA[22]
+   + 83.69394999999993 p_DA[23] + 0.3836475 pos_imbalance[0,0]
+   + 0.47668 pos_imbalance[0,1] + 0.4045575 pos_imbalance[0,2]
+   + 0.3823724999999999 pos_imbalance[0,3] + 0.4609 pos_imbalance[0,4]
+   + 0.017 pos_imbalance[0,5] + 0.4640575 pos_imbalance[0,6]
+   + 0.391765 pos_imbalance[0,7] + 0.4566625 pos_imbalance[0,8]
+   + 0.4436575 pos_imbalance[0,9] + 0.47668 pos_imbalance[0,10]
+   + 0.32775 pos_imbalance[0,11] + 0.47595 pos_imbalance[0,12]
+   + 0.40732 pos_imbalance[0,13] + 0.017 pos_imbalance[0,14]
+   + 0.128775 pos_imbalance[0,15] + 0.4436575 pos_imbalance[0,16]
+   + 0.02 pos_imbalance[0,17] + 0.5311224999999999 pos_imbalance[0,18]
+   + 0.5608 pos_imbalance[0,19] + 0.5311224999999999 pos_imbalance[0,20]
+   + 0.128775 pos_imbalance[0,21] + 0.4045575 pos_imbalance[0,22]
+   + 0.47668 pos_imbalance[0,23] + 0.40732 pos_imbalance[0,24]
+   + 0.14155 pos_imbalance[0,25] + 0.53725 pos_imbalance[0,26]
+   + 0.3836475 pos_imbalance[0,27] + 0.4610825 pos_imbalance[0,28]
+   + 0.4610825 pos_imbalance[0,29] + 0.4436575 pos_imbalance[0,30]
+   + 0.40732 pos_imbalance[0,31] + 0.62485 pos_imbalance[0,32]
+   + 0.3836475 pos_imbalance[0,33] + 0.130305 pos_imbalance[0,34]
+   + 0.62485 pos_imbalance[0,35] + 0.017 pos_imbalance[0,36]
+   + 0.391765 pos_imbalance[0,37] + 0.54485 pos_imbalance[0,38]
+   + 0.4640575 pos_imbalance[0,39] + 0.47668 pos_imbalance[0,40]
+   + 0.4360925 pos_imbalance[0,41] + 0.4360925 pos_imbalance[0,42]
+   + 0.2785875 pos_imbalance[0,43] + 0.2785875 pos_imbalance[0,44]
+   + 0.4610825 pos_imbalance[0,45] + 0.3836475 pos_imbalance[0,46]
+   + 0.86751 pos_imbalance[0,47] + 0.4566625 pos_imbalance[0,48]
+   + 0.62485 pos_imbalance[0,49] + 0.4610825 pos_imbalance[0,50]
+   + 0.44985 pos_imbalance[0,51] + 0.62485 pos_imbalance[0,52]
+   + 0.47668 pos_imbalance[0,53] + 0.3823724999999999 pos_imbalance[0,54]
+   + 0.4610825 pos_imbalance[0,55] + 0.4610825 pos_imbalance[0,56]
+   + 0.4436575 pos_imbalance[0,57] + 0.3823724999999999 pos_imbalance[0,58]
+   + 0.432395 pos_imbalance[0,59] + 0.54485 pos_imbalance[0,60]
+   + 0.40732 pos_imbalance[0,61] + 0.4640575 pos_imbalance[0,62]
+   + 0.1533 pos_imbalance[0,63] + 0.1203175 pos_imbalance[0,64]
+   + 0.86751 pos_imbalance[0,65] + 0.130305 pos_imbalance[0,66]
+   + 0.53725 pos_imbalance[0,67] + 0.86751 pos_imbalance[0,68]
+   + 0.391765 pos_imbalance[0,69] + 0.4610825 pos_imbalance[0,70]
+   + 0.5311224999999999 pos_imbalance[0,71] + 0.4640575 pos_imbalance[0,72]
+   + 0.4609 pos_imbalance[0,73] + 0.017 pos_imbalance[0,74]
+   + 0.32775 pos_imbalance[0,75] + 0.4436575 pos_imbalance[0,76]
+   + 0.54595 pos_imbalance[0,77] + 0.1203175 pos_imbalance[0,78]
+   + 0.40732 pos_imbalance[0,79] + 0.128775 pos_imbalance[0,80]
+   + 0.62485 pos_imbalance[0,81] + 0.4566625 pos_imbalance[0,82]
+   + 0.3823724999999999 pos_imbalance[0,83]
    + 0.5311224999999999 pos_imbalance[0,84] + 0.2785875 pos_imbalance[0,85]
    + 0.4566625 pos_imbalance[0,86] + 0.017 pos_imbalance[0,87]
    + 0.017 pos_imbalance[0,88] + 0.4436575 pos_imbalance[0,89]
@@ -112,7 +113,7 @@ Maximize
    + 0.14155 pos_imbalance[0,194] + 0.4610825 pos_imbalance[0,195]
    + 0.40732 pos_imbalance[0,196] + 0.4609 pos_imbalance[0,197]
    + 0.3823724999999999 pos_imbalance[0,198]
-   + 0.130305 pos_imbalance[0,199] + 0 pos_imbalance[1,0]
+   + 0.130305 pos_imbalance[0,199] + 0.45135 pos_imbalance[1,0]
    + 0.51575 pos_imbalance[1,1] + 0.47405 pos_imbalance[1,2]
    + 0.42875 pos_imbalance[1,3] + 0.38233 pos_imbalance[1,4]
    + 0.02 pos_imbalance[1,5] + 0.5304 pos_imbalance[1,6]
@@ -212,7 +213,7 @@ Maximize
    + 0.51275 pos_imbalance[1,193] + 0.11492 pos_imbalance[1,194]
    + 0.5111 pos_imbalance[1,195] + 0.4746 pos_imbalance[1,196]
    + 0.38233 pos_imbalance[1,197] + 0.42875 pos_imbalance[1,198]
-   + 0.20055 pos_imbalance[1,199] + 0 pos_imbalance[2,0]
+   + 0.20055 pos_imbalance[1,199] + 0.388365 pos_imbalance[2,0]
    + 0.48 pos_imbalance[2,1] + 0.4722 pos_imbalance[2,2]
    + 0.39785 pos_imbalance[2,3] + 0.44855 pos_imbalance[2,4]
    + 0.02 pos_imbalance[2,5] + 0.52985 pos_imbalance[2,6]
@@ -312,7 +313,7 @@ Maximize
    + 0.5067 pos_imbalance[2,193] + 0.129 pos_imbalance[2,194]
    + 0.42058 pos_imbalance[2,195] + 0.410975 pos_imbalance[2,196]
    + 0.44855 pos_imbalance[2,197] + 0.39785 pos_imbalance[2,198]
-   + 0.3298 pos_imbalance[2,199] + 0 pos_imbalance[3,0]
+   + 0.3298 pos_imbalance[2,199] + 0.45845 pos_imbalance[3,0]
    + 0.44945 pos_imbalance[3,1] + 0.48255 pos_imbalance[3,2]
    + 0.39075 pos_imbalance[3,3] + 0.3355 pos_imbalance[3,4]
    + 0.02 pos_imbalance[3,5] + 0.51945 pos_imbalance[3,6]
@@ -412,7 +413,7 @@ Maximize
    + 0.51075 pos_imbalance[3,193] + 0.10055 pos_imbalance[3,194]
    + 0.48345 pos_imbalance[3,195] + 0.4843 pos_imbalance[3,196]
    + 0.3355 pos_imbalance[3,197] + 0.39075 pos_imbalance[3,198]
-   + 0.4045 pos_imbalance[3,199] + 0 pos_imbalance[4,0]
+   + 0.4045 pos_imbalance[3,199] + 0.49065 pos_imbalance[4,0]
    + 0.3692825 pos_imbalance[4,1] + 0.4193475 pos_imbalance[4,2]
    + 0.3338375 pos_imbalance[4,3] + 0.3472 pos_imbalance[4,4]
    + 0.049 pos_imbalance[4,5] + 0.52685 pos_imbalance[4,6]
@@ -512,7 +513,7 @@ Maximize
    + 0.453645 pos_imbalance[4,193] + 0.0747 pos_imbalance[4,194]
    + 0.49165 pos_imbalance[4,195] + 0.4499 pos_imbalance[4,196]
    + 0.3472 pos_imbalance[4,197] + 0.3338375 pos_imbalance[4,198]
-   + 0.4292 pos_imbalance[4,199] + 0 pos_imbalance[5,0]
+   + 0.4292 pos_imbalance[4,199] + 0.48943 pos_imbalance[5,0]
    + 0.3848375 pos_imbalance[5,1] + 0.4314175 pos_imbalance[5,2]
    + 0.1249925 pos_imbalance[5,3] + 0.5114 pos_imbalance[5,4]
    + 0.017 pos_imbalance[5,5] + 0.48484 pos_imbalance[5,6]
@@ -613,7 +614,7 @@ Maximize
    + 0.10055 pos_imbalance[5,194] + 0.4499475000000001 pos_imbalance[5,195]
    + 0.4298025 pos_imbalance[5,196] + 0.5114 pos_imbalance[5,197]
    + 0.1249925 pos_imbalance[5,198] + 0.4391525 pos_imbalance[5,199]
-   + 0 pos_imbalance[6,0] + 0.41225 pos_imbalance[6,1]
+   + 0.67835 pos_imbalance[6,0] + 0.41225 pos_imbalance[6,1]
    + 0.425 pos_imbalance[6,2] + 0.128095 pos_imbalance[6,3]
    + 0.6401 pos_imbalance[6,4] + 0.06817 pos_imbalance[6,5]
    + 0.6079625000000001 pos_imbalance[6,6] + 0.544085 pos_imbalance[6,7]
@@ -713,7 +714,7 @@ Maximize
    + 0.6727325 pos_imbalance[6,193] + 0.20905 pos_imbalance[6,194]
    + 0.6635 pos_imbalance[6,195] + 0.74315 pos_imbalance[6,196]
    + 0.6401 pos_imbalance[6,197] + 0.128095 pos_imbalance[6,198]
-   + 0.6763 pos_imbalance[6,199] + 0 pos_imbalance[7,0]
+   + 0.6763 pos_imbalance[6,199] + 0.627725 pos_imbalance[7,0]
    + 0.4969 pos_imbalance[7,1] + 0.465 pos_imbalance[7,2]
    + 0.1535 pos_imbalance[7,3] + 0.68365 pos_imbalance[7,4]
    + 0.1867025 pos_imbalance[7,5] + 0.6599825 pos_imbalance[7,6]
@@ -816,7 +817,7 @@ Maximize
    + 0.2935 pos_imbalance[7,194] + 0.683145 pos_imbalance[7,195]
    + 0.6794475 pos_imbalance[7,196] + 0.68365 pos_imbalance[7,197]
    + 0.1535 pos_imbalance[7,198] + 0.65008 pos_imbalance[7,199]
-   + 0 pos_imbalance[8,0] + 0.49365 pos_imbalance[8,1]
+   + 0.5194775 pos_imbalance[8,0] + 0.49365 pos_imbalance[8,1]
    + 0.2951 pos_imbalance[8,2] + 0.1525 pos_imbalance[8,3]
    + 0.45288 pos_imbalance[8,4] + 0.19645 pos_imbalance[8,5]
    + 0.7754 pos_imbalance[8,6] + 0.5328 pos_imbalance[8,7]
@@ -916,7 +917,7 @@ Maximize
    + 0.54095 pos_imbalance[8,193] + 0.297925 pos_imbalance[8,194]
    + 0.6842075 pos_imbalance[8,195] + 0.56984 pos_imbalance[8,196]
    + 0.45288 pos_imbalance[8,197] + 0.1525 pos_imbalance[8,198]
-   + 0.57511 pos_imbalance[8,199] + 0 pos_imbalance[9,0]
+   + 0.57511 pos_imbalance[8,199] + 0.415 pos_imbalance[9,0]
    + 0.4318 pos_imbalance[9,1] + 0.12205 pos_imbalance[9,2]
    + 0.14365 pos_imbalance[9,3] + 0.290955 pos_imbalance[9,4]
    + 0.063 pos_imbalance[9,5] + 0.66055 pos_imbalance[9,6]
@@ -1016,7 +1017,7 @@ Maximize
    + 0.36695 pos_imbalance[9,193] + 0.1895075 pos_imbalance[9,194]
    + 0.774 pos_imbalance[9,195] + 0.4946 pos_imbalance[9,196]
    + 0.290955 pos_imbalance[9,197] + 0.14365 pos_imbalance[9,198]
-   + 0.50385 pos_imbalance[9,199] + 0 pos_imbalance[10,0]
+   + 0.50385 pos_imbalance[9,199] + 0.3265 pos_imbalance[10,0]
    + 0.3074875 pos_imbalance[10,1] + 0.09061 pos_imbalance[10,2]
    + 0.102255 pos_imbalance[10,3] + 0.11577 pos_imbalance[10,4]
    + 0.001445 pos_imbalance[10,5] + 0.4760425 pos_imbalance[10,6]
@@ -1116,7 +1117,7 @@ Maximize
    + 0.122655 pos_imbalance[10,193] + 0.085425 pos_imbalance[10,194]
    + 0.6192 pos_imbalance[10,195] + 0.4222 pos_imbalance[10,196]
    + 0.11577 pos_imbalance[10,197] + 0.102255 pos_imbalance[10,198]
-   + 0.341 pos_imbalance[10,199] + 0 pos_imbalance[11,0]
+   + 0.341 pos_imbalance[10,199] + 0.15755 pos_imbalance[11,0]
    + 0.3356 pos_imbalance[11,1] + 0.01975 pos_imbalance[11,2]
    + 0.0145 pos_imbalance[11,3] + 0.0076075 pos_imbalance[11,4]
    + 0.4520725 pos_imbalance[11,6] + 0.00895 pos_imbalance[11,7]
@@ -1209,7 +1210,7 @@ Maximize
    + 0.0182325 pos_imbalance[11,194] + 0.55375 pos_imbalance[11,195]
    + 0.3896 pos_imbalance[11,196] + 0.0076075 pos_imbalance[11,197]
    + 0.0145 pos_imbalance[11,198] + 0.25265 pos_imbalance[11,199]
-   + 0 pos_imbalance[12,0] + 0.2864 pos_imbalance[12,1]
+   + 0.05559 pos_imbalance[12,0] + 0.2864 pos_imbalance[12,1]
    + 0.00645 pos_imbalance[12,2] + 0.00505 pos_imbalance[12,3]
    + 0.4440824999999999 pos_imbalance[12,6] + 0.4099125 pos_imbalance[12,9]
    + 0.24344 pos_imbalance[12,10] + 0.017 pos_imbalance[12,11]
@@ -1284,7 +1285,7 @@ Maximize
    + 0.52245 pos_imbalance[12,192] + 0.0103275 pos_imbalance[12,194]
    + 0.46784 pos_imbalance[12,195] + 0.323255 pos_imbalance[12,196]
    + 0.00505 pos_imbalance[12,198] + 0.132345 pos_imbalance[12,199]
-   + 0 pos_imbalance[13,0] + 0.20383 pos_imbalance[13,1]
+   + 0.03434 pos_imbalance[13,0] + 0.20383 pos_imbalance[13,1]
    + 0.0167875 pos_imbalance[13,2] + 0.0008075 pos_imbalance[13,3]
    + 0.444465 pos_imbalance[13,6] + 0.4181575 pos_imbalance[13,9]
    + 0.20383 pos_imbalance[13,10] + 0.01717 pos_imbalance[13,11]
@@ -1357,7 +1358,7 @@ Maximize
    + 0.444465 pos_imbalance[13,192] + 0.0070975 pos_imbalance[13,194]
    + 0.46019 pos_imbalance[13,195] + 0.32878 pos_imbalance[13,196]
    + 0.0008075 pos_imbalance[13,198] + 0.11866 pos_imbalance[13,199]
-   + 0 pos_imbalance[14,0] + 0.231455 pos_imbalance[14,1]
+   + 0.18525 pos_imbalance[14,0] + 0.231455 pos_imbalance[14,1]
    + 0.0468775 pos_imbalance[14,2] + 0.0113475 pos_imbalance[14,3]
    + 0.0868 pos_imbalance[14,4] + 5e-05 pos_imbalance[14,5]
    + 0.5269 pos_imbalance[14,6] + 0.07378 pos_imbalance[14,7]
@@ -1457,7 +1458,7 @@ Maximize
    + 0.05405 pos_imbalance[14,194] + 0.538 pos_imbalance[14,195]
    + 0.4198 pos_imbalance[14,196] + 0.0868 pos_imbalance[14,197]
    + 0.0113475 pos_imbalance[14,198] + 0.2506 pos_imbalance[14,199]
-   + 0 pos_imbalance[15,0] + 0.30073 pos_imbalance[15,1]
+   + 0.3831375 pos_imbalance[15,0] + 0.30073 pos_imbalance[15,1]
    + 0.1190425 pos_imbalance[15,2] + 0.1309425 pos_imbalance[15,3]
    + 0.16405 pos_imbalance[15,4] + 0.01985 pos_imbalance[15,5]
    + 0.5471 pos_imbalance[15,6] + 0.16405 pos_imbalance[15,7]
@@ -1557,7 +1558,7 @@ Maximize
    + 0.1482825 pos_imbalance[15,194] + 0.467585 pos_imbalance[15,195]
    + 0.414545 pos_imbalance[15,196] + 0.16405 pos_imbalance[15,197]
    + 0.1309425 pos_imbalance[15,198] + 0.297585 pos_imbalance[15,199]
-   + 0 pos_imbalance[16,0] + 0.35785 pos_imbalance[16,1]
+   + 0.5397075 pos_imbalance[16,0] + 0.35785 pos_imbalance[16,1]
    + 0.2932075 pos_imbalance[16,2] + 0.2548725 pos_imbalance[16,3]
    + 0.4081275 pos_imbalance[16,4] + 0.06615 pos_imbalance[16,5]
    + 0.62465 pos_imbalance[16,6] + 0.4081275 pos_imbalance[16,7]
@@ -1668,7 +1669,7 @@ Maximize
    + 0.3002625 pos_imbalance[16,194] + 0.51663 pos_imbalance[16,195]
    + 0.5422574999999999 pos_imbalance[16,196]
    + 0.4081275 pos_imbalance[16,197] + 0.2548725 pos_imbalance[16,198]
-   + 0.4190075 pos_imbalance[16,199] + 0 pos_imbalance[17,0]
+   + 0.4190075 pos_imbalance[16,199] + 0.63716 pos_imbalance[17,0]
    + 0.60935 pos_imbalance[17,1] + 0.5393 pos_imbalance[17,2]
    + 0.4734 pos_imbalance[17,3] + 0.7055 pos_imbalance[17,4]
    + 0.2567 pos_imbalance[17,5] + 0.62288 pos_imbalance[17,6]
@@ -1769,7 +1770,7 @@ Maximize
    + 0.7382 pos_imbalance[17,193] + 0.64595 pos_imbalance[17,194]
    + 0.6075375 pos_imbalance[17,195] + 0.629425 pos_imbalance[17,196]
    + 0.7055 pos_imbalance[17,197] + 0.4734 pos_imbalance[17,198]
-   + 0.608345 pos_imbalance[17,199] + 0 pos_imbalance[18,0]
+   + 0.608345 pos_imbalance[17,199] + 0.9207625 pos_imbalance[18,0]
    + 0.553605 pos_imbalance[18,1] + 0.5701375000000001 pos_imbalance[18,2]
    + 0.3553425 pos_imbalance[18,3] + 0.7274725 pos_imbalance[18,4]
    + 0.2567425 pos_imbalance[18,5] + 0.6607474999999999 pos_imbalance[18,6]
@@ -1888,7 +1889,7 @@ Maximize
    + 0.7058825000000001 pos_imbalance[18,195]
    + 0.744005 pos_imbalance[18,196] + 0.7274725 pos_imbalance[18,197]
    + 0.3553425 pos_imbalance[18,198] + 0.754035 pos_imbalance[18,199]
-   + 0 pos_imbalance[19,0] + 0.5648675 pos_imbalance[19,1]
+   + 0.8934 pos_imbalance[19,0] + 0.5648675 pos_imbalance[19,1]
    + 0.5640175000000001 pos_imbalance[19,2] + 0.193545 pos_imbalance[19,3]
    + 0.83885 pos_imbalance[19,4] + 0.2175 pos_imbalance[19,5]
    + 0.7551 pos_imbalance[19,6] + 0.7130225 pos_imbalance[19,7]
@@ -1990,7 +1991,7 @@ Maximize
    + 0.5135 pos_imbalance[19,194] + 0.8671 pos_imbalance[19,195]
    + 0.802 pos_imbalance[19,196] + 0.83885 pos_imbalance[19,197]
    + 0.193545 pos_imbalance[19,198] + 0.85045 pos_imbalance[19,199]
-   + 0 pos_imbalance[20,0] + 0.60705 pos_imbalance[20,1]
+   + 0.631975 pos_imbalance[20,0] + 0.60705 pos_imbalance[20,1]
    + 0.5727 pos_imbalance[20,2] + 0.15745 pos_imbalance[20,3]
    + 0.6056674999999999 pos_imbalance[20,4] + 0.1738 pos_imbalance[20,5]
    + 0.6505 pos_imbalance[20,6] + 0.71255 pos_imbalance[20,7]
@@ -2093,7 +2094,7 @@ Maximize
    + 0.6332075 pos_imbalance[20,195] + 0.60469 pos_imbalance[20,196]
    + 0.6056674999999999 pos_imbalance[20,197]
    + 0.15745 pos_imbalance[20,198] + 0.601715 pos_imbalance[20,199]
-   + 0 pos_imbalance[21,0] + 0.460955 pos_imbalance[21,1]
+   + 0.662 pos_imbalance[21,0] + 0.460955 pos_imbalance[21,1]
    + 0.4584475 pos_imbalance[21,2] + 0.132175 pos_imbalance[21,3]
    + 0.58885 pos_imbalance[21,4] + 0.16775 pos_imbalance[21,5]
    + 0.5573 pos_imbalance[21,6] + 0.5005225 pos_imbalance[21,7]
@@ -2195,7 +2196,7 @@ Maximize
    + 0.3997 pos_imbalance[21,194] + 0.67845 pos_imbalance[21,195]
    + 0.6334 pos_imbalance[21,196] + 0.58885 pos_imbalance[21,197]
    + 0.132175 pos_imbalance[21,198] + 0.56775 pos_imbalance[21,199]
-   + 0 pos_imbalance[22,0] + 0.446165 pos_imbalance[22,1]
+   + 0.5062175 pos_imbalance[22,0] + 0.446165 pos_imbalance[22,1]
    + 0.44438 pos_imbalance[22,2] + 0.1304325 pos_imbalance[22,3]
    + 0.5373 pos_imbalance[22,4] + 0.15655 pos_imbalance[22,5]
    + 0.57 pos_imbalance[22,6] + 0.456705 pos_imbalance[22,7]
@@ -2300,7 +2301,7 @@ Maximize
    + 0.34505 pos_imbalance[22,194] + 0.5244925 pos_imbalance[22,195]
    + 0.4541975 pos_imbalance[22,196] + 0.5373 pos_imbalance[22,197]
    + 0.1304325 pos_imbalance[22,198] + 0.452455 pos_imbalance[22,199]
-   + 0 pos_imbalance[23,0] + 0.4046425 pos_imbalance[23,1]
+   + 0.55915 pos_imbalance[23,0] + 0.4046425 pos_imbalance[23,1]
    + 0.44047 pos_imbalance[23,2] + 0.12937 pos_imbalance[23,3]
    + 0.427125 pos_imbalance[23,4] + 0.13243 pos_imbalance[23,5]
    + 0.446675 pos_imbalance[23,6] + 0.427125 pos_imbalance[23,7]
@@ -2400,7 +2401,7 @@ Maximize
    + 0.171275 pos_imbalance[23,194] + 0.55765 pos_imbalance[23,195]
    + 0.48965 pos_imbalance[23,196] + 0.427125 pos_imbalance[23,197]
    + 0.12937 pos_imbalance[23,198] + 0.46745 pos_imbalance[23,199]
-   + 0 neg_imbalance[0,0] - 0.5608 neg_imbalance[0,1]
+   - 0.45135 neg_imbalance[0,0] - 0.5608 neg_imbalance[0,1]
    - 0.47595 neg_imbalance[0,2] - 0.44985 neg_imbalance[0,3]
    - 0.576125 neg_imbalance[0,4] - 0.02 neg_imbalance[0,5]
    - 0.54595 neg_imbalance[0,6] - 0.4609 neg_imbalance[0,7]
@@ -2500,7 +2501,7 @@ Maximize
    - 0.1769375 neg_imbalance[0,194] - 0.54245 neg_imbalance[0,195]
    - 0.4792 neg_imbalance[0,196] - 0.576125 neg_imbalance[0,197]
    - 0.44985 neg_imbalance[0,198] - 0.1533 neg_imbalance[0,199]
-   + 0 neg_imbalance[1,0] - 0.6446875 neg_imbalance[1,1]
+   - 0.5641875 neg_imbalance[1,0] - 0.6446875 neg_imbalance[1,1]
    - 0.5925625 neg_imbalance[1,2] - 0.5359375000000001 neg_imbalance[1,3]
    - 0.4498 neg_imbalance[1,4] - 0.025 neg_imbalance[1,5]
    - 0.663 neg_imbalance[1,6] - 0.56225 neg_imbalance[1,7]
@@ -2604,7 +2605,7 @@ Maximize
    - 0.1352 neg_imbalance[1,194] - 0.638875 neg_imbalance[1,195]
    - 0.59325 neg_imbalance[1,196] - 0.4498 neg_imbalance[1,197]
    - 0.5359375000000001 neg_imbalance[1,198]
-   - 0.2506875 neg_imbalance[1,199] + 0 neg_imbalance[2,0]
+   - 0.2506875 neg_imbalance[1,199] - 0.4569 neg_imbalance[2,0]
    - 0.6 neg_imbalance[2,1] - 0.59025 neg_imbalance[2,2]
    - 0.4973125 neg_imbalance[2,3] - 0.5606875 neg_imbalance[2,4]
    - 0.025 neg_imbalance[2,5] - 0.6623125000000001 neg_imbalance[2,6]
@@ -2709,7 +2710,7 @@ Maximize
    - 0.633375 neg_imbalance[2,193] - 0.16125 neg_imbalance[2,194]
    - 0.4948 neg_imbalance[2,195] - 0.4835 neg_imbalance[2,196]
    - 0.5606875 neg_imbalance[2,197] - 0.4973125 neg_imbalance[2,198]
-   - 0.388 neg_imbalance[2,199] + 0 neg_imbalance[3,0]
+   - 0.388 neg_imbalance[2,199] - 0.5730625 neg_imbalance[3,0]
    - 0.5618125 neg_imbalance[3,1] - 0.6031875 neg_imbalance[3,2]
    - 0.4884375 neg_imbalance[3,3] - 0.419375 neg_imbalance[3,4]
    - 0.025 neg_imbalance[3,5] - 0.6493125000000001 neg_imbalance[3,6]
@@ -2810,7 +2811,7 @@ Maximize
    - 0.6384375 neg_imbalance[3,193] - 0.1256875 neg_imbalance[3,194]
    - 0.6043125 neg_imbalance[3,195] - 0.605375 neg_imbalance[3,196]
    - 0.419375 neg_imbalance[3,197] - 0.4884375 neg_imbalance[3,198]
-   - 0.505625 neg_imbalance[3,199] + 0 neg_imbalance[4,0]
+   - 0.505625 neg_imbalance[3,199] - 0.6133125 neg_imbalance[4,0]
    - 0.43445 neg_imbalance[4,1] - 0.49335 neg_imbalance[4,2]
    - 0.39275 neg_imbalance[4,3] - 0.434 neg_imbalance[4,4]
    - 0.06125 neg_imbalance[4,5] - 0.6585625000000001 neg_imbalance[4,6]
@@ -2913,7 +2914,7 @@ Maximize
    - 0.093375 neg_imbalance[4,194] - 0.6145625 neg_imbalance[4,195]
    - 0.562375 neg_imbalance[4,196] - 0.434 neg_imbalance[4,197]
    - 0.39275 neg_imbalance[4,198] - 0.5365 neg_imbalance[4,199]
-   + 0 neg_imbalance[5,0] - 0.45275 neg_imbalance[5,1]
+   - 0.5758 neg_imbalance[5,0] - 0.45275 neg_imbalance[5,1]
    - 0.50755 neg_imbalance[5,2] - 0.14705 neg_imbalance[5,3]
    - 0.63925 neg_imbalance[5,4] - 0.02 neg_imbalance[5,5]
    - 0.5704 neg_imbalance[5,6] - 0.5114 neg_imbalance[5,7]
@@ -3013,7 +3014,7 @@ Maximize
    - 0.1256875 neg_imbalance[5,194] - 0.52935 neg_imbalance[5,195]
    - 0.50565 neg_imbalance[5,196] - 0.63925 neg_imbalance[5,197]
    - 0.14705 neg_imbalance[5,198] - 0.51665 neg_imbalance[5,199]
-   + 0 neg_imbalance[6,0] - 0.485 neg_imbalance[6,1]
+   - 0.8479374999999999 neg_imbalance[6,0] - 0.485 neg_imbalance[6,1]
    - 0.5 neg_imbalance[6,2] - 0.1507 neg_imbalance[6,3]
    - 0.800125 neg_imbalance[6,4] - 0.0802 neg_imbalance[6,5]
    - 0.71525 neg_imbalance[6,6] - 0.6401 neg_imbalance[6,7]
@@ -3114,7 +3115,7 @@ Maximize
    - 0.2613125 neg_imbalance[6,194] - 0.829375 neg_imbalance[6,195]
    - 0.9289375 neg_imbalance[6,196] - 0.800125 neg_imbalance[6,197]
    - 0.1507 neg_imbalance[6,198] - 0.845375 neg_imbalance[6,199]
-   + 0 neg_imbalance[7,0] - 0.621125 neg_imbalance[7,1]
+   - 0.7385 neg_imbalance[7,0] - 0.621125 neg_imbalance[7,1]
    - 0.58125 neg_imbalance[7,2] - 0.191875 neg_imbalance[7,3]
    - 0.8545625 neg_imbalance[7,4] - 0.21965 neg_imbalance[7,5]
    - 0.77645 neg_imbalance[7,6] - 0.8545625 neg_imbalance[7,7]
@@ -3217,7 +3218,7 @@ Maximize
    - 0.366875 neg_imbalance[7,194] - 0.8037 neg_imbalance[7,195]
    - 0.79935 neg_imbalance[7,196] - 0.8545625 neg_imbalance[7,197]
    - 0.191875 neg_imbalance[7,198] - 0.7648 neg_imbalance[7,199]
-   + 0 neg_imbalance[8,0] - 0.6170625000000001 neg_imbalance[8,1]
+   - 0.61115 neg_imbalance[8,0] - 0.6170625000000001 neg_imbalance[8,1]
    - 0.368875 neg_imbalance[8,2] - 0.190625 neg_imbalance[8,3]
    - 0.5328 neg_imbalance[8,4] - 0.2455625 neg_imbalance[8,5]
    - 0.96925 neg_imbalance[8,6] - 0.666 neg_imbalance[8,7]
@@ -3319,7 +3320,7 @@ Maximize
    - 0.6761875000000001 neg_imbalance[8,193] - 0.3505 neg_imbalance[8,194]
    - 0.80495 neg_imbalance[8,195] - 0.6704 neg_imbalance[8,196]
    - 0.5328 neg_imbalance[8,197] - 0.190625 neg_imbalance[8,198]
-   - 0.6766 neg_imbalance[8,199] + 0 neg_imbalance[9,0]
+   - 0.6766 neg_imbalance[8,199] - 0.51875 neg_imbalance[9,0]
    - 0.53975 neg_imbalance[9,1] - 0.1525625 neg_imbalance[9,2]
    - 0.1795625 neg_imbalance[9,3] - 0.3423 neg_imbalance[9,4]
    - 0.07875 neg_imbalance[9,5] - 0.8256875000000001 neg_imbalance[9,6]
@@ -3420,7 +3421,7 @@ Maximize
    - 0.4586875 neg_imbalance[9,193] - 0.22295 neg_imbalance[9,194]
    - 0.9675 neg_imbalance[9,195] - 0.61825 neg_imbalance[9,196]
    - 0.3423 neg_imbalance[9,197] - 0.1795625 neg_imbalance[9,198]
-   - 0.6298125 neg_imbalance[9,199] + 0 neg_imbalance[10,0]
+   - 0.6298125 neg_imbalance[9,199] - 0.408125 neg_imbalance[10,0]
    - 0.36175 neg_imbalance[10,1] - 0.1066 neg_imbalance[10,2]
    - 0.1203 neg_imbalance[10,3] - 0.1362 neg_imbalance[10,4]
    - 0.0017 neg_imbalance[10,5] - 0.56005 neg_imbalance[10,6]
@@ -3520,7 +3521,7 @@ Maximize
    - 0.1443 neg_imbalance[10,193] - 0.1005 neg_imbalance[10,194]
    - 0.774 neg_imbalance[10,195] - 0.52775 neg_imbalance[10,196]
    - 0.1362 neg_imbalance[10,197] - 0.1203 neg_imbalance[10,198]
-   - 0.42625 neg_imbalance[10,199] + 0 neg_imbalance[11,0]
+   - 0.42625 neg_imbalance[10,199] - 0.1969375 neg_imbalance[11,0]
    - 0.4195 neg_imbalance[11,1] - 0.0246875 neg_imbalance[11,2]
    - 0.018125 neg_imbalance[11,3] - 0.00895 neg_imbalance[11,4]
    - 0.53185 neg_imbalance[11,6] - 0.0111875 neg_imbalance[11,7]
@@ -3613,7 +3614,7 @@ Maximize
    - 0.02475 neg_imbalance[11,193] - 0.02145 neg_imbalance[11,194]
    - 0.6921875000000001 neg_imbalance[11,195] - 0.487 neg_imbalance[11,196]
    - 0.00895 neg_imbalance[11,197] - 0.018125 neg_imbalance[11,198]
-   - 0.3158125 neg_imbalance[11,199] + 0 neg_imbalance[12,0]
+   - 0.3158125 neg_imbalance[11,199] - 0.0654 neg_imbalance[12,0]
    - 0.358 neg_imbalance[12,1] - 0.0080625 neg_imbalance[12,2]
    - 0.0063125 neg_imbalance[12,3] - 0.52245 neg_imbalance[12,6]
    - 0.48225 neg_imbalance[12,9] - 0.2864 neg_imbalance[12,10]
@@ -3687,7 +3688,7 @@ Maximize
    - 0.6530624999999999 neg_imbalance[12,192]
    - 0.01215 neg_imbalance[12,194] - 0.5504 neg_imbalance[12,195]
    - 0.3803 neg_imbalance[12,196] - 0.0063125 neg_imbalance[12,198]
-   - 0.1557 neg_imbalance[12,199] + 0 neg_imbalance[13,0]
+   - 0.1557 neg_imbalance[12,199] - 0.0404 neg_imbalance[13,0]
    - 0.2398 neg_imbalance[13,1] - 0.01975 neg_imbalance[13,2]
    - 0.00095 neg_imbalance[13,3] - 0.5229 neg_imbalance[13,6]
    - 0.49195 neg_imbalance[13,9] - 0.2398 neg_imbalance[13,10]
@@ -3760,7 +3761,7 @@ Maximize
    - 0.0157 neg_imbalance[13,191] - 0.5229 neg_imbalance[13,192]
    - 0.00835 neg_imbalance[13,194] - 0.5414 neg_imbalance[13,195]
    - 0.3868 neg_imbalance[13,196] - 0.00095 neg_imbalance[13,198]
-   - 0.1396 neg_imbalance[13,199] + 0 neg_imbalance[14,0]
+   - 0.1396 neg_imbalance[13,199] - 0.2315625 neg_imbalance[14,0]
    - 0.2723 neg_imbalance[14,1] - 0.05515 neg_imbalance[14,2]
    - 0.01335 neg_imbalance[14,3] - 0.1085 neg_imbalance[14,4]
    - 6.25e-05 neg_imbalance[14,5] - 0.658625 neg_imbalance[14,6]
@@ -3860,7 +3861,7 @@ Maximize
    - 0.1371 neg_imbalance[14,193] - 0.0675625 neg_imbalance[14,194]
    - 0.6725 neg_imbalance[14,195] - 0.52475 neg_imbalance[14,196]
    - 0.1085 neg_imbalance[14,197] - 0.01335 neg_imbalance[14,198]
-   - 0.31325 neg_imbalance[14,199] + 0 neg_imbalance[15,0]
+   - 0.31325 neg_imbalance[14,199] - 0.45075 neg_imbalance[15,0]
    - 0.3538 neg_imbalance[15,1] - 0.14005 neg_imbalance[15,2]
    - 0.15405 neg_imbalance[15,3] - 0.193 neg_imbalance[15,4]
    - 0.0248125 neg_imbalance[15,5] - 0.683875 neg_imbalance[15,6]
@@ -3960,7 +3961,7 @@ Maximize
    - 0.2014 neg_imbalance[15,193] - 0.17445 neg_imbalance[15,194]
    - 0.5501 neg_imbalance[15,195] - 0.4877 neg_imbalance[15,196]
    - 0.193 neg_imbalance[15,197] - 0.15405 neg_imbalance[15,198]
-   - 0.3501 neg_imbalance[15,199] + 0 neg_imbalance[16,0]
+   - 0.3501 neg_imbalance[15,199] - 0.63495 neg_imbalance[16,0]
    - 0.421 neg_imbalance[16,1] - 0.34495 neg_imbalance[16,2]
    - 0.29985 neg_imbalance[16,3] - 0.48015 neg_imbalance[16,4]
    - 0.0826875 neg_imbalance[16,5] - 0.7808125000000001 neg_imbalance[16,6]
@@ -4062,7 +4063,7 @@ Maximize
    - 0.35325 neg_imbalance[16,194] - 0.6078 neg_imbalance[16,195]
    - 0.63795 neg_imbalance[16,196] - 0.48015 neg_imbalance[16,197]
    - 0.29985 neg_imbalance[16,198] - 0.49295 neg_imbalance[16,199]
-   + 0 neg_imbalance[17,0] - 0.7616875000000001 neg_imbalance[17,1]
+   - 0.7496 neg_imbalance[17,0] - 0.7616875000000001 neg_imbalance[17,1]
    - 0.674125 neg_imbalance[17,2] - 0.59175 neg_imbalance[17,3]
    - 0.881875 neg_imbalance[17,4] - 0.302 neg_imbalance[17,5]
    - 0.7328 neg_imbalance[17,6] - 0.881875 neg_imbalance[17,7]
@@ -4165,7 +4166,7 @@ Maximize
    - 0.92275 neg_imbalance[17,193] - 0.8074375 neg_imbalance[17,194]
    - 0.71475 neg_imbalance[17,195] - 0.7405 neg_imbalance[17,196]
    - 0.881875 neg_imbalance[17,197] - 0.59175 neg_imbalance[17,198]
-   - 0.7157 neg_imbalance[17,199] + 0 neg_imbalance[18,0]
+   - 0.7157 neg_imbalance[17,199] - 1.08325 neg_imbalance[18,0]
    - 0.6513 neg_imbalance[18,1] - 0.67075 neg_imbalance[18,2]
    - 0.41805 neg_imbalance[18,3] - 0.85585 neg_imbalance[18,4]
    - 0.30205 neg_imbalance[18,5] - 0.77735 neg_imbalance[18,6]
@@ -4265,7 +4266,7 @@ Maximize
    - 1.24135 neg_imbalance[18,193] - 0.8183 neg_imbalance[18,194]
    - 0.83045 neg_imbalance[18,195] - 0.8753 neg_imbalance[18,196]
    - 0.85585 neg_imbalance[18,197] - 0.41805 neg_imbalance[18,198]
-   - 0.8871 neg_imbalance[18,199] + 0 neg_imbalance[19,0]
+   - 0.8871 neg_imbalance[18,199] - 1.11675 neg_imbalance[19,0]
    - 0.66455 neg_imbalance[19,1] - 0.66355 neg_imbalance[19,2]
    - 0.2277 neg_imbalance[19,3] - 1.0485625 neg_imbalance[19,4]
    - 0.271875 neg_imbalance[19,5] - 0.943875 neg_imbalance[19,6]
@@ -4381,7 +4382,7 @@ Maximize
    - 0.641875 neg_imbalance[19,194] - 1.083875 neg_imbalance[19,195]
    - 1.0025 neg_imbalance[19,196] - 1.0485625 neg_imbalance[19,197]
    - 0.2277 neg_imbalance[19,198] - 1.0630625 neg_imbalance[19,199]
-   + 0 neg_imbalance[20,0] - 0.7588125 neg_imbalance[20,1]
+   - 0.7435 neg_imbalance[20,0] - 0.7588125 neg_imbalance[20,1]
    - 0.715875 neg_imbalance[20,2] - 0.1968125 neg_imbalance[20,3]
    - 0.71255 neg_imbalance[20,4] - 0.21725 neg_imbalance[20,5]
    - 0.813125 neg_imbalance[20,6] - 0.8906875 neg_imbalance[20,7]
@@ -4491,7 +4492,7 @@ Maximize
    - 0.44095 neg_imbalance[20,194] - 0.74495 neg_imbalance[20,195]
    - 0.7114 neg_imbalance[20,196] - 0.71255 neg_imbalance[20,197]
    - 0.1968125 neg_imbalance[20,198] - 0.7079 neg_imbalance[20,199]
-   + 0 neg_imbalance[21,0] - 0.5423 neg_imbalance[21,1]
+   - 0.8275 neg_imbalance[21,0] - 0.5423 neg_imbalance[21,1]
    - 0.53935 neg_imbalance[21,2] - 0.1555 neg_imbalance[21,3]
    - 0.7360625000000001 neg_imbalance[21,4] - 0.2096875 neg_imbalance[21,5]
    - 0.696625 neg_imbalance[21,6] - 0.58885 neg_imbalance[21,7]
@@ -4609,7 +4610,7 @@ Maximize
    - 0.79175 neg_imbalance[21,196]
    - 0.7360625000000001 neg_imbalance[21,197]
    - 0.1555 neg_imbalance[21,198] - 0.7096875 neg_imbalance[21,199]
-   + 0 neg_imbalance[22,0] - 0.5249 neg_imbalance[22,1]
+   - 0.59555 neg_imbalance[22,0] - 0.5249 neg_imbalance[22,1]
    - 0.5228 neg_imbalance[22,2] - 0.15345 neg_imbalance[22,3]
    - 0.671625 neg_imbalance[22,4] - 0.1956875 neg_imbalance[22,5]
    - 0.7125 neg_imbalance[22,6] - 0.5373 neg_imbalance[22,7]
@@ -4713,7 +4714,7 @@ Maximize
    - 0.4313125 neg_imbalance[22,194] - 0.61705 neg_imbalance[22,195]
    - 0.53435 neg_imbalance[22,196] - 0.671625 neg_imbalance[22,197]
    - 0.15345 neg_imbalance[22,198] - 0.5323 neg_imbalance[22,199]
-   + 0 neg_imbalance[23,0] - 0.47605 neg_imbalance[23,1]
+   - 0.6989375 neg_imbalance[23,0] - 0.47605 neg_imbalance[23,1]
    - 0.5182 neg_imbalance[23,2] - 0.1522 neg_imbalance[23,3]
    - 0.5025 neg_imbalance[23,4] - 0.1558 neg_imbalance[23,5]
    - 0.5255 neg_imbalance[23,6] - 0.5025 neg_imbalance[23,7]
@@ -4815,8 +4816,93 @@ Maximize
    - 0.6970625 neg_imbalance[23,195]
    - 0.6120625000000001 neg_imbalance[23,196]
    - 0.5025 neg_imbalance[23,197] - 0.1522 neg_imbalance[23,198]
-   - 0.5843125 neg_imbalance[23,199]
+   - 0.5843125 neg_imbalance[23,199] + 0 scenario_profit[0]
+   + 0 scenario_profit[1] + 0 scenario_profit[2] + 0 scenario_profit[3]
+   + 0 scenario_profit[4] + 0 scenario_profit[5] + 0 scenario_profit[6]
+   + 0 scenario_profit[7] + 0 scenario_profit[8] + 0 scenario_profit[9]
+   + 0 scenario_profit[10] + 0 scenario_profit[11] + 0 scenario_profit[12]
+   + 0 scenario_profit[13] + 0 scenario_profit[14] + 0 scenario_profit[15]
+   + 0 scenario_profit[16] + 0 scenario_profit[17] + 0 scenario_profit[18]
+   + 0 scenario_profit[19] + 0 scenario_profit[20] + 0 scenario_profit[21]
+   + 0 scenario_profit[22] + 0 scenario_profit[23] + 0 scenario_profit[24]
+   + 0 scenario_profit[25] + 0 scenario_profit[26] + 0 scenario_profit[27]
+   + 0 scenario_profit[28] + 0 scenario_profit[29] + 0 scenario_profit[30]
+   + 0 scenario_profit[31] + 0 scenario_profit[32] + 0 scenario_profit[33]
+   + 0 scenario_profit[34] + 0 scenario_profit[35] + 0 scenario_profit[36]
+   + 0 scenario_profit[37] + 0 scenario_profit[38] + 0 scenario_profit[39]
+   + 0 scenario_profit[40] + 0 scenario_profit[41] + 0 scenario_profit[42]
+   + 0 scenario_profit[43] + 0 scenario_profit[44] + 0 scenario_profit[45]
+   + 0 scenario_profit[46] + 0 scenario_profit[47] + 0 scenario_profit[48]
+   + 0 scenario_profit[49] + 0 scenario_profit[50] + 0 scenario_profit[51]
+   + 0 scenario_profit[52] + 0 scenario_profit[53] + 0 scenario_profit[54]
+   + 0 scenario_profit[55] + 0 scenario_profit[56] + 0 scenario_profit[57]
+   + 0 scenario_profit[58] + 0 scenario_profit[59] + 0 scenario_profit[60]
+   + 0 scenario_profit[61] + 0 scenario_profit[62] + 0 scenario_profit[63]
+   + 0 scenario_profit[64] + 0 scenario_profit[65] + 0 scenario_profit[66]
+   + 0 scenario_profit[67] + 0 scenario_profit[68] + 0 scenario_profit[69]
+   + 0 scenario_profit[70] + 0 scenario_profit[71] + 0 scenario_profit[72]
+   + 0 scenario_profit[73] + 0 scenario_profit[74] + 0 scenario_profit[75]
+   + 0 scenario_profit[76] + 0 scenario_profit[77] + 0 scenario_profit[78]
+   + 0 scenario_profit[79] + 0 scenario_profit[80] + 0 scenario_profit[81]
+   + 0 scenario_profit[82] + 0 scenario_profit[83] + 0 scenario_profit[84]
+   + 0 scenario_profit[85] + 0 scenario_profit[86] + 0 scenario_profit[87]
+   + 0 scenario_profit[88] + 0 scenario_profit[89] + 0 scenario_profit[90]
+   + 0 scenario_profit[91] + 0 scenario_profit[92] + 0 scenario_profit[93]
+   + 0 scenario_profit[94] + 0 scenario_profit[95] + 0 scenario_profit[96]
+   + 0 scenario_profit[97] + 0 scenario_profit[98] + 0 scenario_profit[99]
+   + 0 scenario_profit[100] + 0 scenario_profit[101]
+   + 0 scenario_profit[102] + 0 scenario_profit[103]
+   + 0 scenario_profit[104] + 0 scenario_profit[105]
+   + 0 scenario_profit[106] + 0 scenario_profit[107]
+   + 0 scenario_profit[108] + 0 scenario_profit[109]
+   + 0 scenario_profit[110] + 0 scenario_profit[111]
+   + 0 scenario_profit[112] + 0 scenario_profit[113]
+   + 0 scenario_profit[114] + 0 scenario_profit[115]
+   + 0 scenario_profit[116] + 0 scenario_profit[117]
+   + 0 scenario_profit[118] + 0 scenario_profit[119]
+   + 0 scenario_profit[120] + 0 scenario_profit[121]
+   + 0 scenario_profit[122] + 0 scenario_profit[123]
+   + 0 scenario_profit[124] + 0 scenario_profit[125]
+   + 0 scenario_profit[126] + 0 scenario_profit[127]
+   + 0 scenario_profit[128] + 0 scenario_profit[129]
+   + 0 scenario_profit[130] + 0 scenario_profit[131]
+   + 0 scenario_profit[132] + 0 scenario_profit[133]
+   + 0 scenario_profit[134] + 0 scenario_profit[135]
+   + 0 scenario_profit[136] + 0 scenario_profit[137]
+   + 0 scenario_profit[138] + 0 scenario_profit[139]
+   + 0 scenario_profit[140] + 0 scenario_profit[141]
+   + 0 scenario_profit[142] + 0 scenario_profit[143]
+   + 0 scenario_profit[144] + 0 scenario_profit[145]
+   + 0 scenario_profit[146] + 0 scenario_profit[147]
+   + 0 scenario_profit[148] + 0 scenario_profit[149]
+   + 0 scenario_profit[150] + 0 scenario_profit[151]
+   + 0 scenario_profit[152] + 0 scenario_profit[153]
+   + 0 scenario_profit[154] + 0 scenario_profit[155]
+   + 0 scenario_profit[156] + 0 scenario_profit[157]
+   + 0 scenario_profit[158] + 0 scenario_profit[159]
+   + 0 scenario_profit[160] + 0 scenario_profit[161]
+   + 0 scenario_profit[162] + 0 scenario_profit[163]
+   + 0 scenario_profit[164] + 0 scenario_profit[165]
+   + 0 scenario_profit[166] + 0 scenario_profit[167]
+   + 0 scenario_profit[168] + 0 scenario_profit[169]
+   + 0 scenario_profit[170] + 0 scenario_profit[171]
+   + 0 scenario_profit[172] + 0 scenario_profit[173]
+   + 0 scenario_profit[174] + 0 scenario_profit[175]
+   + 0 scenario_profit[176] + 0 scenario_profit[177]
+   + 0 scenario_profit[178] + 0 scenario_profit[179]
+   + 0 scenario_profit[180] + 0 scenario_profit[181]
+   + 0 scenario_profit[182] + 0 scenario_profit[183]
+   + 0 scenario_profit[184] + 0 scenario_profit[185]
+   + 0 scenario_profit[186] + 0 scenario_profit[187]
+   + 0 scenario_profit[188] + 0 scenario_profit[189]
+   + 0 scenario_profit[190] + 0 scenario_profit[191]
+   + 0 scenario_profit[192] + 0 scenario_profit[193]
+   + 0 scenario_profit[194] + 0 scenario_profit[195]
+   + 0 scenario_profit[196] + 0 scenario_profit[197]
+   + 0 scenario_profit[198] + 0 scenario_profit[199]
 Subject To
+ imbalance_0_0: - p_DA[0] - pos_imbalance[0,0] + neg_imbalance[0,0]
+   = -162.3314706931399
  imbalance_0_1: - p_DA[0] - pos_imbalance[0,1] + neg_imbalance[0,1]
    = -103.0118297467602
  imbalance_0_2: - p_DA[0] - pos_imbalance[0,2] + neg_imbalance[0,2]
@@ -5215,6 +5301,8 @@ Subject To
    = -136.4350255617643
  imbalance_0_199: - p_DA[0] - pos_imbalance[0,199] + neg_imbalance[0,199]
    = -285.5537391511116
+ imbalance_1_0: - p_DA[1] - pos_imbalance[1,0] + neg_imbalance[1,0]
+   = -182.8752526453454
  imbalance_1_1: - p_DA[1] - pos_imbalance[1,1] + neg_imbalance[1,1]
    = -107.1635358459161
  imbalance_1_2: - p_DA[1] - pos_imbalance[1,2] + neg_imbalance[1,2]
@@ -5613,6 +5701,8 @@ Subject To
    = -106.1795565331114
  imbalance_1_199: - p_DA[1] - pos_imbalance[1,199] + neg_imbalance[1,199]
    = -287.3958209487576
+ imbalance_2_0: - p_DA[2] - pos_imbalance[2,0] + neg_imbalance[2,0]
+   = -168.2371299488765
  imbalance_2_1: - p_DA[2] - pos_imbalance[2,1] + neg_imbalance[2,1]
    = -104.2851622874807
  imbalance_2_2: - p_DA[2] - pos_imbalance[2,2] + neg_imbalance[2,2]
@@ -6011,6 +6101,8 @@ Subject To
    = -81.64427535370349
  imbalance_2_199: - p_DA[2] - pos_imbalance[2,199] + neg_imbalance[2,199]
    = -274.0484187373677
+ imbalance_3_0: - p_DA[3] - pos_imbalance[3,0] + neg_imbalance[3,0]
+   = -140.1741766734039
  imbalance_3_1: - p_DA[3] - pos_imbalance[3,1] + neg_imbalance[3,1]
    = -110.2061288788491
  imbalance_3_2: - p_DA[3] - pos_imbalance[3,2] + neg_imbalance[3,2]
@@ -6409,6 +6501,8 @@ Subject To
    = -61.54975627154917
  imbalance_3_199: - p_DA[3] - pos_imbalance[3,199] + neg_imbalance[3,199]
    = -278.0072226845797
+ imbalance_4_0: - p_DA[4] - pos_imbalance[4,0] + neg_imbalance[4,0]
+   = -115.6415705623588
  imbalance_4_1: - p_DA[4] - pos_imbalance[4,1] + neg_imbalance[4,1]
    = -113.6578587563904
  imbalance_4_2: - p_DA[4] - pos_imbalance[4,2] + neg_imbalance[4,2]
@@ -6807,6 +6901,8 @@ Subject To
    = -65.19661752467009
  imbalance_4_199: - p_DA[4] - pos_imbalance[4,199] + neg_imbalance[4,199]
    = -287.7299072642967
+ imbalance_5_0: - p_DA[5] - pos_imbalance[5,0] + neg_imbalance[5,0]
+   = -87.08372963975745
  imbalance_5_1: - p_DA[5] - pos_imbalance[5,1] + neg_imbalance[5,1]
    = -127.7630483890144
  imbalance_5_2: - p_DA[5] - pos_imbalance[5,2] + neg_imbalance[5,2]
@@ -7205,6 +7301,8 @@ Subject To
    = -103.1512305314469
  imbalance_5_199: - p_DA[5] - pos_imbalance[5,199] + neg_imbalance[5,199]
    = -279.700689573178
+ imbalance_6_0: - p_DA[6] - pos_imbalance[6,0] + neg_imbalance[6,0]
+   = -88.47684579717037
  imbalance_6_1: - p_DA[6] - pos_imbalance[6,1] + neg_imbalance[6,1]
    = -163.3893116157413
  imbalance_6_2: - p_DA[6] - pos_imbalance[6,2] + neg_imbalance[6,2]
@@ -7603,6 +7701,8 @@ Subject To
    = -151.617970514802
  imbalance_6_199: - p_DA[6] - pos_imbalance[6,199] + neg_imbalance[6,199]
    = -271.5451492093687
+ imbalance_7_0: - p_DA[7] - pos_imbalance[7,0] + neg_imbalance[7,0]
+   = -85.40244917370111
  imbalance_7_1: - p_DA[7] - pos_imbalance[7,1] + neg_imbalance[7,1]
    = -215.2557662584711
  imbalance_7_2: - p_DA[7] - pos_imbalance[7,2] + neg_imbalance[7,2]
@@ -8001,6 +8101,8 @@ Subject To
    = -166.2268160741886
  imbalance_7_199: - p_DA[7] - pos_imbalance[7,199] + neg_imbalance[7,199]
    = -240.0711865414338
+ imbalance_8_0: - p_DA[8] - pos_imbalance[8,0] + neg_imbalance[8,0]
+   = -71.03748068006183
  imbalance_8_1: - p_DA[8] - pos_imbalance[8,1] + neg_imbalance[8,1]
    = -227.8948698133397
  imbalance_8_2: - p_DA[8] - pos_imbalance[8,2] + neg_imbalance[8,2]
@@ -8399,6 +8501,8 @@ Subject To
    = -176.0835513018666
  imbalance_8_199: - p_DA[8] - pos_imbalance[8,199] + neg_imbalance[8,199]
    = -185.2841517060992
+ imbalance_9_0: - p_DA[9] - pos_imbalance[9,0] + neg_imbalance[9,0]
+   = -55.61199619545832
  imbalance_9_1: - p_DA[9] - pos_imbalance[9,1] + neg_imbalance[9,1]
    = -243.4879919153489
  imbalance_9_2: - p_DA[9] - pos_imbalance[9,2] + neg_imbalance[9,2]
@@ -8797,6 +8901,8 @@ Subject To
    = -186.7722327903935
  imbalance_9_199: - p_DA[9] - pos_imbalance[9,199] + neg_imbalance[9,199]
    = -165.0777255974319
+ imbalance_10_0: - p_DA[10] - pos_imbalance[10,0] + neg_imbalance[10,0]
+   = -52.2983295684223
  imbalance_10_1: - p_DA[10] - pos_imbalance[10,1] + neg_imbalance[10,1]
    = -237.9880513613126
  imbalance_10_2: - p_DA[10] - pos_imbalance[10,2] + neg_imbalance[10,2]
@@ -9195,6 +9301,8 @@ Subject To
    + neg_imbalance[10,198] = -202.917756509333
  imbalance_10_199: - p_DA[10] - pos_imbalance[10,199]
    + neg_imbalance[10,199] = -168.8262394483415
+ imbalance_11_0: - p_DA[11] - pos_imbalance[11,0] + neg_imbalance[11,0]
+   = -49.09538104862681
  imbalance_11_1: - p_DA[11] - pos_imbalance[11,1] + neg_imbalance[11,1]
    = -237.9834442991321
  imbalance_11_2: - p_DA[11] - pos_imbalance[11,2] + neg_imbalance[11,2]
@@ -9593,6 +9701,8 @@ Subject To
    + neg_imbalance[11,198] = -222.1847877779099
  imbalance_11_199: - p_DA[11] - pos_imbalance[11,199]
    + neg_imbalance[11,199] = -155.8600344786589
+ imbalance_12_0: - p_DA[12] - pos_imbalance[12,0] + neg_imbalance[12,0]
+   = -57.01700154559505
  imbalance_12_1: - p_DA[12] - pos_imbalance[12,1] + neg_imbalance[12,1]
    = -249.7876292949709
  imbalance_12_2: - p_DA[12] - pos_imbalance[12,2] + neg_imbalance[12,2]
@@ -9991,6 +10101,8 @@ Subject To
    + neg_imbalance[12,198] = -222.6719474497682
  imbalance_12_199: - p_DA[12] - pos_imbalance[12,199]
    + neg_imbalance[12,199] = -158.188978718345
+ imbalance_13_0: - p_DA[13] - pos_imbalance[13,0] + neg_imbalance[13,0]
+   = -75.28682677446201
  imbalance_13_1: - p_DA[13] - pos_imbalance[13,1] + neg_imbalance[13,1]
    = -283.061169896564
  imbalance_13_2: - p_DA[13] - pos_imbalance[13,2] + neg_imbalance[13,2]
@@ -10389,6 +10501,8 @@ Subject To
    + neg_imbalance[13,198] = -230.9286945666389
  imbalance_13_199: - p_DA[13] - pos_imbalance[13,199]
    + neg_imbalance[13,199] = -144.4609737248841
+ imbalance_14_0: - p_DA[14] - pos_imbalance[14,0] + neg_imbalance[14,0]
+   = -102.3274580905957
  imbalance_14_1: - p_DA[14] - pos_imbalance[14,1] + neg_imbalance[14,1]
    = -323.6881761978362
  imbalance_14_2: - p_DA[14] - pos_imbalance[14,2] + neg_imbalance[14,2]
@@ -10787,6 +10901,8 @@ Subject To
    + neg_imbalance[14,198] = -259.2217037213173
  imbalance_14_199: - p_DA[14] - pos_imbalance[14,199]
    + neg_imbalance[14,199] = -125.3822375460706
+ imbalance_15_0: - p_DA[15] - pos_imbalance[15,0] + neg_imbalance[15,0]
+   = -121.1086672214957
  imbalance_15_1: - p_DA[15] - pos_imbalance[15,1] + neg_imbalance[15,1]
    = -353.9635596243015
  imbalance_15_2: - p_DA[15] - pos_imbalance[15,2] + neg_imbalance[15,2]
@@ -11185,6 +11301,8 @@ Subject To
    + neg_imbalance[15,198] = -253.2683390797765
  imbalance_15_199: - p_DA[15] - pos_imbalance[15,199]
    + neg_imbalance[15,199] = -129.678991796457
+ imbalance_16_0: - p_DA[16] - pos_imbalance[16,0] + neg_imbalance[16,0]
+   = -162.8811972417073
  imbalance_16_1: - p_DA[16] - pos_imbalance[16,1] + neg_imbalance[16,1]
    = -367.5789145167043
  imbalance_16_2: - p_DA[16] - pos_imbalance[16,2] + neg_imbalance[16,2]
@@ -11583,6 +11701,8 @@ Subject To
    + neg_imbalance[16,198] = -247.3476697182261
  imbalance_16_199: - p_DA[16] - pos_imbalance[16,199]
    + neg_imbalance[16,199] = -129.8561407680419
+ imbalance_17_0: - p_DA[17] - pos_imbalance[17,0] + neg_imbalance[17,0]
+   = -192.7856378551896
  imbalance_17_1: - p_DA[17] - pos_imbalance[17,1] + neg_imbalance[17,1]
    = -398.441475448817
  imbalance_17_2: - p_DA[17] - pos_imbalance[17,2] + neg_imbalance[17,2]
@@ -11981,6 +12101,8 @@ Subject To
    + neg_imbalance[17,198] = -250.4018547140649
  imbalance_17_199: - p_DA[17] - pos_imbalance[17,199]
    + neg_imbalance[17,199] = -128.2436690048746
+ imbalance_18_0: - p_DA[18] - pos_imbalance[18,0] + neg_imbalance[18,0]
+   = -227.3304303887766
  imbalance_18_1: - p_DA[18] - pos_imbalance[18,1] + neg_imbalance[18,1]
    = -427.4222744025681
  imbalance_18_2: - p_DA[18] - pos_imbalance[18,2] + neg_imbalance[18,2]
@@ -12379,6 +12501,8 @@ Subject To
    + neg_imbalance[18,198] = -244.9777077636428
  imbalance_18_199: - p_DA[18] - pos_imbalance[18,199]
    + neg_imbalance[18,199] = -122.2653370586137
+ imbalance_19_0: - p_DA[19] - pos_imbalance[19,0] + neg_imbalance[19,0]
+   = -269.3350968969207
  imbalance_19_1: - p_DA[19] - pos_imbalance[19,1] + neg_imbalance[19,1]
    = -404.8527226251337
  imbalance_19_2: - p_DA[19] - pos_imbalance[19,2] + neg_imbalance[19,2]
@@ -12777,6 +12901,8 @@ Subject To
    + neg_imbalance[19,198] = -230.6811021281655
  imbalance_19_199: - p_DA[19] - pos_imbalance[19,199]
    + neg_imbalance[19,199] = -113.4044703364642
+ imbalance_20_0: - p_DA[20] - pos_imbalance[20,0] + neg_imbalance[20,0]
+   = -281.0007727975271
  imbalance_20_1: - p_DA[20] - pos_imbalance[20,1] + neg_imbalance[20,1]
    = -363.740785875639
  imbalance_20_2: - p_DA[20] - pos_imbalance[20,2] + neg_imbalance[20,2]
@@ -13175,6 +13301,8 @@ Subject To
    + neg_imbalance[20,198] = -203.5047854000713
  imbalance_20_199: - p_DA[20] - pos_imbalance[20,199]
    + neg_imbalance[20,199] = -99.23537629294972
+ imbalance_21_0: - p_DA[21] - pos_imbalance[21,0] + neg_imbalance[21,0]
+   = -283.9201640708596
  imbalance_21_1: - p_DA[21] - pos_imbalance[21,1] + neg_imbalance[21,1]
    = -369.0622399239091
  imbalance_21_2: - p_DA[21] - pos_imbalance[21,2] + neg_imbalance[21,2]
@@ -13573,6 +13701,8 @@ Subject To
    + neg_imbalance[21,198] = -167.9562477707764
  imbalance_21_199: - p_DA[21] - pos_imbalance[21,199]
    + neg_imbalance[21,199] = -97.51307811199619
+ imbalance_22_0: - p_DA[22] - pos_imbalance[22,0] + neg_imbalance[22,0]
+   = -270.4138925216978
  imbalance_22_1: - p_DA[22] - pos_imbalance[22,1] + neg_imbalance[22,1]
    = -363.6850552847462
  imbalance_22_2: - p_DA[22] - pos_imbalance[22,2] + neg_imbalance[22,2]
@@ -13971,6 +14101,8 @@ Subject To
    + neg_imbalance[22,198] = -161.0511532516942
  imbalance_22_199: - p_DA[22] - pos_imbalance[22,199]
    + neg_imbalance[22,199] = -88.00677683985258
+ imbalance_23_0: - p_DA[23] - pos_imbalance[23,0] + neg_imbalance[23,0]
+   = -257.6411841635953
  imbalance_23_1: - p_DA[23] - pos_imbalance[23,1] + neg_imbalance[23,1]
    = -366.8835453572702
  imbalance_23_2: - p_DA[23] - pos_imbalance[23,2] + neg_imbalance[23,2]
@@ -14394,4 +14526,204 @@ Bounds
  p_DA[21] <= 500
  p_DA[22] <= 500
  p_DA[23] <= 500
+ scenario_profit[0] free
+ scenario_profit[1] free
+ scenario_profit[2] free
+ scenario_profit[3] free
+ scenario_profit[4] free
+ scenario_profit[5] free
+ scenario_profit[6] free
+ scenario_profit[7] free
+ scenario_profit[8] free
+ scenario_profit[9] free
+ scenario_profit[10] free
+ scenario_profit[11] free
+ scenario_profit[12] free
+ scenario_profit[13] free
+ scenario_profit[14] free
+ scenario_profit[15] free
+ scenario_profit[16] free
+ scenario_profit[17] free
+ scenario_profit[18] free
+ scenario_profit[19] free
+ scenario_profit[20] free
+ scenario_profit[21] free
+ scenario_profit[22] free
+ scenario_profit[23] free
+ scenario_profit[24] free
+ scenario_profit[25] free
+ scenario_profit[26] free
+ scenario_profit[27] free
+ scenario_profit[28] free
+ scenario_profit[29] free
+ scenario_profit[30] free
+ scenario_profit[31] free
+ scenario_profit[32] free
+ scenario_profit[33] free
+ scenario_profit[34] free
+ scenario_profit[35] free
+ scenario_profit[36] free
+ scenario_profit[37] free
+ scenario_profit[38] free
+ scenario_profit[39] free
+ scenario_profit[40] free
+ scenario_profit[41] free
+ scenario_profit[42] free
+ scenario_profit[43] free
+ scenario_profit[44] free
+ scenario_profit[45] free
+ scenario_profit[46] free
+ scenario_profit[47] free
+ scenario_profit[48] free
+ scenario_profit[49] free
+ scenario_profit[50] free
+ scenario_profit[51] free
+ scenario_profit[52] free
+ scenario_profit[53] free
+ scenario_profit[54] free
+ scenario_profit[55] free
+ scenario_profit[56] free
+ scenario_profit[57] free
+ scenario_profit[58] free
+ scenario_profit[59] free
+ scenario_profit[60] free
+ scenario_profit[61] free
+ scenario_profit[62] free
+ scenario_profit[63] free
+ scenario_profit[64] free
+ scenario_profit[65] free
+ scenario_profit[66] free
+ scenario_profit[67] free
+ scenario_profit[68] free
+ scenario_profit[69] free
+ scenario_profit[70] free
+ scenario_profit[71] free
+ scenario_profit[72] free
+ scenario_profit[73] free
+ scenario_profit[74] free
+ scenario_profit[75] free
+ scenario_profit[76] free
+ scenario_profit[77] free
+ scenario_profit[78] free
+ scenario_profit[79] free
+ scenario_profit[80] free
+ scenario_profit[81] free
+ scenario_profit[82] free
+ scenario_profit[83] free
+ scenario_profit[84] free
+ scenario_profit[85] free
+ scenario_profit[86] free
+ scenario_profit[87] free
+ scenario_profit[88] free
+ scenario_profit[89] free
+ scenario_profit[90] free
+ scenario_profit[91] free
+ scenario_profit[92] free
+ scenario_profit[93] free
+ scenario_profit[94] free
+ scenario_profit[95] free
+ scenario_profit[96] free
+ scenario_profit[97] free
+ scenario_profit[98] free
+ scenario_profit[99] free
+ scenario_profit[100] free
+ scenario_profit[101] free
+ scenario_profit[102] free
+ scenario_profit[103] free
+ scenario_profit[104] free
+ scenario_profit[105] free
+ scenario_profit[106] free
+ scenario_profit[107] free
+ scenario_profit[108] free
+ scenario_profit[109] free
+ scenario_profit[110] free
+ scenario_profit[111] free
+ scenario_profit[112] free
+ scenario_profit[113] free
+ scenario_profit[114] free
+ scenario_profit[115] free
+ scenario_profit[116] free
+ scenario_profit[117] free
+ scenario_profit[118] free
+ scenario_profit[119] free
+ scenario_profit[120] free
+ scenario_profit[121] free
+ scenario_profit[122] free
+ scenario_profit[123] free
+ scenario_profit[124] free
+ scenario_profit[125] free
+ scenario_profit[126] free
+ scenario_profit[127] free
+ scenario_profit[128] free
+ scenario_profit[129] free
+ scenario_profit[130] free
+ scenario_profit[131] free
+ scenario_profit[132] free
+ scenario_profit[133] free
+ scenario_profit[134] free
+ scenario_profit[135] free
+ scenario_profit[136] free
+ scenario_profit[137] free
+ scenario_profit[138] free
+ scenario_profit[139] free
+ scenario_profit[140] free
+ scenario_profit[141] free
+ scenario_profit[142] free
+ scenario_profit[143] free
+ scenario_profit[144] free
+ scenario_profit[145] free
+ scenario_profit[146] free
+ scenario_profit[147] free
+ scenario_profit[148] free
+ scenario_profit[149] free
+ scenario_profit[150] free
+ scenario_profit[151] free
+ scenario_profit[152] free
+ scenario_profit[153] free
+ scenario_profit[154] free
+ scenario_profit[155] free
+ scenario_profit[156] free
+ scenario_profit[157] free
+ scenario_profit[158] free
+ scenario_profit[159] free
+ scenario_profit[160] free
+ scenario_profit[161] free
+ scenario_profit[162] free
+ scenario_profit[163] free
+ scenario_profit[164] free
+ scenario_profit[165] free
+ scenario_profit[166] free
+ scenario_profit[167] free
+ scenario_profit[168] free
+ scenario_profit[169] free
+ scenario_profit[170] free
+ scenario_profit[171] free
+ scenario_profit[172] free
+ scenario_profit[173] free
+ scenario_profit[174] free
+ scenario_profit[175] free
+ scenario_profit[176] free
+ scenario_profit[177] free
+ scenario_profit[178] free
+ scenario_profit[179] free
+ scenario_profit[180] free
+ scenario_profit[181] free
+ scenario_profit[182] free
+ scenario_profit[183] free
+ scenario_profit[184] free
+ scenario_profit[185] free
+ scenario_profit[186] free
+ scenario_profit[187] free
+ scenario_profit[188] free
+ scenario_profit[189] free
+ scenario_profit[190] free
+ scenario_profit[191] free
+ scenario_profit[192] free
+ scenario_profit[193] free
+ scenario_profit[194] free
+ scenario_profit[195] free
+ scenario_profit[196] free
+ scenario_profit[197] free
+ scenario_profit[198] free
+ scenario_profit[199] free
 End
