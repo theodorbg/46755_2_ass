@@ -1,3 +1,5 @@
+print('\n#################################')
+print('\nInitializing scenario_generator.py')
 # Standard library imports
 import os
 import json
@@ -9,8 +11,8 @@ import pandas as pd
 import pickle
 
 # Local imports
-from import_data import df_wind, df_price, df_conditions
-import plot_functions_scenario_generation as pf
+from data_and_scenario_generation.import_data import df_wind, df_price, df_conditions
+import data_and_scenario_generation.plot_functions_scenario_generation as pf
 
 IN_SAMPLE_NUMBER = 200
 
@@ -66,12 +68,6 @@ for condition in range(df_conditions.shape[1]):
             sample_scenarios[scenario_counter] = scenario_data
             scenario_counter += 1
 
-<<<<<<< HEAD:scripts/data_and_scenario_generation/scenario_generator.py
-# Define the number of in-sample scenarios
-IN_SAMPLE_NUMBER = 200  # Changed from 1 to 200
-=======
->>>>>>> 87d66d9 (too much to write):part1/scripts/data_and_scenario_generation/scenario_generator.py
-
 # Take random scenarios from sample_scenarios and save them in a dictionary
 # with continuous numbering (0-199 for in-sample, 200+ for out-of-sample)
 in_sample_scenarios = {}
@@ -103,7 +99,7 @@ for i in range(total_scenarios_to_select):
 
 # No need to reset keys since they're already numbered correctly
 # Print confirmation of key ranges
-print("In-sample scenarios keys range:", min(in_sample_scenarios.keys()), "to", max(in_sample_scenarios.keys()))
+print("\nIn-sample scenarios keys range:", min(in_sample_scenarios.keys()), "to", max(in_sample_scenarios.keys()))
 print("Out-of-sample scenarios keys range:", min(out_of_sample_scenarios.keys()), "to", max(out_of_sample_scenarios.keys()))
 
 # Save scenarios to pickle files (best for preserving DataFrame structure)
@@ -131,13 +127,14 @@ with open('part1/results/scenarios/out_of_sample_scenarios.pkl', 'wb') as f:
 if len(in_sample_scenarios) > 5:
     for i in range(5):
         pf.plot_scenario(in_sample_scenarios[i], i)
-    print('Plotted the first 5 scenarios')
+    print('\nPlotted the first 5 scenarios')
 else:
     pf.plot_scenario(in_sample_scenarios[0], 0)
     print('Plotted the first scenario')
 
 # Generate  balancing price, and day ahead price (20 plots)
 pf.plot_balancing_prices_by_day(balancing_prices_list, df_price)
-print('Plotted balancing prices by day')
+print('\nPlotted balancing prices by day')
 
-print('Scenario generation completed.')
+print('\nScenario generation completed.')
+print('#################################')

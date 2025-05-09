@@ -267,3 +267,34 @@ def forecast_strategy(in_sample_scenarios, capacity_wind_farm, n_hours):
         total_expected_profit += hour_expected_profit
     
     return optimal_offers, total_expected_profit, scenario_profits
+
+def compare_one_price_two_price(expected_profit_one_price, two_price_total_expected_profit):
+    """ Compare the expected profits of one-price and two-price strategies. """
+    print("\n=== COMPARISON: ONE-PRICE vs TWO-PRICE ===")
+    print(f"One-Price Expected Profit: {expected_profit_one_price:.2e} EUR")
+    print(f"Two-Price Expected Profit: {two_price_total_expected_profit:.2e} EUR")
+    print(f"Difference: {two_price_total_expected_profit - expected_profit_one_price:.2e} EUR")
+
+    return None
+
+def compare_all_strategies(expected_profit_one_price,
+                           two_price_total_expected_profit,
+                           ew_expected_profit):
+    print("\n=== COMPARISON: ALL STRATEGIES ===")
+
+    print(f"One-Price Expected Profit: "
+          f"{expected_profit_one_price:.2e} EUR")
+    
+    print(f"Two-Price Expected Profit: "
+          f"{two_price_total_expected_profit:.2e} EUR")
+    
+    print(f"Expected Wind Profit: "
+          f"{ew_expected_profit:.2e} EUR")
+    
+    print(f"Expected Wind vs One-Price: "
+          f"{ew_expected_profit - expected_profit_one_price:.2e} EUR")
+    
+    print(f"Expected Wind vs Two-Price: "
+          f"{ew_expected_profit - two_price_total_expected_profit:.2e} EUR")
+
+    return None

@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
-from generate_conditions import generate_conditions
+from data_and_scenario_generation.generate_conditions import generate_conditions
 
 def load_data():
     """Load and process price and wind data, generate conditions"""
@@ -18,7 +18,7 @@ def load_data():
     wind_path = os.path.join(DATA_DIR, 'wind_actual_gen.csv')
     
     # Print path for debugging
-    print(f"Looking for price data at: {price_path}")
+    print(f"\nLooking for price data at: {price_path}")
     print(f"Looking for wind data at: {wind_path}")
     
     # Check if files exist
@@ -32,6 +32,7 @@ def load_data():
     df_price.index.name = 'Hour'
     df_price = df_price.drop(columns=['time']).iloc[:, ::-1]  # Drop time, reverse columns
     df_price.columns = [f'Day {i+1}' for i in range(len(df_price.columns))]
+    print('\nPrice data loaded')
     
     # Load wind data and reshape
     df_wind_raw = pd.read_csv(wind_path, sep=";", parse_dates=['startTime'])
@@ -44,6 +45,7 @@ def load_data():
         reshaped_wind, 
         columns=[f'Day {i+1}' for i in range(reshaped_wind.shape[1])]
     )
+    print('\nWind data loaded')
     
     # Generate conditions dataframe
     df_conditions = generate_conditions()

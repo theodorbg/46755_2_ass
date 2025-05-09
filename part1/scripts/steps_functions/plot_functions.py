@@ -24,11 +24,11 @@ def plot_optimal_offers(offers, title="Optimal Day-Ahead Market Offers", filenam
     
     # Save the figure
     save_path = 'part1/results/step1/figures/one_price_optimal_offers.png'
-    if filename:
-        save_path = f'results/{filename}'
+    # if filename:
+    #     save_path = f'results/{filename}'
     
     # Ensure directory exists before saving
-    ensure_dir_exists(save_path)
+    # ensure_dir_exists(save_path)
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     
     plt.close()
@@ -62,7 +62,7 @@ def compare_offers(optimal_offers_one_price, optimal_offers_two_price):
     plt.legend()
     plt.tight_layout()
     plt.savefig('part1/results/step2/figures/comparison_optimal_offers.png', dpi=300, bbox_inches='tight')
-    print('\nPlotted comparison of offering strategies and saved to results/comparison_optimal_offers.png')
+    print('\nPlotted comparison of offering strategies and saved to part1/results/step2/figures/comparison_optimal_offers.png')
     plt.close()
 
 def compare_all_strategies(optimal_offers_one_price, optimal_offers_two_price, ew_optimal_offers):
@@ -77,4 +77,6 @@ def compare_all_strategies(optimal_offers_one_price, optimal_offers_two_price, e
     plt.legend()
     plt.tight_layout()
     plt.savefig('part1/results/step2/figures/comparison_all_strategies.png', dpi=300, bbox_inches='tight')
+    print('\nPlotted comparison of all strategies and saved to part1/results/step2/figures/comparison_all_strategies.png')
+    plt.close()
 

@@ -24,7 +24,7 @@ def load_scenarios():
     with open(out_sample_path, 'rb') as f:
         out_sample_scenarios = pickle.load(f)
     
-    print(f"Loaded {len(in_sample_scenarios)} in-sample scenarios")
+    print(f"\nLoaded {len(in_sample_scenarios)} in-sample scenarios")
     print(f"Loaded {len(out_sample_scenarios)} out-of-sample scenarios")
     
     return in_sample_scenarios, out_sample_scenarios

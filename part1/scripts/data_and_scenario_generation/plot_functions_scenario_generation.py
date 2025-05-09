@@ -113,4 +113,4 @@ def plot_balancing_prices_by_day(balancing_prices_list, df_price,
         plt.savefig(f'{save_dir}/day_{day_idx+1}_all_conditions.png', dpi=300, bbox_inches='tight')
         plt.close()
     
-    print(f"Generated {days} plots, one for each day, showing all balancing price conditions")
+    print(f"\nGenerated {days} plots, one for each day, showing all balancing price conditions")
