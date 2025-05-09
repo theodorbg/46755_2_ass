@@ -1,6 +1,6 @@
 \ Model WindFarmTwoPrice_Hour
 \ LP format - for model browsing. Use MPS format to capture full model detail.
-\ Signature: 0xdcccfb4ead0ec85a
+\ Signature: 0xdcccfb4ead0ec883
 Maximize
   88.45125000000004 p_DA[0] + 78.78 p_DA[1] + 76.63965000000002 p_DA[2]
    + 74.06824999999994 p_DA[3] + 75.6764 p_DA[4]

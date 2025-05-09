@@ -337,3 +337,21 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig('results/risk_profit_distributions_two_price.png', dpi=300, bbox_inches='tight')
 plt.show()
+
+print('#################################')
+
+# %% In-sample Decision Making: Offering Strategy Under the P90 Requirement
+print("\n=== Offering Strategy Under the P90 Requirement ===")
+
+
+
+
+print('#################################')
+
+# %% Verification of the P90 Requirement Using Out-of-Sample Analysis
+print("\n=== Verification of the P90 Requirement Using Out-of-Sample Analysis ===")
+
+
+
+
+
