@@ -22,14 +22,6 @@ from steps.step3_expost_analysis import perform_cross_validation, calculate_prof
 # Read in_sample and out of_sample scenarios
 in_sample_scenarios, out_sample_scenarios = load_scenarios.load_scenarios()
 
-
-# Example: Access scenario 1
-# print(f"Scenario 1 data:")
-# print(in_sample_scenarios[1])
-# print('amount of in_sample_scenarios:', len(in_sample_scenarios))
-# print('amount of out_of_sample_scenarios:', len(out_sample_scenarios))
-
-
 CAPACITY_WIND_FARM = 500 #MW
 OFFER_PRICE_WIND_FARM = 0
 N_HOURS = in_sample_scenarios[0].shape[0]  # 24 hours
@@ -46,27 +38,6 @@ N_HOURS = in_sample_scenarios[0].shape[0]  # 24 hours
 # uncertainties assumed uncorrelated
 
 # %%  1.1 Offering Strategy Under a One-Price Balancing Scheme
-# formulate and solve the stochastic offering strategy problem 
-# for a one-price balancing scheme using in-sample scenarios.
-
-# Determine the optimal hourly production quantity offers of the 
-# wind farm in the day-ahead market and calculate the expected profit
-
-# Additionally, illustrate the cumulative distribution of profit 
-# across the in-sample scenarios. 
-
-# Do we observe the wind farm bidding either 0 or full capacity 
-# (an all-or-nothing strategy)? If so, why?
-
-# From slides:
-# problem determines:
-# how much quantity to offer
-# at what price? (0 ??= offer price)
-# objective: maximize expected profit
-
-# Assumptions:
-# The wind farm is a price taker in the day-ahead market
-# Each scenario is independent and equally likely (1/200) for in-sample scenarios
 
 # Solve the model
 optimal_offers_one_price, expected_profit, scenario_profits = s1.solve_one_price_offering_strategy(in_sample_scenarios,
@@ -92,18 +63,7 @@ threshold = 1e-6  # MW, to account for potential numerical precision
 all_or_nothing = all(offer <= threshold or abs(offer - CAPACITY_WIND_FARM) <= threshold for offer in optimal_offers_one_price)
 print(f"All-or-nothing bidding strategy: {'Yes' if all_or_nothing else 'No'}")
 
-
 # %%  1.2 Offering Strategy Under a Two-Price Balancing Scheme
-#Repeat Step 1.1, but now consider a two-price balancing scheme. 
-# Analyze any significant differences between the results of Step 1.1 and 
-# Step 1.2, particularly in terms of the offering strategy and profit distribution
-
-# from slides:
-# yt link: https://www.youtube.com/watch?v=9dEe5JdqPp4&ab_channel=Renewablesinelectricitymarkets
-# Print results
-
-# print keys of in sample scenarios
-# print(f"Keys of in_sample_scenarios: {in_sample_scenarios.keys()}")
 
 print('#################################')
 
@@ -180,107 +140,12 @@ print(f"Expected Wind vs Two-Price: {ew_expected_profit - two_price_total_expect
 pf.compare_all_strategies(optimal_offers_one_price, optimal_offers_two_price, ew_optimal_offers)
 
 print('#################################')
-# %% DEBUGGING 1.2
-# After solving all hours
-# price_diff_by_hour = []
-# for hour in range(N_HOURS):
-#     DA_prices = [in_sample_scenarios[s].loc[hour, 'price'] for s in in_sample_scenarios]
-#     BAL_prices_excess = [in_sample_scenarios[s].loc[hour, 'balancing_price'] 
-#                          for s in in_sample_scenarios if in_sample_scenarios[s].loc[hour, 'condition'] == 0]
-#     BAL_prices_deficit = [in_sample_scenarios[s].loc[hour, 'balancing_price'] 
-#                           for s in in_sample_scenarios if in_sample_scenarios[s].loc[hour, 'condition'] == 1]
-    
-#     avg_DA = sum(DA_prices) / len(DA_prices)
-#     avg_BAL_excess = sum(BAL_prices_excess) / len(BAL_prices_excess) if BAL_prices_excess else 0
-#     avg_BAL_deficit = sum(BAL_prices_deficit) / len(BAL_prices_deficit) if BAL_prices_deficit else 0
-    
-#     price_diff_by_hour.append({
-#         'hour': hour,
-#         'avg_DA': avg_DA,
-#         'avg_BAL_excess': avg_BAL_excess,
-#         'avg_BAL_deficit': avg_BAL_deficit,
-#         'surplus_penalty': (avg_DA - avg_BAL_excess) / avg_DA if avg_DA else 0,
-#         'deficit_penalty': (avg_BAL_deficit - avg_DA) / avg_DA if avg_DA else 0,
-#         'optimal_bid': optimal_offers_one_price[hour]
-#     })
-
-# # Print analysis for hours with 0 or 500 MW bids
-# print("\nPrice difference analysis for extreme bidding hours:")
-# for data in price_diff_by_hour:
-#     if data['optimal_bid'] < 1 or data['optimal_bid'] > 499:
-#         print(f"Hour {data['hour']}: Bid = {data['optimal_bid']:.0f} MW, " +
-#               f"DA = {data['avg_DA']:.2e}, " +
-#               f"BAL(excess) = {data['avg_BAL_excess']:.2e}, " +
-#               f"BAL(deficit) = {data['avg_BAL_deficit']:.2e}, " +
-#               f"Surplus penalty = {data['surplus_penalty']*100:.0f}%, " +
-#               f"Deficit penalty = {data['deficit_penalty']*100:.0f}%")
-        
-
-
-# # Add detailed debugging for problematic hours
-# if hour in [11, 12, 13]:
-#     print(f"\n--- Detailed analysis for Hour {hour} ---")
-#     # Check data ranges
-#     wind_values = [in_sample_scenarios[s].loc[hour, 'wind'] for s in in_sample_scenarios]
-#     price_values = [in_sample_scenarios[s].loc[hour, 'price'] for s in in_sample_scenarios]
-    
-#     print(f"Wind min/avg/max: {min(wind_values):.1f}/{sum(wind_values)/len(wind_values):.1f}/{max(wind_values):.1f}")
-#     print(f"DA Price min/avg/max: {min(price_values):.2e}/{sum(price_values)/len(price_values):.2e}/{max(price_values):.2e}")
-    
-#     # Check for extreme or invalid values
-#     extreme_wind = [s for s in in_sample_scenarios if abs(in_sample_scenarios[s].loc[hour, 'wind']) > 1000]
-#     negative_wind = [s for s in in_sample_scenarios if in_sample_scenarios[s].loc[hour, 'wind'] < 0]
-    
-#     if extreme_wind:
-#         print(f"Found {len(extreme_wind)} scenarios with extreme wind values")
-#     if negative_wind:
-#         print(f"Found {len(negative_wind)} scenarios with negative wind values")
-# %%  Ex-post Analysis
-#  Following Lecture 8, conduct ex-post cross-validation analyses to
-#  evaluate the quality of the offering decisions made in both Steps 1.1 and 1.2. 
-# With 200 in-sample and 1,400 out-of-sample scenarios, 
-# perform an 8-fold cross-validation analysis.
-# 
-#  For each run (with the given 200 in-sample and 1,400 out-of-sample scenarios), 
-# calculate the expected profits for both the in-sample and out-of-sample analyses. 
-# 
-# After completing all 8 runs, calculate the average expected profits for both 
-# the in-sample and out-of-sample analyses. 
-# 
-# Considering the results from all 8 runs, compare the average expected profits from
-#  the in-sample analyses to those from the out-of-sample analyses. 
-# 
-# Based on this comparison, can we interpret how satisfactory the offering 
-# decisions are? 
-# 
-# While keeping the total number of scenarios at 1,600, discuss whether 
-# altering the number of in-sample scenarios from 200 would improve the quality 
-# of the offering decisions, and if so, to what extent
-
-# %% Risk-Averse Offering Strategy
-# Following Lecture 9, formulate and solve the risk averse offering strategy 
-# problem for the wind farm under both one- and two-price balancing schemes (α = 0.90). 
-# 
-# Gradually increase the value of β from zero and plot a two-dimensional
-#  figure showing expected profit versus Conditional Value at Risk (CVaR). 
-# 
-# Explain how the offering strategy and profit volatility evolve as β increases. 
-# 
-# Additionally, discuss how the profit distribution across scenarios changes when 
-# risk considerations are incorporated. 
-# 
-# Lastly, analyze whether changing the set and number of in-sample scenarios leads 
-# to significant changes in the risk-averse offering decisions. 
-
-# This task does not require any ex-post out-of-sample or cross-validation analyses
-
-
+"""
 # %% Ex-post Analysis
 
 print("\n=== Ex-post Cross-validation Analysis ===")
 
 # Combine in-sample and out-of-sample scenarios
-
 
 # Perform cross-validation
 # Replace current cross-validation call
@@ -333,3 +198,142 @@ for strategy in ['one_price', 'two_price']:
     diff_percent = ((in_sample - out_sample) / in_sample) * 100
     print(f"\n{strategy.replace('_', ' ').title()} Strategy Gap Analysis:")
     print(f"In-sample vs Out-sample difference: {diff_percent:.2e}%")
+"""
+print('#################################')
+
+# %% Risk-Averse Offering Strategy
+print("\n=== Risk-Averse Analysis (One-Price) ===")
+
+from steps import step4_Risk_Averse as s4
+
+
+# Define beta range from 0 (risk-neutral) to 1 (fully risk-averse)
+beta_range_one_price = np.linspace(0, 1, 20)
+
+risk_results = s4.analyze_risk_return_tradeoff(
+    in_sample_scenarios=in_sample_scenarios,
+    CAPACITY_WIND_FARM=CAPACITY_WIND_FARM,
+    N_HOURS=N_HOURS,
+    beta_values=beta_range_one_price
+)
+
+# Plot results 
+plt.figure(figsize=(10, 6))
+plt.plot(risk_results['cvar'], risk_results['expected_profit'], 'bo-', linewidth=2, markersize=6)
+
+# Format axes
+plt.xlabel("Conditional Value at Risk (CVaR) [kEUR]")
+plt.ylabel("Expected Profit [kEUR]")
+plt.title("Risk-Return Trade-off (One-Price, α = 0.90)")
+
+# Set detailed y-axis ticks
+y_min = min(risk_results['expected_profit'])
+y_max = max(risk_results['expected_profit'])
+y_range = y_max - y_min
+plt.gca().yaxis.set_major_locator(plt.LinearLocator(10))  # Reduced number of ticks
+plt.gca().yaxis.set_minor_locator(plt.LinearLocator(20))  # Reduced number of minor ticks
+
+# Format tick labels with more precision
+plt.gca().get_xaxis().set_major_formatter(plt.FuncFormatter(lambda x, p: f'{x/1000:.1f}'))
+plt.gca().get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, p: f'{x/1000:.2f}'))
+# Add grid for both major and minor ticks
+plt.grid(True, which='major', alpha=0.3, linestyle='--')
+plt.grid(True, which='minor', alpha=0.1, linestyle=':')
+
+plt.tight_layout()
+plt.savefig('results/risk_return_tradeoff.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+# Print summary table with improved formatting
+print("\nRisk-Return Trade-off Analysis")
+print("-" * 65)
+print(f"{'Beta':^6} | {'Expected Profit':^15} | {'CVaR':^15} | {'Risk Premium':^15}")
+print("-" * 65)
+
+# Calculate and display risk premium
+base_profit = risk_results['expected_profit'][0]  # Risk-neutral profit
+for i, beta in enumerate(risk_results['beta']):
+    exp_profit = risk_results['expected_profit'][i]
+    cvar = risk_results['cvar'][i]
+    risk_premium = base_profit - exp_profit
+    
+    print(f"{beta:6.2f} | {exp_profit/1000:15.2f} | {cvar/1000:15.2f} | {risk_premium/1000:15.2f}")
+print("-" * 65)
+
+# Additional analysis: Plot profit distribution for selected beta values
+plt.figure(figsize=(12, 6))
+selected_betas = [0.0, 0.5, 1.0]
+for beta in selected_betas:
+    idx = int(beta * 10)
+    profits = list(risk_results['scenario_profits'][idx].values())
+    plt.hist(profits, bins=30, alpha=0.5, label=f'β={beta:.1f}')
+
+plt.xlabel('Profit [EUR]')
+plt.ylabel('Number of Scenarios')
+plt.title('Profit Distribution for Different Risk Levels')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('results/risk_profit_distributions.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+print("\n=== Risk-Averse Analysis (Two-Price) ===")
+
+beta_range_two_price = np.linspace(0, 1, 21)  # 11 unique values from 0 to 1
+
+# Analyze two-price risk-return tradeoff
+two_price_risk_results = s4.analyze_two_price_risk_return_tradeoff(
+    in_sample_scenarios=in_sample_scenarios,
+    CAPACITY_WIND_FARM=CAPACITY_WIND_FARM,
+    N_HOURS=N_HOURS,
+    beta_values=beta_range_two_price
+)
+
+# Plot two-price risk-return tradeoff
+plt.figure(figsize=(10, 6))
+plt.plot(two_price_risk_results['cvar'], two_price_risk_results['expected_profit'], 
+         'ro-', linewidth=2, markersize=6)
+
+# Format axes
+plt.xlabel("Conditional Value at Risk (CVaR) [kEUR]")
+plt.ylabel("Expected Profit [kEUR]")
+plt.title("Risk-Return Trade-off (Two-Price, α = 0.90)")
+
+# Set detailed y-axis ticks
+y_min = min(two_price_risk_results['expected_profit'])
+y_max = max(two_price_risk_results['expected_profit'])
+y_range = y_max - y_min
+plt.gca().yaxis.set_major_locator(plt.LinearLocator(10))  # Reduced number of ticks
+plt.gca().yaxis.set_minor_locator(plt.LinearLocator(20))  # Minor ticks
+
+# Format tick labels with more precision
+plt.gca().get_xaxis().set_major_formatter(plt.FuncFormatter(lambda x, p: f'{x/1000:.1f}'))
+plt.gca().get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, p: f'{x/1000:.2f}'))
+
+# Add grid for both major and minor ticks
+plt.grid(True, which='major', alpha=0.3, linestyle='--')
+plt.grid(True, which='minor', alpha=0.1, linestyle=':')
+
+plt.tight_layout()
+plt.savefig('results/risk_return_tradeoff_two_price.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+# Plot profit distribution for two-price scheme
+plt.figure(figsize=(12, 6))
+selected_betas = [0.0, 0.5, 1.0]
+n_points = len(two_price_risk_results['beta'])
+
+for beta in selected_betas:
+    # Calculate correct index based on number of points
+    idx = int((n_points - 1) * beta)
+    profits = list(two_price_risk_results['scenario_profits'][idx].values())
+    plt.hist(profits, bins=30, alpha=0.5, label=f'β={beta:.1f}')
+
+plt.xlabel('Profit [kEUR]')
+plt.ylabel('Number of Scenarios')
+plt.title('Profit Distribution for Different Risk Levels (Two-Price)')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('results/risk_profit_distributions_two_price.png', dpi=300, bbox_inches='tight')
+plt.show()

@@ -12,7 +12,7 @@ import pickle
 from import_data import df_wind, df_price, df_conditions
 import plot_functions_scenario_generation as pf
 
-IN_SAMPLE_NUMBER = 1
+IN_SAMPLE_NUMBER = 100
 
 # Create balancing prices DataFrames to store condition-specific pricing
 num_conditions = df_conditions.shape[1] #4 conditions
@@ -67,7 +67,7 @@ for condition in range(df_conditions.shape[1]):
             scenario_counter += 1
 
 # Define the number of in-sample scenarios
-IN_SAMPLE_NUMBER = 200  # Changed from 1 to 200
+IN_SAMPLE_NUMBER = 100  # Changed from 1 to 200
 
 # Take random scenarios from sample_scenarios and save them in a dictionary
 # with continuous numbering (0-199 for in-sample, 200+ for out-of-sample)
