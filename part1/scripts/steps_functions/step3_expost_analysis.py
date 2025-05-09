@@ -1,0 +1,169 @@
+import numpy as np
+import pandas as pd
+from .step1_one_price import solve_one_price_offering_strategy
+from .step2_two_price import solve_two_price_offering_strategy
+from .step2_two_price import solve_two_price_offering_strategy_hourly
+
+def calculate_profits(offers, scenarios, capacity_wind_farm, n_hours, price_scheme='one'):
+    """Calculate profits for a set of scenarios given the offering decisions"""
+    total_profit = 0
+    
+    for s in scenarios:
+        scenario = scenarios[s]
+        scenario_profit = 0
+        
+        for h in range(n_hours):
+            wind_actual = scenario.loc[h, 'wind']
+            price_DA = scenario.loc[h, 'price']
+            price_BAL = scenario.loc[h, 'balancing_price']
+            condition = scenario.loc[h, 'condition']
+            
+            # Day-ahead revenue
+            p_DA = offers[h]
+            revenue_DA = price_DA * p_DA
+            
+            # Balancing settlement
+            imbalance = wind_actual - p_DA
+            
+            if price_scheme == 'one':
+                revenue_BAL = price_BAL * imbalance
+            else:
+                if condition == 0:  # System excess
+                    revenue_BAL = price_BAL * max(0, imbalance) + price_DA * min(0, imbalance)
+                else:  # System deficit
+                    revenue_BAL = price_DA * max(0, imbalance) + price_BAL * min(0, imbalance)
+            
+            scenario_profit += revenue_DA + revenue_BAL
+        
+        total_profit += scenario_profit
+    
+    return total_profit / len(scenarios)
+
+def perform_cross_validation(in_sample_scenarios, out_sample_scenarios, n_folds=8, 
+                           capacity_wind_farm=500, n_hours=24):
+    """
+    Perform k-fold cross-validation analysis using sequential blocks of scenarios.
+    
+    Args:
+        in_sample_scenarios: Dictionary of original in-sample scenarios (keys 0-199)
+        out_sample_scenarios: Dictionary of out-of-sample scenarios (keys 200+)
+        n_folds: Number of cross-validation folds
+        capacity_wind_farm: Maximum capacity of wind farm (MW)
+        n_hours: Number of hours in planning horizon
+        
+    Returns:
+        Dictionary with cross-validation results
+    """
+    # Initialize results dictionary
+    results = {
+        'one_price': {'in_sample': [], 'out_sample': []},
+        'two_price': {'in_sample': [], 'out_sample': []}
+    }
+    
+    # Calculate in_sample_size (number of scenarios in the initial in-sample set, e.g., 200)
+    in_sample_size = len(in_sample_scenarios)
+    
+    # The variable all_keys is defined on line 67 but not used in the excerpt from line 70.
+    # If not used later in the function, it can be removed.
+    # all_keys = list(in_sample_scenarios.keys()) + list(out_sample_scenarios.keys())
+    
+    # Process each fold
+    for fold in range(n_folds):
+        print(f"Processing fold {fold + 1}/{n_folds}")
+        
+        if fold == 0:
+            # First fold uses original in-sample scenarios (keys 0-199)
+            fold_in_sample = in_sample_scenarios
+            # And original out-of-sample scenarios (keys 200-1599)
+            fold_out_sample = out_sample_scenarios
+        else:
+            # For subsequent folds, select a new block of scenarios as in-sample.
+            # This block is taken from the original out_sample_scenarios.
+            # The size of this block is determined by in_sample_size (e.g., 200).
+            
+            # Calculate start and end indices for slicing the list of out_sample_scenarios' keys
+            start_idx = (fold - 1) * in_sample_size 
+            end_idx = start_idx + in_sample_size
+            
+            # Ensure we don't go out of bounds for out_sample_scenarios
+            if start_idx >= len(out_sample_scenarios):
+                print(f"Warning: Not enough unique out-of-sample scenario blocks for fold {fold + 1}")
+                break # Stop if no more blocks can be formed
+                
+            # Get the list of keys from the original out_sample_scenarios
+            out_sample_keys_list = list(out_sample_scenarios.keys()) # e.g., [200, 201, ..., 1599]
+            # Select a slice of these keys for the current fold's in-sample set
+            fold_in_sample_keys = out_sample_keys_list[start_idx:min(end_idx, len(out_sample_keys_list))]
+            
+            # Create the in-sample dictionary for this fold using scenarios from original out_sample_scenarios
+            fold_in_sample = {key: out_sample_scenarios[key] for key in fold_in_sample_keys}
+            
+            # Create the out-sample dictionary for this fold.
+            # It will contain all original in-sample scenarios (0-199)
+            # PLUS all original out-of-sample scenarios (200-1599) that are NOT in fold_in_sample_keys.
+            fold_out_sample = {}
+            
+            # Add all original in-sample scenarios (keys 0-199)
+            for k_orig_in in in_sample_scenarios:
+                fold_out_sample[k_orig_in] = in_sample_scenarios[k_orig_in]
+                
+            # Add original out-of-sample scenarios (keys 200-1599) that are not part of the current fold_in_sample
+            for k_orig_out in out_sample_scenarios:
+                if k_orig_out not in fold_in_sample_keys: # fold_in_sample_keys are from out_sample_scenarios.keys()
+                    fold_out_sample[k_orig_out] = out_sample_scenarios[k_orig_out]
+            
+            # The 'fold_out_sample_keys' variable previously defined on lines 89-90 was not directly
+            # used for constructing 'fold_out_sample' dictionary above, so it can be omitted.
+        
+        print(f"  Fold {fold + 1}: In-sample size: {len(fold_in_sample)}, Out-sample size: {len(fold_out_sample)}")
+        
+        # Solve strategies and calculate profits
+        for strategy, solver_func in [ # Renamed solver to solver_func to avoid conflict if solver is a module
+            ('one_price', solve_one_price_offering_strategy),
+            ('two_price', solve_two_price_offering_strategy) # Assuming this is not the hourly one for this main CV loop
+        ]:
+            # Note: If Gurobi size limits are an issue with solve_two_price_offering_strategy,
+            # you might need to switch to solve_two_price_offering_strategy_hourly here too,
+            # or ensure the number of scenarios in fold_in_sample is small enough.
+            
+            # Solve offering strategy
+            # Assuming all solver functions now consistently return three values: offers, total_expected_profit, scenario_specific_profits
+            optimal_offers, returned_total_profit, returned_scenario_profits = solver_func(fold_in_sample, capacity_wind_farm, n_hours)
+            
+            if optimal_offers is None: # Handle cases where solver might fail (e.g., non-optimal status)
+                print(f"Warning: Solver for {strategy} failed for fold {fold + 1}. Skipping profit calculation for this strategy/fold.")
+                # Append NaN or handle as appropriate for averaging later, or skip appending
+                results[strategy]['in_sample'].append(np.nan) # Or 0, or skip
+                results[strategy]['out_sample'].append(np.nan) # Or 0, or skip
+                continue
+
+            # Calculate profits using the dedicated calculate_profits function
+            # The 'total_profit' and 'scenario_profits' from the solver might be based on its internal objective,
+            # while calculate_profits provides a consistent evaluation metric.
+            in_sample_profit_eval = calculate_profits(
+                optimal_offers, fold_in_sample, capacity_wind_farm, n_hours, 
+                strategy.split('_')[0] # 'one' or 'two'
+            )
+            out_sample_profit_eval = calculate_profits(
+                optimal_offers, fold_out_sample, capacity_wind_farm, n_hours,
+                strategy.split('_')[0] # 'one' or 'two'
+            )
+            
+            # Store results
+            results[strategy]['in_sample'].append(in_sample_profit_eval)
+            results[strategy]['out_sample'].append(out_sample_profit_eval)
+    
+    # Calculate summary statistics (mean and std for profits collected from each fold)
+    for strategy in results:
+        for sample_type in ['in_sample', 'out_sample']:
+            profits_list = results[strategy][sample_type]
+            # Filter out NaNs if they were added, before calculating mean/std
+            valid_profits = [p for p in profits_list if not np.isnan(p)]
+            if valid_profits:  # Check if list is not empty after filtering
+                results[strategy][f'{sample_type}_avg'] = np.mean(valid_profits)
+                results[strategy][f'{sample_type}_std'] = np.std(valid_profits)
+            else:
+                results[strategy][f'{sample_type}_avg'] = np.nan # Or 0
+                results[strategy][f'{sample_type}_std'] = np.nan # Or 0
+    
+    return results
