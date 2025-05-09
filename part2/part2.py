@@ -1,5 +1,6 @@
 print('#################################')
 print('\nInitializing part2.py...')
+#%% Imports
 import random
 from gurobipy import Model, GRB
 import numpy as np
@@ -44,9 +45,9 @@ out_sample_profiles = [
     profile for profile in consumption_profiles if profile not in in_sample_profiles
 ]
 
-print('\nDone generating consumption profiles.')
+print('\nGenerating consumption profiles completed')
 # %% CVaR
-print("\n=== Computing CVaR (P90)... ===")
+print("\n=== Computing CVaR (P90)...")
 
 # Parameters
 epsilon = 0.1
@@ -85,9 +86,9 @@ model.optimize()
 # Output
 r_cvar_dtu = c.X
 print(f"Optimal reserve capacity bid (CVaR) under P90: {r_cvar_dtu:.2f} kW")
-print("=== CVaR (P90) Computed ===")
+print("\n=== CVaR (P90) Computed ===")
 # %% ALSO - X
-print("\n=== Computing ALSO - X... ===")
+print("\n=== Computing ALSO - X...")
 
 # Parameters
 epsilon = 0.1  # P90 constraint → 10% violation allowance
@@ -160,16 +161,14 @@ plt.grid(False)
 plt.tight_layout()
 plt.show()
 
-print(f"Optimal reserve capacity bid (ALSO-X MILP) under P90: {r_alsox_binary:.2f} kW")
-print("=== ALSO-X Computed ===")
+print(f"\nOptimal reserve capacity bid (ALSO-X MILP) under P90: {r_alsox_binary:.2f} kW")
+print("\n=== ALSO-X Computed ===")
 # %% Verification of the P90 Requirement Using Out-of-Sample Analysis:
-
-print("\n=== Computing Verification of the P90 Requirement Using Out-of-Sample Analysis... ===")
+print("\n=== Computing Verification of the P90 Requirement Using Out-of-Sample Analysis...")
 
 # Extract reserve bids
 reserve_cvar = r_cvar_dtu
 reserve_alsox = r_alsox_binary
-
 
 def verify_p90(profiles, reserve_bid, label):
     """Check whether a reserve bid satisfies the P90 requirement."""
@@ -191,7 +190,6 @@ def verify_p90(profiles, reserve_bid, label):
     print(f"Violations: {violations}")
     print(f"Violation rate: {rate:.2%}")
     print(f"P90 satisfied: {'YES ✅' if satisfied else 'NO ❌'}")
-
 
 # Run P90 verification
 verify_p90(in_sample_profiles, reserve_cvar, "CVaR (In-sample)")
@@ -228,34 +226,35 @@ shortfalls_alsox_in = compute_shortfalls(in_sample_profiles, reserve_alsox, "ALS
 shortfalls_cvar_out = compute_shortfalls(out_sample_profiles, reserve_cvar, "CVaR (Out-of-sample)")
 shortfalls_alsox_out = compute_shortfalls(out_sample_profiles, reserve_alsox, "ALSO-X (Out-of-sample)")
 
-print('\n#################################')
+print("\n=== Verification of the P90 Requirement Using Out-of-Sample Analysis Computed ===")
+#%% Trade-off between reserve bid and expected shortfall
+print("\n=== Initializing Energinets Perspective...")
 
-print("=== Step 2.3 Energinet Perspective ===")
+# Define epsilon values (from P100 to P80)
+epsilons = np.linspace(0.0, 0.2, 21)  # 0% to 20% violation
+p_requirements = 1 - epsilons
 
-# Step 1: Define epsilon values (P100 to P80)
-epsilons = np.linspace(0.0, 0.2, 21)  # from 0% to 20% violations
 reserve_bids = []
 expected_shortfalls = []
 
-# Data
-in_matrix = np.array([p.profile if hasattr(p, 'profile') else p for p in in_sample_profiles])
-out_matrix = np.array([p.profile if hasattr(p, 'profile') else p for p in out_sample_profiles])
+# Prepare data matrices
+in_matrix = np.array([
+    p.profile if hasattr(p, 'profile') else p for p in in_sample_profiles
+])
+out_matrix = np.array([
+    p.profile if hasattr(p, 'profile') else p for p in out_sample_profiles
+])
 num_in_profiles, num_minutes = in_matrix.shape
 num_out_profiles = out_matrix.shape[0]
 
-# Vary epsilon (1 - P requirement)
-epsilons = np.linspace(0.0, 0.2, 21)  # from P100 to P80
-p_requirements = 1 - epsilons
-reserve_bids = []
-expected_shortfalls = []
-
-# Loop over epsilons
+# Loop over each epsilon
 for epsilon in epsilons:
     max_violations = int(epsilon * num_in_profiles * num_minutes)
 
-    # Create ALSO-X MILP model
+    # Create MILP model (ALSO-X)
     model = Model("ALSOX_tradeoff")
     model.setParam('OutputFlag', 0)
+
     c = model.addVar(lb=0, ub=600, name="reserve_bid")
     y = model.addVars(num_in_profiles, num_minutes, vtype=GRB.BINARY, name="y")
     M = 10000
@@ -264,30 +263,29 @@ for epsilon in epsilons:
     for i in range(num_in_profiles):
         for t in range(num_minutes):
             model.addConstr(c - in_matrix[i, t] <= M * y[i, t])
-    model.addConstr(sum(y[i, t] for i in range(num_in_profiles) for t in range(num_minutes)) <= max_violations)
+
+    model.addConstr(
+        sum(y[i, t] for i in range(num_in_profiles) for t in range(num_minutes)) <= max_violations
+    )
 
     # Objective: maximize reserve bid
     model.setObjective(c, GRB.MAXIMIZE)
     model.optimize()
 
-    # Get result
+    # Store result
     reserve = c.X
     reserve_bids.append(reserve)
 
-    # Compute expected shortfall on out-of-sample
     shortfall_matrix = np.maximum(0, reserve - out_matrix)
     expected_shortfall = np.mean(shortfall_matrix)
     expected_shortfalls.append(expected_shortfall)
 
-    print(f"Epsilon: {epsilon:.2f} | P={1 - epsilon:.2f} → Reserve: {reserve:.2f} kW, Expected shortfall: {expected_shortfall:.2f} kW")
+    print(
+        f"Epsilon: {epsilon:.2f} | P={1 - epsilon:.2f} → "
+        f"Reserve: {reserve:.2f} kW, Expected shortfall: {expected_shortfall:.2f} kW"
+    )
 
-# Step 3: Plot results
-# Prepare data
-p_requirements = 1 - epsilons  # from P100 to P80
-reserves = reserve_bids
-
-
-# Set up figure and twin axes
+# Plot trade-off
 fig, ax1 = plt.subplots(figsize=(9, 5))
 ax2 = ax1.twinx()
 
@@ -305,7 +303,7 @@ ax2.set_ylabel("Expected Shortfall (kW/min)", fontsize=14, color='darkorange')
 ax2.tick_params(axis='y', labelcolor='darkorange')
 ax2.set_ylim(0, max(expected_shortfalls) * 1.1)
 
-# Set up x-axis
+# X-axis settings
 ax1.set_xlabel("P Requirement", fontsize=14)
 ax1.set_xlim(1.0, 0.8)
 ax1.set_xticks([1.00, 0.95, 0.90, 0.85, 0.80])
@@ -321,6 +319,9 @@ lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
 ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', fontsize=11)
 
-# Show plot
 plt.tight_layout()
 plt.show()
+
+print("\n=== Computed Energinets Perspective ===")
+print("\n=== Finished Part 2 ===")
+
