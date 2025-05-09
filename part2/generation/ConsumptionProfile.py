@@ -12,18 +12,19 @@ import numpy as np
 #   - |dC/dt| <= 35kw
 
 class ConsumptionProfile:
-    def __init__(self, lower_bound: float, upper_bound: float, max_change: float, resolution: int, duration: int):
+    def __init__(self, lower_bound: float, upper_bound: float,
+                 max_change: float, resolution: int, duration: int, seed: int = None):
         self.lower_bound = lower_bound
         self.upper_bound = upper_bound
         self.max_change = max_change
         self.resolution = resolution
         self.duration = duration
-        self.profile = self.generate_profile()
+        self.seed = seed
+        self.profile = self.generate_profile(seed = self.seed)
 
     def generate_profile(self, seed = None):
-    
-        if seed is not None:
-            random.seed(seed)
+        
+        random.seed(seed)
 
         profile = [random.uniform(self.lower_bound, self.upper_bound)]
         # The loop should generate (duration * 60 / resolution) - 1 more points

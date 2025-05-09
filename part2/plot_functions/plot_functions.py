@@ -13,7 +13,7 @@ def plot_consumption_profiles(in_sample_profiles, out_sample_profiles):
     plt.grid()
     # Save to figures one directory up from the current file
     
-    save_path = 'part2/results/step1/figures/in_sample_profiles.png'
+    save_path = 'part2/figures/in_sample_profiles.png'
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     print(f"\nSaved in-sample profiles to {save_path}")
     plt.close()
@@ -27,7 +27,7 @@ def plot_consumption_profiles(in_sample_profiles, out_sample_profiles):
     plt.title('Out-of-sample Consumption Profiles')
     plt.legend()
     plt.grid()
-    save_path = 'part2/results/step1/figures/out_sample_profiles.png'
+    save_path = 'part2/figures/out_sample_profiles.png'
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     print(f"Saved out-of-sample profiles to {save_path}")
     plt.close()
