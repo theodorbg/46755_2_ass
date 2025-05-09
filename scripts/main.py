@@ -71,13 +71,13 @@ print("\n=== TWO-PRICE BALANCING ===")
 # Solve the two-price model
 
 print('\nSolving two-price model...')
-# optimal_offers_two_price, two_price_total_expected_profit  = s2.solve_two_price_offering_strategy(
-#     in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS
-# )
-
-optimal_offers_two_price, two_price_total_expected_profit, two_price_scenario_profits = s2.solve_two_price_offering_strategy_hourly(
+optimal_offers_two_price, two_price_total_expected_profit  = s2.solve_two_price_offering_strategy(
     in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS
 )
+
+# optimal_offers_two_price, two_price_total_expected_profit, two_price_scenario_profits = s2.solve_two_price_offering_strategy_hourly(
+#     in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS
+# )
 
 
 # Print results
