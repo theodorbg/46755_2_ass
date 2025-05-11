@@ -177,7 +177,7 @@ def print_strategy_results(results):
         print(f"In-sample average profit: {results[strategy]['in_sample_avg']:.2e} ± {results[strategy]['in_sample_std']:.2e}")
         print(f"Out-sample average profit: {results[strategy]['out_sample_avg']:.2e} ± {results[strategy]['out_sample_std']:.2e}")
 
-    return none
+    return None
 
 def plot_cross_validation(results):
     """Plot the cross-validation results for in-sample and out-of-sample profits"""
@@ -192,10 +192,16 @@ def plot_cross_validation(results):
     in_sample_stds = [results['one_price']['in_sample_std'], results['two_price']['in_sample_std']]
     out_sample_stds = [results['one_price']['out_sample_std'], results['two_price']['out_sample_std']]
 
+    # Create bars with custom colors and better styling
     plt.bar(x - width/2, in_sample_means, width, label='In-sample', 
-            yerr=in_sample_stds, capsize=5, alpha=0.8)
+            color='#2E86C1', yerr=in_sample_stds, capsize=5, 
+            alpha=0.8, error_kw={'ecolor': '0.2', 'capthick': 2})
     plt.bar(x + width/2, out_sample_means, width, label='Out-of-sample', 
-            yerr=out_sample_stds, capsize=5, alpha=0.8)
+            color='#E67E22', yerr=out_sample_stds, capsize=5, 
+            alpha=0.8, error_kw={'ecolor': '0.2', 'capthick': 2})
+
+    # Set y-axis limits to start from 300,000
+    plt.ylim(bottom=300000)  # Add this line
 
     plt.xlabel('Strategy')
     plt.ylabel('Expected Profit (EUR)')
@@ -208,8 +214,58 @@ def plot_cross_validation(results):
     print('\nPlotted cross-validation results and saved to part1/results/step3/figures/cross_validation_results.png')
     plt.close()
 
-    return none
+    return None
+def plot_fold_evolution(results):
+    """Create a visualization of profit evolution across folds"""
+    
+    # Create figure with appropriate size for a single plot
+    plt.figure(figsize=(12, 7))
+    
+    # Prepare data for fold comparison
+    one_price_in = results['one_price']['in_sample']
+    one_price_out = results['one_price']['out_sample']
+    two_price_in = results['two_price']['in_sample']
+    two_price_out = results['two_price']['out_sample']
+    
+    folds = range(1, len(one_price_in) + 1)
+    
+    # Plot fold-by-fold comparison with enhanced styling
+    plt.plot(folds, one_price_in, 'o-', color='#2E86C1', label='One-Price In-sample', 
+             alpha=0.9, linewidth=2.5, markersize=8)
+    plt.plot(folds, one_price_out, 's-', color='#2E86C1', label='One-Price Out-of-sample', 
+             linestyle='--', alpha=0.9, linewidth=2.5, markersize=8)
+    plt.plot(folds, two_price_in, 'o-', color='#E67E22', label='Two-Price In-sample', 
+             alpha=0.9, linewidth=2.5, markersize=8)
+    plt.plot(folds, two_price_out, 's-', color='#E67E22', label='Two-Price Out-of-sample',
+             linestyle='--', alpha=0.9, linewidth=2.5, markersize=8)
 
+    # Customize plot
+    plt.xlabel('Fold Number', fontsize=14, fontweight='bold')
+    plt.ylabel('Expected Profit (EUR)', fontsize=14, fontweight='bold')
+    plt.title('Cross-validation Results: Profit Evolution Across Folds', 
+             fontsize=16, fontweight='bold', pad=20)
+    
+    # Enhanced grid and legend
+    plt.grid(True, linestyle='--', alpha=0.3)
+    plt.legend(fontsize=12, ncol=2, bbox_to_anchor=(0.5, -0.15), 
+              loc='upper center', borderaxespad=0.)
+    
+    # Customize ticks
+    plt.xticks(folds, fontsize=12)
+    plt.yticks(fontsize=12)
+    
+    # Format y-axis with comma separator
+    plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'{int(x):,}'))
+    
+    # Adjust layout and save
+    plt.tight_layout()
+    plt.savefig('part1/results/step3/figures/fold_evolution.png', 
+                dpi=300, bbox_inches='tight', facecolor='white')
+    print('\nPlotted fold evolution results and saved to part1/results/step3/figures/fold_evolution.png')
+    plt.close()
+
+    return None
+    return None
 def  gap_analysis(results):
     ''' Calculate percentage difference between in-sample and out-of-sample profits'''
     for strategy in ['one_price', 'two_price']:

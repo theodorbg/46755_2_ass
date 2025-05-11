@@ -41,8 +41,8 @@ def solve_two_price_offering_strategy(in_sample_scenarios, capacity_wind_farm, n
     calculated_scenario_profits = {s_key: 0 for s_key in s_keys}
 
     model = gp.Model("WindFarmTwoPrice")
-    model.setParam('DualReductions', 0)
-    model.setParam('OutputFlag', 0) # Suppress Gurobi output for cleaner logs
+    #model.setParam('DualReductions', 0)
+    #model.setParam('OutputFlag', 0) # Suppress Gurobi output for cleaner logs
         
     p_da = model.addMVar(
         shape=(n_hours), 

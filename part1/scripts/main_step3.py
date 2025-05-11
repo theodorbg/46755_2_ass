@@ -49,6 +49,8 @@ s3.print_strategy_results(results)
 # Visualize results
 s3.plot_cross_validation(results)
 
+s3.plot_fold_evolution(results)
+
 # Calculate percentage difference between in-sample and out-of-sample profits
 s3.gap_analysis(results)
 
