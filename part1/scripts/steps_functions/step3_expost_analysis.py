@@ -219,7 +219,7 @@ def plot_fold_evolution(results):
     """Create a visualization of profit evolution across folds"""
     
     # Create figure with appropriate size for a single plot
-    plt.figure(figsize=(12, 7))
+    plt.figure(figsize=(10, 5))
     
     # Prepare data for fold comparison
     one_price_in = results['one_price']['in_sample']
@@ -228,6 +228,12 @@ def plot_fold_evolution(results):
     two_price_out = results['two_price']['out_sample']
     
     folds = range(1, len(one_price_in) + 1)
+    
+    # Calculate means for each series
+    one_price_in_mean = np.mean(one_price_in)
+    one_price_out_mean = np.mean(one_price_out)
+    two_price_in_mean = np.mean(two_price_in)
+    two_price_out_mean = np.mean(two_price_out)
     
     # Plot fold-by-fold comparison with enhanced styling
     plt.plot(folds, one_price_in, 'o-', color='#2E86C1', label='One-Price In-sample', 
@@ -238,6 +244,12 @@ def plot_fold_evolution(results):
              alpha=0.9, linewidth=2.5, markersize=8)
     plt.plot(folds, two_price_out, 's-', color='#E67E22', label='Two-Price Out-of-sample',
              linestyle='--', alpha=0.9, linewidth=2.5, markersize=8)
+    
+    # Add mean lines
+    plt.axhline(y=one_price_in_mean, color='#2E86C1', linestyle='-', alpha=0.3)
+    plt.axhline(y=one_price_out_mean, color='#2E86C1', linestyle='--', alpha=0.3)
+    plt.axhline(y=two_price_in_mean, color='#E67E22', linestyle='-', alpha=0.3)
+    plt.axhline(y=two_price_out_mean, color='#E67E22', linestyle='--', alpha=0.3)
 
     # Customize plot
     plt.xlabel('Fold Number', fontsize=14, fontweight='bold')
@@ -245,10 +257,12 @@ def plot_fold_evolution(results):
     plt.title('Cross-validation Results: Profit Evolution Across Folds', 
              fontsize=16, fontweight='bold', pad=20)
     
-    # Enhanced grid and legend
+    # Enhanced grid
     plt.grid(True, linestyle='--', alpha=0.3)
-    plt.legend(fontsize=12, ncol=2, bbox_to_anchor=(0.5, -0.15), 
-              loc='upper center', borderaxespad=0.)
+    
+    # Move legend inside the plot
+    plt.legend(fontsize=12, ncol=2, loc='lower right', 
+              bbox_to_anchor=(0.98, 0.02))
     
     # Customize ticks
     plt.xticks(folds, fontsize=12)
@@ -263,6 +277,8 @@ def plot_fold_evolution(results):
                 dpi=300, bbox_inches='tight', facecolor='white')
     print('\nPlotted fold evolution results and saved to part1/results/step3/figures/fold_evolution.png')
     plt.close()
+
+    return None
 
     return None
     return None
