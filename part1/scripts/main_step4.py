@@ -25,14 +25,12 @@ in_sample_scenarios, out_sample_scenarios = load_scenarios.load_scenarios()
 print('#################################')
 print('\nInitializing step4.py Risk-Averse Analysis (One-Price)')
 
+#Define constants
 CAPACITY_WIND_FARM = 500 #MW
 OFFER_PRICE_WIND_FARM = 0
 N_HOURS = in_sample_scenarios[0].shape[0]  # 24 hours
 
-
-
 from steps_functions import step4_Risk_Averse as s4
-
 
 # Define beta range from 0 (risk-neutral) to 1 (fully risk-averse)
 beta_range_one_price = np.linspace(0, 1, 20)

@@ -6,38 +6,79 @@ from .step2_two_price import solve_two_price_offering_strategy
 from .step2_two_price import solve_two_price_offering_strategy_hourly
 
 def calculate_profits(offers, scenarios, capacity_wind_farm, n_hours, price_scheme='one'):
-    """Calculate profits for a set of scenarios given the offering decisions"""
-    total_profit = 0
+    """
+    Calculate the expected profit across multiple scenarios given day-ahead market offers.
     
-    for s in scenarios:
-        scenario = scenarios[s]
-        scenario_profit = 0
+    This function evaluates the economic performance of a set of hourly electricity market
+    offers by calculating the total profit (day-ahead revenue + balancing settlement) across
+    all provided scenarios and hours.
+    
+    Args:
+        offers: List containing the day-ahead market offers (MW) for each hour
+        scenarios: Dictionary of scenarios, each containing wind, price, balancing_price and condition data
+        capacity_wind_farm: Maximum wind farm capacity in MW (not directly used in this function)
+        n_hours: Number of hours in the planning horizon (typically 24)
+        price_scheme: Balancing scheme type - 'one' for one-price scheme, anything else for two-price scheme
         
+    Returns:
+        float: Average profit across all scenarios (€)
+    """
+    total_profit = 0  # Initialize accumulator for total profit across all scenarios
+    
+    # Iterate through each scenario to calculate its profit
+    for s in scenarios:
+        scenario = scenarios[s]  # Get the data for this scenario
+        scenario_profit = 0  # Initialize accumulator for this specific scenario
+        
+        # Calculate profit for each hour in this scenario
         for h in range(n_hours):
-            wind_actual = scenario.loc[h, 'wind']
-            price_DA = scenario.loc[h, 'price']
-            price_BAL = scenario.loc[h, 'balancing_price']
-            condition = scenario.loc[h, 'condition']
+            # Extract relevant data from the scenario for this hour
+            wind_actual = scenario.loc[h, 'wind']           # Actual wind production (MW)
+            price_DA = scenario.loc[h, 'price']             # Day-ahead market price (€/MWh)
+            price_BAL = scenario.loc[h, 'balancing_price']  # Balancing market price (€/MWh)
+            condition = scenario.loc[h, 'condition']        # System condition (0=excess, 1=deficit)
             
-            # Day-ahead revenue
-            p_DA = offers[h]
-            revenue_DA = price_DA * p_DA
+            # --- Part 1: Day-ahead market revenue calculation ---
+            p_DA = offers[h]                 # Day-ahead offer for this hour (MW)
+            revenue_DA = price_DA * p_DA     # Day-ahead revenue (€)
             
-            # Balancing settlement
-            imbalance = wind_actual - p_DA
+            # --- Part 2: Balancing market settlement calculation ---
+            imbalance = wind_actual - p_DA   # Imbalance: actual production minus offered amount (MW)
+                                            # Positive: surplus (more wind than offered)
+                                            # Negative: deficit (less wind than offered)
             
+            # Calculate balancing settlement based on price scheme
             if price_scheme == 'one':
+                # --- One-price balancing scheme ---
+                # In one-price scheme, both surplus and deficit are settled at the same balancing price
+                # revenue_BAL is positive for surplus (extra money received) and
+                # negative for deficit (money paid back)
                 revenue_BAL = price_BAL * imbalance
             else:
-                if condition == 0:  # System excess
-                    revenue_BAL = price_BAL * max(0, imbalance) + price_DA * min(0, imbalance)
-                else:  # System deficit
-                    revenue_BAL = price_DA * max(0, imbalance) + price_BAL * min(0, imbalance)
+                # --- Two-price balancing scheme ---
+                # In two-price scheme, the settlement price depends on both:
+                # 1. The direction of the imbalance (surplus or deficit)
+                # 2. The system condition (excess or deficit)
+                
+                if condition == 0:  # System excess condition
+                    # - Positive imbalance (surplus): Paid at balancing price (typically < day-ahead price)
+                    # - Negative imbalance (deficit): Charged at day-ahead price
+                    revenue_BAL = (price_BAL * max(0, imbalance) +  # Revenue for surplus (if any)
+                                  price_DA * min(0, imbalance))     # Cost for deficit (if any)
+                else:  # System deficit condition (condition == 1)
+                    # - Positive imbalance (surplus): Paid at day-ahead price
+                    # - Negative imbalance (deficit): Charged at balancing price (typically > day-ahead price)
+                    revenue_BAL = (price_DA * max(0, imbalance) +   # Revenue for surplus (if any)
+                                  price_BAL * min(0, imbalance))    # Cost for deficit (if any)
             
+            # Add this hour's profit (day-ahead revenue + balancing settlement) to the scenario total
             scenario_profit += revenue_DA + revenue_BAL
         
+        # Add this scenario's profit to the total profit
         total_profit += scenario_profit
     
+    # Return the average profit across all scenarios
+    # This represents the expected profit under the given probability distribution
     return total_profit / len(scenarios)
 
 def perform_cross_validation(in_sample_scenarios, out_sample_scenarios, n_folds=8, 
@@ -215,6 +256,8 @@ def plot_cross_validation(results):
     plt.close()
 
     return None
+
+
 def plot_fold_evolution(results):
     """Create a visualization of profit evolution across folds"""
     
@@ -280,8 +323,6 @@ def plot_fold_evolution(results):
 
     return None
 
-    return None
-    return None
 def  gap_analysis(results):
     ''' Calculate percentage difference between in-sample and out-of-sample profits'''
     for strategy in ['one_price', 'two_price']:

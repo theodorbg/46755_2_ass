@@ -26,6 +26,7 @@ print('\nInitializing step3.py: Ex-post Cross-validation Analysis ...')
 # Read in_sample and out of_sample scenarios
 in_sample_scenarios, out_sample_scenarios = load_scenarios.load_scenarios()
 
+#Define constants
 CAPACITY_WIND_FARM = 500 #MW
 OFFER_PRICE_WIND_FARM = 0
 N_HOURS = in_sample_scenarios[0].shape[0]  # 24 hours
@@ -33,7 +34,6 @@ N_HOURS = in_sample_scenarios[0].shape[0]  # 24 hours
 # Combine in-sample and out-of-sample scenarios
 
 # Perform cross-validation
-# Replace current cross-validation call
 results = s3.perform_cross_validation(in_sample_scenarios, 
                                       out_sample_scenarios,
                                       n_folds=8,

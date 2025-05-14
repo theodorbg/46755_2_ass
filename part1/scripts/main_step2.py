@@ -26,14 +26,13 @@ print('\nInitializing step2.py: TWO-PRICE BALANCING ...')
 # Read in_sample and out of_sample scenarios
 in_sample_scenarios, out_sample_scenarios = load_scenarios.load_scenarios()
 
+#Define constants
 CAPACITY_WIND_FARM = 500 #MW
 OFFER_PRICE_WIND_FARM = 0
 N_HOURS = in_sample_scenarios[0].shape[0]  # 24 hours
 # %%  1.2 Offering Strategy Under a Two-Price Balancing Scheme
 
 # Solve the two-price model
-
-
 print('\nSolving the model for Two-Price offering strategy')
 print('####################################################################')
 (optimal_offers_two_price,
@@ -44,25 +43,15 @@ print('####################################################################')
 print('\nSolved the model for Two-Price offering strategy')
 print('####################################################################')
 
-# optimal_offers_two_price, two_price_total_expected_profit, two_price_scenario_profits = s2.solve_two_price_offering_strategy_hourly(
-#     in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS
-# )
-
-
 # Print results
 print("\n=== TWO-PRICE BALANCING SCHEME RESULTS ===")
 print(f"\nExpected profit (Two_Price): {two_price_total_expected_profit:.2e} EUR")
-# print("Optimal day-ahead offers (MW):")
-# for h in range(len(optimal_offers_two_price)):
-#     print(f"Hour {h}: {optimal_offers_two_price[h]:.2e} MW")
+
 # Plot optimal offers
 pf.plot_optimal_offers(optimal_offers_two_price, title="Optimal Day-Ahead Offers - Two-Price Scheme", 
                      filename="optimal_offers_two_price.png")
 
 # Plot profit distribution
-# if two_price_scenario_profits exists:
-    # If scenario profits are available, plot the cumulative distribution function
-
 try:
     two_price_scenario_profits
     # If scenario profits are available, plot the cumulative distribution function
@@ -86,12 +75,6 @@ print('Analysis to see if bidding the expected wind production is better ' \
 # ew = expected wind production
 ew_optimal_offers, ew_expected_profit, ew_scenario_profits = (
     s2.forecast_strategy(in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS))
-
-
-# print(f"Expected profit: {ew_expected_profit:.2e} EUR")
-# print("Optimal day-ahead offers (MW):")
-# for h in range(24):
-#     print(f"Hour {h}: {ew_optimal_offers[h]:.2e} MW")
 
 # Compare with other strategies
 s2.compare_all_strategies(expected_profit_one_price,
