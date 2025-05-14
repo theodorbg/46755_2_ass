@@ -37,12 +37,14 @@ from steps_functions import step4_Risk_Averse as s4
 # Define beta range from 0 (risk-neutral) to 1 (fully risk-averse)
 beta_range_one_price = np.linspace(0, 1, 20)
 
+print('Computing risk-return trade-off for one-price offering strategy')
 risk_results = s4.analyze_risk_return_tradeoff(
     in_sample_scenarios=in_sample_scenarios,
     CAPACITY_WIND_FARM=CAPACITY_WIND_FARM,
     N_HOURS=N_HOURS,
     beta_values=beta_range_one_price
 )
+print('Risk-return trade-off analysis completed')
 
 # Plot results 
 s4.plot_risk_return_tradeoff(risk_results)
@@ -64,7 +66,7 @@ for i, beta in enumerate(risk_results['beta']):
 print("-" * 65)
 
 # Additional analysis: Plot profit distribution for selected beta values
-s4.plot_profit_distribution(scenario_profits, beta)
+s4.plot_profit_distribution(risk_results, beta)
 
 print("\n=== Risk-Averse Analysis (Two-Price) ===")
 
@@ -79,10 +81,10 @@ two_price_risk_results = s4.analyze_two_price_risk_return_tradeoff(
 )
 
 # Plot two-price risk-return tradeoff
-s4.plot_risk_return_tradeoff_two_price(risk_results)
+s4.plot_risk_return_tradeoff_two_price(two_price_risk_results)
 
 # Plot profit distribution for two-price scheme
-s4.plot_profit_distribution_two_price(two_price_scenario_profits, beta)
+s4.plot_profit_distribution_two_price(two_price_risk_results, beta)
 
 
 print('\nFinished step4.py: Ex-post Cross-validation Analysis')

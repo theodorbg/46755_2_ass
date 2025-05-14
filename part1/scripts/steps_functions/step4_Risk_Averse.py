@@ -9,8 +9,12 @@ import matplotlib.pyplot as plt
 def solve_risk_averse_one_price(in_sample_scenarios, CAPACITY_WIND_FARM, N_HOURS, alpha=0.90, beta=0):
     """
     Solve the risk-averse optimization problem for one-price balancing scheme.
+    
     """
-    model = gp.Model("WindFarmRiskAverse")
+    with gp.Env(empty=True) as env:
+            env.setParam('OutputFlag', 0)  # Suppress all Gurobi output
+            env.start()
+            model = gp.Model("WindFarmRiskAverse", env=env)        
         
     # Decision variables
     p_DA = model.addVars(N_HOURS, lb=0, ub=CAPACITY_WIND_FARM, name="p_DA")
@@ -187,6 +191,8 @@ def analyze_two_price_risk_return_tradeoff(in_sample_scenarios, CAPACITY_WIND_FA
     """
     Analyze risk-return tradeoff for two-price balancing scheme.
     """
+    print('Analyzing risk-return tradeoff for two-price balancing scheme...')
+
     if beta_values is None:
         beta_values = np.linspace(0, 1, 11)
     
@@ -207,6 +213,11 @@ def analyze_two_price_risk_return_tradeoff(in_sample_scenarios, CAPACITY_WIND_FA
         results['cvar'].append(cvar)
         results['optimal_offers'].append(optimal_offers)
         results['scenario_profits'].append(scen_profits)
+    
+    if results:
+        print('Risk-return tradeoff analysis completed successfully.')
+    else:
+        print('No results found. Please check the input data and parameters.')
     
     return results
 
@@ -239,7 +250,7 @@ def plot_risk_return_tradeoff(risk_results):
 
     plt.close()
 
-def plot_profit_distribution(scenario_profits, beta):
+def plot_profit_distribution(risk_results, beta):
     plt.figure(figsize=(12, 6))
     selected_betas = [0.0, 0.5, 1.0]
     for beta in selected_betas:
@@ -258,7 +269,7 @@ def plot_profit_distribution(scenario_profits, beta):
 
     plt.close()
 
-def plot_risk_return_tradeoff_two_price(risk_results):
+def plot_risk_return_tradeoff_two_price(two_price_risk_results):
     plt.figure(figsize=(10, 6))
     plt.plot(two_price_risk_results['cvar'], two_price_risk_results['expected_profit'], 
             'ro-', linewidth=2, markersize=6)
@@ -288,7 +299,7 @@ def plot_risk_return_tradeoff_two_price(risk_results):
     print('\nPlotted two-price risk return results and saved to part1/results/step4/figures/risk_return_tradeoff_two_price.png')
     plt.close()
 
-def plot_profit_distribution_two_price(scenario_profits, beta):
+def plot_profit_distribution_two_price(two_price_risk_results, beta):
     plt.figure(figsize=(12, 6))
     selected_betas = [0.0, 0.5, 1.0]
     n_points = len(two_price_risk_results['beta'])
