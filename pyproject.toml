@@ -18,7 +18,8 @@ dependencies = [
     "pathlib",
     "pytest",
     "gurobipy",
-    "pathlib"    
+    "pathlib",
+    "openpyxl"
 ]
 
 [project.urls]

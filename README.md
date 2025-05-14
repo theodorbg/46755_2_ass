@@ -51,8 +51,7 @@ The package depends on:
 * `pytest`
 * `gurobipy`
 * `pathlib`
-
-> ⚠️ Note: Modules like `os`, `sys`, `pickle`, and `random` are built-in Python standard libraries and are **not included** as dependencies.
+* `openpyxl`
 
 ### Step 4: Run the Main Scripts
 
