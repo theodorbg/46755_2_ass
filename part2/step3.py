@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 from pathlib import Path
-import plot_functions.plot_functions as pf  # Importing the plot functions
+import utils.plot_functions as pf  # Importing the plot functions
 import os
 from generation.ConsumptionProfile import ConsumptionProfile  # Consumption profile generation class
 import utils.step3_utils as s3

@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# Information on the package
+[project]
+name = "46755_assignment2"
+description = "Package for assignmnent 2 for 46755 renewables in electricity markets "
+version = "0.0.1"
+authors = [
+    { name = "T.B. Gilhøj", email = "tgilhoj@gmail.com" }
+]
+dependencies = [
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "scipy",
+    "pathlib",
+    "pytest",
+    "os",
+    "pickle",
+    "gurobipy",
+    "sys",
+    "pathlib",
+    "random"
+]
+
+[project.urls]
+Repository = "https://github.com/theodorbg/46755_2_ass.git"
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+# Tell Hatch where to find your package files
+[tool.hatch.build.targets.wheel]
+packages = ["46755_2_ass"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=src --cov-report=term-missing"
+testpaths = ["tests"]

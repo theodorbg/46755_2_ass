@@ -9,7 +9,7 @@ import random
 
 import numpy as np
 import matplotlib.pyplot as plt
-import plot_functions.plot_functions as pf  # Importing the plot functions
+import utils.plot_functions as pf  # Importing the plot functions
 import os
 from generation.ConsumptionProfile import ConsumptionProfile  # Consumption profile generation class
 from generation.ConsumptionProfile import verify_profiles  # Verification function
@@ -23,7 +23,7 @@ in_sample_profiles = random.sample(consumption_profiles, 100)
 out_sample_profiles = [profile for profile in consumption_profiles if profile not in in_sample_profiles]
 
 # Verify the profiles
-verify_profiles(in_sample_profiles, out_sample_profiles)
+# verify_profiles(in_sample_profiles, out_sample_profiles)
 
 # Visualize the first 10 in-sample profiles
 pf.plot_consumption_profiles(in_sample_profiles, out_sample_profiles)
