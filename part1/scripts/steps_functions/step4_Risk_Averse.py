@@ -1,6 +1,7 @@
 import gurobipy as gp
 from gurobipy import GRB
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 # %% Risk-Averse one-price offering strategy
