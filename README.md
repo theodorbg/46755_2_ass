@@ -1,60 +1,83 @@
 # 46755_2_ass
-Assignment 2 46755 repo
+Assignment 2 - 46755
 
 Group: [7]
+
 ## Overview
 
-This project solves the tasks outlined in assignment 46755 of the course Renewables in Electricity Markets at DTU. The course was followed during the spring of 2025.
-
+This project solves the tasks outlined in Assignment 2 of the course *Renewables in Electricity Markets* at DTU. The course was followed during the spring of 2025.
 
 ## Quick-start Guide
-Follow these steps to run the code that solves the exercises. Each step produces text output to the terminal and figures are saved to the results folder.
 
-### Step 0: Install git to your PC
-Follow the steps provided by git at:
+Follow these steps to run the code that solves the exercises. Each step produces terminal output and saves figures to the `results/` folder.
 
+### Step 0: Install Git
+
+Download and install Git from:  
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
+### Step 1: Clone the Repository
 
-### Step 1: Clone the repository with git bash
+Open Git Bash and run:
 
-In git bash type:
-
+```bash
 git clone https://github.com/theodorbg/46755_2_ass.git
-
 cd 46755_2_ass
+````
 
-### Step 2: Navigate to the root of the cloned repository with Anaconda Prompt
-You can also do this using a terminal like Anaconda Prompt.
-Example path on Windows:
+### Step 2: Navigate to the Project Folder
 
+Use Anaconda Prompt or your preferred terminal to navigate to the project directory. For example (on Windows):
+
+```bash
 cd C:\Users\User_example\folder_example\46755_2_ass
+```
 
-### Step 3: Install the package
-Run the following command:
+### Step 3: Install the Package
 
+Run:
+
+```bash
 pip install .
+```
 
-This will automatically install the required dependencies listed in setup.py, including:
+This installs all required dependencies automatically.
+The package depends on:
 
-numpy, pandas, matplotlib, scipy, pytest, os, pickle, gurobipy, sys,pathlib, random
+* `numpy`
+* `pandas`
+* `matplotlib`
+* `scipy`
+* `pytest`
+* `gurobipy`
+* `pathlib`
 
-### Step 4: Run the main scripts
+> ⚠️ Note: Modules like `os`, `sys`, `pickle`, and `random` are built-in Python standard libraries and are **not included** as dependencies.
 
-For part 1, each step can be run individually like so:
+### Step 4: Run the Main Scripts
 
+#### Part 1
+
+Run each script individually:
+
+```bash
 python .\part1\scripts\main_step1.py
 python .\part1\scripts\main_step2.py
 python .\part1\scripts\main_step3.py
 python .\part1\scripts\main_step4.py
+```
 
-As some of the steps depend on each other, they also run each other, so the terminal will also display results from the previous steps when you run step 2, for example.
+Note: Steps are partially dependent on each other. Running e.g. step 2 will also execute step 1 if needed.
 
-For part 2, each step can be run individually like so:
+#### Part 2
 
+Run each step individually:
+
+```bash
 python .\part2\step1.py
 python .\part2\step2.py
 python .\part2\step3.py
+```
 
 ## Architecture
 This section describes the folder structure, the class `ConsumptionProfile` and its key functions, as well as the overall workflow of the package.
