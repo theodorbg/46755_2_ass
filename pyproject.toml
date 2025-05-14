@@ -17,12 +17,8 @@ dependencies = [
     "scipy",
     "pathlib",
     "pytest",
-    "os",
-    "pickle",
     "gurobipy",
-    "sys",
-    "pathlib",
-    "random"
+    "pathlib"    
 ]
 
 [project.urls]
