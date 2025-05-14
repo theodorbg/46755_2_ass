@@ -18,7 +18,6 @@ dependencies = [
     "pathlib",
     "pytest",
     "gurobipy",
-    "sys",
     "pathlib"    
 ]
 
