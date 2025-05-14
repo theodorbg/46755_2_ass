@@ -5,17 +5,14 @@ setup(
     version='0.1',
     packages=find_packages(),
     install_requires=[
-        "matplotlib",
-        "numpy",
-        "pandas",
-        "scipy",
-        "pathlib",
-        "pytest",
-        "os",
-        "pickle",
-        "gurobipy",
-        "sys",
-        "pathlib",
-        "random" # List your dependencies
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "scipy",
+    "pathlib",
+    "pytest",
+    "gurobipy",
+    "pathlib",
+    "openpyxl"
         ],
 )
