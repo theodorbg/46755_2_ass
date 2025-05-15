@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from .step1_one_price import solve_one_price_offering_strategy
 from .step2_two_price import solve_two_price_offering_strategy
-from .step2_two_price import solve_two_price_offering_strategy_hourly
+# from .step2_two_price import solve_two_price_offering_strategy_hourly
 
 def calculate_profits(offers, scenarios, capacity_wind_farm, n_hours, price_scheme='one'):
     """
@@ -255,7 +255,7 @@ def plot_cross_validation(results):
     print('\nPlotted cross-validation results and saved to part1/results/step3/figures/cross_validation_results.png')
     plt.close()
 
-    return None
+    return in_sample_means, out_sample_means, in_sample_stds, out_sample_stds, strategies
 
 
 def plot_fold_evolution(results):
@@ -277,7 +277,34 @@ def plot_fold_evolution(results):
     one_price_out_mean = np.mean(one_price_out)
     two_price_in_mean = np.mean(two_price_in)
     two_price_out_mean = np.mean(two_price_out)
+
+    # print results
+    print(f"\nFold-by-fold results:")
+    print(f"One-Price In-sample: {one_price_in}")
+    print(f"One-Price Out-of-sample: {one_price_out}")
+    print(f"Two-Price In-sample: {two_price_in}")
+    print(f"Two-Price Out-of-sample: {two_price_out}")
     
+    print(f"One-Price In-sample mean: {one_price_in_mean:.2e} EUR")
+    print(f"One-Price Out-of-sample mean: {one_price_out_mean:.2e} EUR")
+    print(f"Two-Price In-sample mean: {two_price_in_mean:.2e} EUR")
+    print(f"Two-Price Out-of-sample mean: {two_price_out_mean:.2e} EUR")
+    print(f"Fold-by-fold results saved to part1/results/step3/fold_evolution.txt")
+    with open('part1/results/step3/fold_evolution.txt', 'w') as f:
+
+        f.write(f"Fold-by-fold results:\n")
+        f.write(f"One-Price In-sample: {one_price_in}\n")
+        f.write(f"One-Price Out-of-sample: {one_price_out}\n")
+        f.write(f"Two-Price In-sample: {two_price_in}\n")
+        f.write(f"Two-Price Out-of-sample: {two_price_out}\n")
+        f.write(f"One-Price In-sample mean: {one_price_in_mean:.2e} EUR\n")
+        f.write(f"One-Price Out-of-sample mean: {one_price_out_mean:.2e} EUR\n")
+        f.write(f"Two-Price In-sample mean: {two_price_in_mean:.2e} EUR\n")
+        f.write(f"Two-Price Out-of-sample mean: {two_price_out_mean:.2e} EUR\n")
+        f.write(f"Fold-by-fold results saved to part1/results/step3/fold_evolution.txt\n")
+
+
+
     # Plot fold-by-fold comparison with enhanced styling
     plt.plot(folds, one_price_in, 'o-', color='#2E86C1', label='One-Price In-sample', 
              alpha=0.9, linewidth=2.5, markersize=8)
@@ -321,7 +348,7 @@ def plot_fold_evolution(results):
     print('\nPlotted fold evolution results and saved to part1/results/step3/figures/fold_evolution.png')
     plt.close()
 
-    return None
+    return one_price_in, one_price_out, two_price_in, two_price_out, folds
 
 def  gap_analysis(results):
     ''' Calculate percentage difference between in-sample and out-of-sample profits'''
@@ -331,3 +358,107 @@ def  gap_analysis(results):
         diff_percent = ((in_sample - out_sample) / in_sample) * 100
         print(f"\n{strategy.replace('_', ' ').title()} Strategy Gap Analysis:")
         print(f"In-sample vs Out-sample difference: {diff_percent:.2e}%")
+
+# plot that combines the fold comparison evolution and the cross validation results in two subplots in one figure
+# use plot_fold_evolution() and plot_cross_validation() to get the data
+ 
+    
+def plot_combined_results(results, in_sample_means, out_sample_means,
+                          in_sample_stds, out_sample_stds, strategies,
+                          one_price_in, one_price_out, two_price_in, two_price_out, folds):
+    """Plot the combined results of cross-validation and fold evolution"""
+    
+    # Create figure with two subplots stacked vertically (2 rows, 1 column)
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 18))  # Taller figure for vertical layout
+    
+    # --- Top subplot: Cross-validation results (bar chart) ---
+    x = np.arange(len(strategies))
+    width = 0.35
+    
+    # Create bars with custom colors and better styling
+    bars1 = ax1.bar(x - width/2, in_sample_means, width, label='In-sample', 
+           color='#2E86C1', yerr=in_sample_stds, capsize=5, 
+           alpha=0.8, error_kw={'ecolor': '0.2', 'capthick': 2})
+    bars2 = ax1.bar(x + width/2, out_sample_means, width, label='Out-of-sample', 
+           color='#E67E22', yerr=out_sample_stds, capsize=5, 
+           alpha=0.8, error_kw={'ecolor': '0.2', 'capthick': 2})
+    
+    # Add text annotations showing profit values in the middle of each bar
+    for i, bar in enumerate(bars1):
+        height = bar.get_height()
+        ax1.text(bar.get_x() + bar.get_width()/2., height/2,
+                f'{int(height):,}',
+                ha='center', va='center', color='white', fontsize=18, fontweight='bold')
+    
+    for i, bar in enumerate(bars2):
+        height = bar.get_height()
+        ax1.text(bar.get_x() + bar.get_width()/2., height/2,
+                f'{int(height):,}',
+                ha='center', va='center', color='white', fontsize=18, fontweight='bold')
+    
+    # Set y-axis limits to start from 300,000
+    ax1.set_ylim(bottom=300000)
+    
+    ax1.set_xlabel('Strategy', fontsize=22, fontweight='bold')
+    ax1.set_ylabel('Expected Profit (EUR)', fontsize=22, fontweight='bold')
+    ax1.set_title('Cross-validation Results', fontsize=22, fontweight='bold')
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(strategies)
+    ax1.legend(fontsize=22)
+    ax1.grid(True, alpha=0.3)
+    ax1.tick_params(axis='both', which='major', labelsize=22)
+    
+    # Format y-axis with comma separator
+    ax1.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'{int(x):,}'))
+    
+    # --- Bottom subplot: Fold evolution (line chart) ---
+    # Plot fold-by-fold comparison with enhanced styling
+    ax2.plot(folds, one_price_in, 'o-', color='#2E86C1', label='One-Price In-sample', 
+            alpha=0.9, linewidth=2.5, markersize=8)
+    ax2.plot(folds, one_price_out, 's-', color='#2E86C1', label='One-Price Out-of-sample', 
+            linestyle='--', alpha=0.9, linewidth=2.5, markersize=8)
+    ax2.plot(folds, two_price_in, 'o-', color='#E67E22', label='Two-Price In-sample', 
+            alpha=0.9, linewidth=2.5, markersize=8)
+    ax2.plot(folds, two_price_out, 's-', color='#E67E22', label='Two-Price Out-of-sample',
+            linestyle='--', alpha=0.9, linewidth=2.5, markersize=8)
+    
+    # Add mean lines
+    one_price_in_mean = np.mean(one_price_in)
+    one_price_out_mean = np.mean(one_price_out)
+    two_price_in_mean = np.mean(two_price_in)
+    two_price_out_mean = np.mean(two_price_out)
+    
+    ax2.axhline(y=one_price_in_mean, color='#2E86C1', linestyle='-', alpha=0.3)
+    ax2.axhline(y=one_price_out_mean, color='#2E86C1', linestyle='--', alpha=0.3)
+    ax2.axhline(y=two_price_in_mean, color='#E67E22', linestyle='-', alpha=0.3)
+    ax2.axhline(y=two_price_out_mean, color='#E67E22', linestyle='--', alpha=0.3)
+    
+    # Customize plot
+    ax2.set_xlabel('Fold Number', fontsize=22, fontweight='bold')
+    ax2.set_ylabel('Expected Profit (EUR)', fontsize=22, fontweight='bold')
+    ax2.set_title('Profit Evolution Across Folds', fontsize=22, fontweight='bold')
+    
+    # Enhanced grid
+    ax2.grid(True, linestyle='--', alpha=0.3)
+    
+    # Move legend inside the plot
+    ax2.legend(fontsize=22, ncol=1, loc='lower right')
+    
+    # Customize ticks
+    ax2.set_xticks(folds)
+    ax2.tick_params(axis='both', which='major', labelsize=22)
+    
+    # Format y-axis with comma separator
+    ax2.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'{int(x):,}'))
+    
+    # Add overall title to the figure
+    fig.suptitle('Cross-Validation Analysis of Pricing Strategies', 
+                fontsize=22, fontweight='bold', y=0.98)
+    
+    # Adjust layout and save
+    plt.tight_layout()
+    fig.subplots_adjust(top=0.95, hspace=0.3)  # Adjust top spacing for title and increase space between subplots
+    plt.savefig('part1/results/step3/figures/combined_results.png', 
+                dpi=300, bbox_inches='tight', facecolor='white')
+    print('\nPlotted combined results and saved to part1/results/step3/figures/combined_results.png')
+    plt.close()

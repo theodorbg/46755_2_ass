@@ -1,0 +1,10 @@
+Fold-by-fold results:
+One-Price In-sample: [np.float64(413891.7238015715), np.float64(448406.6715330402), np.float64(446165.83262548567), np.float64(412064.43085579656), np.float64(444917.84372522956), np.float64(448881.93388831156), np.float64(433716.19309839373), np.float64(393247.2900827423)]
+One-Price Out-of-sample: [np.float64(431459.59368699987), np.float64(427540.6582967902), np.float64(427860.7781407265), np.float64(432732.40696496767), np.float64(428039.0622693342), np.float64(427472.7636746084), np.float64(429639.2980731679), np.float64(435420.5699325476)]
+Two-Price In-sample: [np.float64(357607.8244133363), np.float64(388955.6267816962), np.float64(386502.8116796994), np.float64(355457.87754590623), np.float64(385532.3079442632), np.float64(389944.07540137594), np.float64(375225.50195456), np.float64(336995.38168787496)]
+Two-Price Out-of-sample: [np.float64(373562.118399486), np.float64(369104.70118022914), np.float64(369704.4820825322), np.float64(374092.49804023147), np.float64(369843.9604485818), np.float64(369088.2628233409), np.float64(371355.0628874697), np.float64(376546.1092093876)]
+One-Price In-sample mean: 4.30e+05 EUR
+One-Price Out-of-sample mean: 4.30e+05 EUR
+Two-Price In-sample mean: 3.72e+05 EUR
+Two-Price Out-of-sample mean: 3.72e+05 EUR
+Fold-by-fold results saved to part1/results/step3/fold_evolution.txt

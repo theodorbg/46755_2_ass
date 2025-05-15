@@ -124,7 +124,7 @@ with open('part1/results/scenarios/out_of_sample_scenarios.pkl', 'wb') as f:
 
 
 # Plot the first 5 scenarios (wind, price, balancing price)
-if len(in_sample_scenarios) > 5:
+if len(in_sample_scenarios) > 3:
     for i in range(5):
         pf.plot_scenario(in_sample_scenarios[i], i)
     print('\nPlotted the first 5 scenarios')
@@ -132,7 +132,7 @@ else:
     pf.plot_scenario(in_sample_scenarios[0], 0)
     print('Plotted the first scenario')
 
-# Generate  balancing price, and day ahead price (20 plots)
+# Generate  balancing price, and day ahead price (20 plots)(now just 3)
 pf.plot_balancing_prices_by_day(balancing_prices_list, df_price)
 print('\nPlotted balancing prices by day')
 

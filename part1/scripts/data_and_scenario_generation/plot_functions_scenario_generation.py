@@ -18,37 +18,41 @@ def plot_scenario(scenario_df, scenario_id):
     
     # Plot condition
     axes[0].step(range(24), scenario_df['condition'], where='post', lw=2)
-    axes[0].set_ylabel('Condition\n(0=Excess, 1=Deficit)')
-    axes[0].set_title(f'Scenario {scenario_id}', fontsize=16)
+    axes[0].set_ylabel('Condition\n(0=Excess, 1=Deficit)', fontsize=22)
+    axes[0].set_title(f'Scenario {scenario_id}', fontsize=22)
     axes[0].grid(True, alpha=0.3)
+    axes[0].tick_params(axis='both', which='major', labelsize=22)
     
     # Plot prices
     axes[1].plot(range(24), scenario_df['price'], 'b-', label='Price')
     axes[1].plot(range(24), scenario_df['balancing_price'], 'r--', label='Balancing Price')
-    axes[1].set_ylabel('Price (EUR/MWh)')
-    axes[1].legend()
+    axes[1].set_ylabel('Price (EUR/MWh)', fontsize=22)
+    axes[1].legend(fontsize=22)
     axes[1].grid(True, alpha=0.3)
+    axes[1].tick_params(axis='both', which='major', labelsize=22)
     
     # Plot wind
     axes[2].plot(range(24), scenario_df['wind'], 'g-')
-    axes[2].set_ylabel('Wind (MW)')
+    axes[2].set_ylabel('Wind (MW)', fontsize=22)
     axes[2].grid(True, alpha=0.3)
+    axes[2].tick_params(axis='both', which='major', labelsize=22)
     
     # Plot imbalance cost (difference between price and balancing price)
     imbalance_cost = scenario_df['balancing_price'] - scenario_df['price']
     axes[3].bar(range(24), imbalance_cost, color=['red' if x > 0 else 'green' for x in imbalance_cost])
-    axes[3].set_ylabel('Imbalance Cost\n(EUR/MWh)')
-    axes[3].set_xlabel('Hour')
+    axes[3].set_ylabel('Imbalance Cost\n(EUR/MWh)', fontsize=22)
+    axes[3].set_xlabel('Hour', fontsize=22)
     axes[3].grid(True, alpha=0.3)
+    axes[3].tick_params(axis='both', which='major', labelsize=22)
     
     # Format x-axis
     axes[3].set_xticks(range(0, 24, 2))
     
     # Save figure
     os.makedirs('part1/results/figures/scenarios/example_visualizations', exist_ok=True)
+    plt.tight_layout()  # Move tight_layout before saving
     plt.savefig(f'part1/results/figures/scenarios/example_visualizations/{scenario_id}.png', 
                 dpi=300, bbox_inches='tight')
-    plt.tight_layout()
     plt.close()
 
 def plot_balancing_prices_by_day(balancing_prices_list, df_price,
@@ -70,10 +74,12 @@ def plot_balancing_prices_by_day(balancing_prices_list, df_price,
     
     # Number of days
     days = df_price.shape[1]  # 20 days
+    # just make 3 plots
+    days = 3
     
     # Iterate through each day
     for day_idx in range(days):
-        plt.figure(figsize=(12, 6))
+        plt.figure(figsize=(14, 8))  # Slightly larger figure to accommodate larger text
         
         # Plot the original price for this day
         plt.plot(df_price.index, df_price.iloc[:, day_idx], 
@@ -94,18 +100,22 @@ def plot_balancing_prices_by_day(balancing_prices_list, df_price,
             )
         
         # Add title and labels
-        plt.title(f'Day {day_idx+1}: Price and Balancing Prices for All Conditions', fontsize=14)
-        plt.xlabel('Hour', fontsize=12)
-        plt.ylabel('Price (EUR/MWh)', fontsize=12)
+        plt.title(f'Day {day_idx+1}: Price and Balancing Prices for All Conditions', fontsize=22)
+        plt.xlabel('Hour', fontsize=22)
+        plt.ylabel('Price (EUR/MWh)', fontsize=22)
         plt.grid(True, alpha=0.3)
-        plt.legend(loc='best')
+        plt.legend(loc='best', fontsize=22)
         
         # Add annotation explaining conditions
         plt.annotate(
             'Deficit (+25%)\nExcess (-15%)', 
             xy=(0.02, 0.02), xycoords='axes fraction',
-            fontsize=9, bbox=dict(facecolor='white', alpha=0.7)
+            fontsize=22, bbox=dict(facecolor='white', alpha=0.7)
         )
+        
+        # Set tick label sizes
+        plt.xticks(fontsize=22)
+        plt.yticks(fontsize=22)
         
         plt.tight_layout()
         

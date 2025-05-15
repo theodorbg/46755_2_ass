@@ -15,8 +15,8 @@ import data_and_scenario_generation.load_scenarios as load_scenarios
 import steps_functions.step1_one_price as s1
 import steps_functions.step2_two_price as s2
 import steps_functions.plot_functions as pf
-import steps_functions.step3_expost_analysis as s3 
-from steps_functions.step3_expost_analysis import perform_cross_validation, calculate_profits
+# import steps_functions.step3_expost_analysis as s3 
+# from steps_functions.step3_expost_analysis import perform_cross_validation, calculate_profits
 import data_and_scenario_generation.scenario_generator 
 
 # %% 1.1 Offering Strategy Under a One-Price Balancing Scheme

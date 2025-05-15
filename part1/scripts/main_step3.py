@@ -47,9 +47,13 @@ print("========================")
 s3.print_strategy_results(results)
 
 # Visualize results
-s3.plot_cross_validation(results)
+in_sample_means, out_sample_means, in_sample_stds, out_sample_stds, strategies = s3.plot_cross_validation(results)
 
-s3.plot_fold_evolution(results)
+one_price_in, one_price_out, two_price_in, two_price_out, folds = s3.plot_fold_evolution(results)
+
+s3.plot_combined_results(results, in_sample_means, out_sample_means,
+                          in_sample_stds, out_sample_stds, strategies,
+                          one_price_in, one_price_out, two_price_in, two_price_out, folds)
 
 # Calculate percentage difference between in-sample and out-of-sample profits
 s3.gap_analysis(results)

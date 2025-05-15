@@ -36,7 +36,7 @@ from steps_functions import step4_Risk_Averse as s4
 beta_range_one_price = np.linspace(0, 1, 20)
 
 print('Computing risk-return trade-off for one-price offering strategy')
-risk_results = s4.analyze_risk_return_tradeoff(
+one_price_risk_results = s4.analyze_risk_return_tradeoff(
     in_sample_scenarios=in_sample_scenarios,
     CAPACITY_WIND_FARM=CAPACITY_WIND_FARM,
     N_HOURS=N_HOURS,
@@ -45,7 +45,7 @@ risk_results = s4.analyze_risk_return_tradeoff(
 print('Risk-return trade-off analysis completed')
 
 # Plot results 
-s4.plot_risk_return_tradeoff(risk_results)
+s4.plot_risk_return_tradeoff(one_price_risk_results)
 
 # Print summary table with improved formatting
 print("\nRisk-Return Trade-off Analysis")
@@ -54,17 +54,18 @@ print(f"{'Beta':^6} | {'Expected Profit':^15} | {'CVaR':^15} | {'Risk Premium':^
 print("-" * 65)
 
 # Calculate and display risk premium
-base_profit = risk_results['expected_profit'][0]  # Risk-neutral profit
-for i, beta in enumerate(risk_results['beta']):
-    exp_profit = risk_results['expected_profit'][i]
-    cvar = risk_results['cvar'][i]
+base_profit = one_price_risk_results['expected_profit'][0]  # Risk-neutral profit
+for i, beta in enumerate(one_price_risk_results['beta']):
+    exp_profit = one_price_risk_results['expected_profit'][i]
+    cvar = one_price_risk_results['cvar'][i]
     risk_premium = base_profit - exp_profit
     
     print(f"{beta:6.2f} | {exp_profit/1000:15.2f} | {cvar/1000:15.2f} | {risk_premium/1000:15.2f}")
 print("-" * 65)
 
 # Additional analysis: Plot profit distribution for selected beta values
-s4.plot_profit_distribution(risk_results, beta)
+s4.plot_profit_distribution(one_price_risk_results, beta)
+s4.plot_profit_distribution_kde(one_price_risk_results, beta)
 
 print("\n=== Risk-Averse Analysis (Two-Price) ===")
 
@@ -83,7 +84,23 @@ s4.plot_risk_return_tradeoff_two_price(two_price_risk_results)
 
 # Plot profit distribution for two-price scheme
 s4.plot_profit_distribution_two_price(two_price_risk_results, beta)
+s4.plot_profit_distribution_kde_two_price(two_price_risk_results, beta)
 
+s4.plot_combined_risk_return_tradeoff(one_price_risk_results, two_price_risk_results)
+s4.plot_combined_risk_return_tradeoff_normalized(one_price_risk_results, two_price_risk_results)
+# # Individual boxplots
+# s4.plot_profit_boxplots(one_price_risk_results, scheme_type="One-Price")
+# s4.plot_profit_boxplots(two_price_risk_results, scheme_type="Two-Price")
+
+# # Combined comparison
+# s4.plot_combined_profit_boxplots(one_price_risk_results, two_price_risk_results)
+
+# # Individual violin plots
+# s4.plot_profit_violinplots(one_price_risk_results, scheme_type="One-Price")
+# s4.plot_profit_violinplots(two_price_risk_results, scheme_type="Two-Price")
+
+# # Combined comparison
+# s4.plot_combined_profit_violinplots(one_price_risk_results, two_price_risk_results)
 
 print('\nFinished step4.py: Ex-post Cross-validation Analysis')
 print('#################################')

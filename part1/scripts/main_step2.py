@@ -15,8 +15,8 @@ import data_and_scenario_generation.load_scenarios as load_scenarios
 import steps_functions.step1_one_price as s1
 import steps_functions.step2_two_price as s2
 import steps_functions.plot_functions as pf
-import steps_functions.step3_expost_analysis as s3 
-from steps_functions.step3_expost_analysis import perform_cross_validation, calculate_profits
+# import steps_functions.step3_expost_analysis as s3 
+# from steps_functions.step3_expost_analysis import perform_cross_validation, calculate_profits
 from main_step1 import optimal_offers_one_price, expected_profit_one_price, scenario_profits_one_price
 import data_and_scenario_generation.scenario_generator 
 
@@ -85,6 +85,70 @@ s2.compare_all_strategies(expected_profit_one_price,
 pf.compare_all_strategies(optimal_offers_one_price,
                           optimal_offers_two_price,
                           ew_optimal_offers)
+
+# Plot profit distribution
+pf.plot_cumulative_distribution_func(two_price_scenario_profits, two_price_total_expected_profit, 'Two-Price')
+print('\nPlotted profit distribution')
+
+def compare_profit_distributions(one_price_profits, two_price_profits, one_price_exp, two_price_exp):
+    plt.figure(figsize=(12, 6))
+    
+    # Plot One-Price CDF
+    sorted_profits_one = np.sort(list(one_price_profits.values()))
+    p_one = 1. * np.arange(len(sorted_profits_one)) / (len(sorted_profits_one) - 1)
+    plt.plot(sorted_profits_one, p_one, 'b-', label='One-Price')
+    
+    # Plot Two-Price CDF
+    sorted_profits_two = np.sort(list(two_price_profits.values()))
+    p_two = 1. * np.arange(len(sorted_profits_two)) / (len(sorted_profits_two) - 1)
+    plt.plot(sorted_profits_two, p_two, 'g-', label='Two-Price')
+    
+    # Add expected profit vertical lines
+    plt.axvline(x=one_price_exp, color='b', linestyle='--', 
+                label=f'One-Price Exp. Profit: {one_price_exp:.3e} EUR')
+    plt.axvline(x=two_price_exp, color='g', linestyle='--', 
+                label=f'Two-Price Exp. Profit: {two_price_exp:.3e} EUR')
+    
+    plt.xlabel('Profit (EUR)', fontsize=22)
+    plt.ylabel('Cumulative Probability', fontsize=22)
+    plt.title('Comparison of Profit Distributions', fontsize=22)
+    plt.grid(alpha=0.3)
+    plt.legend(fontsize=22)
+    plt.xticks(fontsize=22)
+    plt.yticks(fontsize=22)
+    plt.tight_layout()
+    plt.savefig('part1/results/step2/figures/profit_distribution_comparison.png', 
+                dpi=300, bbox_inches='tight')
+    plt.close()
+
+def analyze_profit_distributions(one_price_profits, two_price_profits):
+    # Convert to arrays for analysis
+    profits_one = np.array(list(one_price_profits.values()))
+    profits_two = np.array(list(two_price_profits.values()))
+    
+    # Calculate key statistics
+    metrics = {
+        'Mean': [np.mean(profits_one), np.mean(profits_two)],
+        'Standard Deviation': [np.std(profits_one), np.std(profits_two)],
+        'Min': [np.min(profits_one), np.min(profits_two)],
+        'Max': [np.max(profits_one), np.max(profits_two)],
+        '5th Percentile': [np.percentile(profits_one, 5), np.percentile(profits_two, 5)],
+        '95th Percentile': [np.percentile(profits_one, 95), np.percentile(profits_two, 95)],
+        'Range': [np.max(profits_one) - np.min(profits_one), 
+                 np.max(profits_two) - np.min(profits_two)],
+        'Coefficient of Variation': [np.std(profits_one)/np.mean(profits_one), 
+                                    np.std(profits_two)/np.mean(profits_two)]
+    }
+    
+    # Create and display results table
+    df_metrics = pd.DataFrame(metrics, index=['One-Price', 'Two-Price'])
+    print("\n=== Profit Distribution Analysis ===")
+    print(df_metrics)
+    return df_metrics
+
+
+compare_profit_distributions(scenario_profits_one_price, two_price_scenario_profits, expected_profit_one_price, two_price_total_expected_profit)
+analyze_profit_distributions(scenario_profits_one_price, two_price_scenario_profits)
 
 print('\nStep 2 completed')
 print('#################################')
