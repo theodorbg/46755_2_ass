@@ -9,7 +9,7 @@ This project solves the tasks outlined in Assignment 2 of the course *Renewables
 
 ## Quick-start Guide
 
-Follow these steps to run the code that solves the exercises. Each step produces terminal output and saves figures to the `results/` folder.
+Follow these steps to run the code that solves the tasks of the assignment. Each step produces terminal output and saves figures to the `results/` folder.
 
 ### Step 0: Install Git
 
